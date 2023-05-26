@@ -43,6 +43,18 @@
                     text-decoration: underline;
                 }
 
+                >.finalOrderText {
+                    margin-bottom: 0.7rem;
+                    font-size: 1.2rem;
+                }
+
+
+                >.errorMessage {
+                    margin-bottom: 1.25rem;
+                    color: red;
+                    font-weight: bold;
+                }
+
                 >.ingredient {
                     margin-top: 1rem;
                     margin-right: 2%;
