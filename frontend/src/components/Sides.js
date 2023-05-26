@@ -2,7 +2,7 @@ import './sandwich.scss'
 import { React, useState } from 'react';
 import ButtonGroup from './IngredientButton';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { sidesData, beverageData } from './ingredientsData';
+import { sidesData, beverageData } from './sandwichIngredientsData';
 
 export function Sides() {
     const location = useLocation();
@@ -11,7 +11,7 @@ export function Sides() {
     const navigate = useNavigate();
     const handleClick = () => {
         //window.location.href = '/confirmOrder';
-        navigate('/confirmOrder', {state: finalOrder});
+        navigate('/confirmOrder', {state: finalOrder });
     };
 
     const [side, setSide] = useState([]);
@@ -26,7 +26,7 @@ export function Sides() {
     }
 
     const finalOrder = {ingredients, side, beverage};
-    //console.log(finalOrder);
+    console.log(finalOrder);
 
     return <div className="sandwichPage">
         <div className = "header">
