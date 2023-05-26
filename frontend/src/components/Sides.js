@@ -10,8 +10,7 @@ export function Sides() {
 
     const navigate = useNavigate();
     const handleClick = () => {
-        //window.location.href = '/confirmOrder';
-        navigate('/confirmOrder', {state: finalOrder });
+        navigate('/confirmOrder', {state: {finalOrder, fromPage : location.state.fromPage }});
     };
 
     const [side, setSide] = useState([]);
@@ -26,7 +25,6 @@ export function Sides() {
     }
 
     const finalOrder = {ingredients, side, beverage};
-    console.log(finalOrder);
 
     return <div className="sandwichPage">
         <div className = "header">

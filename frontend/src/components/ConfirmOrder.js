@@ -1,31 +1,71 @@
 import './sandwich.scss'
 import { React } from 'react';
 import { useLocation } from 'react-router-dom';
-import { breadData, cheeseData, toppingsData, addOnsData, spreadsCondimentsData, sidesData, beverageData } from './sandwichIngredientsData';
+import { breadSandwichData, cheeseSandwichData, toppingsSandwichData, addOnsSandwichData, spreadsCondimentsSandwichData, sidesData, beverageData } from './sandwichIngredientsData';
+import { saucePizzaData, cheesePizzaData, toppingsPizzaData, addOnsPizzaData } from './pizzaIngredientsData';
 
 export function ConfirmOrder() {
     const location = useLocation();
-    const finalOrder = location.state || [];
+    const fromPage = location.state.fromPage;
+    const finalOrder = location.state.finalOrder || [];
 
-    const breadId = finalOrder.ingredients.bread[0];
-    const breadItem = breadData.find(item => item.id === breadId);
-    const breadName = breadItem ? breadItem.name : 'None';
+    let firstId, firstData, firstOptionalText;
+    let secondId, secondData, secondOptionalText;
+    let thirdId, thirdData, thirdOptionalText;
+    let fourthId, fourthData, fourthOptionalText;
+    let fifthId, fifthItem, fifthName, fifthOptionalText;
 
-    const cheeseId = finalOrder.ingredients.cheese[0];
-    const cheeseItem = cheeseData.find(item => item.id === cheeseId);
-    const cheeseName = cheeseItem ? cheeseItem.name : 'No';
+    if(fromPage === "sandwich") {
+        firstId = finalOrder.ingredients.ingredients.bread[0];
+        firstData = breadSandwichData;
+        firstOptionalText = " Bread";
 
-    const toppingId = finalOrder.ingredients.toppings;
-    const toppingItems = toppingId.flatMap(id => toppingsData.find(item => item.id === id));
-    const toppingNames = (toppingItems.length !== 0) ? toppingItems.map(item => item.name) : ["No Toppings"];
+        secondId = finalOrder.ingredients.ingredients.cheese[0];
+        secondData = cheeseSandwichData;
+        secondOptionalText = " Cheese"
 
-    const addOnsId = finalOrder.ingredients.addOns;
-    const addOnsItems = addOnsId.flatMap(id => addOnsData.find(item => item.id === id));
-    const addOnsNames = (addOnsItems.length !== 0) ? addOnsItems.map(item => item.name) : ["No Add Ons"];
+        thirdId = finalOrder.ingredients.ingredients.toppings;
+        thirdData = toppingsSandwichData;
+        thirdOptionalText = "No Toppings";
 
-    const spreadsCondimentsId = finalOrder.ingredients.spreadsCondiments;
-    const spreadsCondimentsItems = spreadsCondimentsId.flatMap(id => spreadsCondimentsData.find(item => item.id === id));
-    const spreadsCondimentsNames = (spreadsCondimentsItems.length !== 0) ? spreadsCondimentsItems.map(item => item.name) : ["No Spreads or Condiments"];
+        fourthId = finalOrder.ingredients.ingredients.addOns;
+        fourthData = addOnsSandwichData;
+        fourthOptionalText = "No Add Ons";
+
+        fifthId = finalOrder.ingredients.ingredients.spreadsCondiments;
+        fifthItem = fifthId.flatMap(id => spreadsCondimentsSandwichData.find(item => item.id === id));
+        fifthOptionalText = "No Spreads or Condiments";
+        fifthName = (fifthItem.length !== 0) ? fifthItem.map(item => item.name) : [fifthOptionalText];
+    }
+    else if(fromPage === "pizza") {
+        firstId = finalOrder.ingredients.ingredients.sauce[0];
+        firstData = saucePizzaData;
+        firstOptionalText = " Sauce";
+
+        secondId = finalOrder.ingredients.ingredients.cheese[0];
+        secondData = cheesePizzaData;
+        secondOptionalText = " Cheese";
+
+        thirdId = finalOrder.ingredients.ingredients.toppings;
+        thirdData = toppingsPizzaData;
+        thirdOptionalText = "No Toppings";
+
+        fourthId = finalOrder.ingredients.ingredients.addOns;
+        fourthData = addOnsPizzaData;
+        fourthOptionalText = "No Add Ons";
+    }
+
+    const firstItem = firstData.find(item => item.id === firstId);
+    const firstName = firstItem ? firstItem.name : 'No';
+
+    const secondItem = secondData.find(item => item.id === secondId);
+    const secondName = secondItem ? secondItem.name : 'No';
+
+    const thirdItem = thirdId.flatMap(id => thirdData.find(item => item.id === id));
+    const thirdName = (thirdItem.length !== 0) ? thirdItem.map(item => item.name) : [thirdOptionalText];
+
+    const fourthItem = fourthId.flatMap(id => fourthData.find(item => item.id === id));
+    const fourthName = (fourthItem.length !== 0) ? fourthItem.map(item => item.name) : [fourthOptionalText];
 
     const sideId = finalOrder.side[0];
     const sideItem = sidesData.find(item => item.id === sideId);
@@ -48,17 +88,17 @@ export function ConfirmOrder() {
             <div className = "mainTitle">Rahul, Confirm Your Order!</div>
             <div className = "mainSubtitle">Make sure that your order is correct.</div>
             <div className = "ingredientType">
-                <div className = "finalOrderText">{breadName} Bread</div>
-                <div className = "finalOrderText">{cheeseName} Cheese</div>
-                {toppingNames.map((name, index) => (
+                <div className = "finalOrderText">{firstName} {firstOptionalText}</div>
+                <div className = "finalOrderText">{secondName} {secondOptionalText}</div>
+                {thirdName.map((name, index) => (
                     <div key={index} className = "finalOrderText">{name}</div>
                 ))}
-                {addOnsNames.map((name, index) => (
+                {fourthName.map((name, index) => (
                     <div key={index} className = "finalOrderText">{name}</div>
                 ))}
-                {spreadsCondimentsNames.map((name, index) => (
+                {fromPage === "sandwich" && (fifthName.map((name, index) => (
                     <div key={index} className = "finalOrderText">{name}</div>
-                ))}
+                )))}
                 <div className = "finalOrderText">{sideName}</div>
                 <div className = "finalOrderText">{beverageName}</div>
             </div>
