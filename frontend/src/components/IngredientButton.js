@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './font.css'
 
 const IngredientButton = ({ name, color, width, isActive, onClick, shouldDisplayCircle, quantity, children }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const buttonStyle = {
     position: 'relative',
     backgroundColor: isActive ? color : 'white',
@@ -17,6 +19,8 @@ const IngredientButton = ({ name, color, width, isActive, onClick, shouldDisplay
     marginRight: '2%',
     fontSize: '0.82rem',
     fontWeight: 'bold',
+    transition: 'transform 0.6s ease-out',
+    transform: isHovered ? 'translateY(9px)' : 'translateY(0)',
   };
 
   const circleStyle = {
@@ -36,8 +40,16 @@ const IngredientButton = ({ name, color, width, isActive, onClick, shouldDisplay
     right: '-10px',
   }
 
+  const handleHover = () => {
+    setIsHovered(true);
+  };
+
+  const handleHoverEnd = () => {
+    setIsHovered(false);
+  };
+
   return (
-        <button style={buttonStyle}onClick={onClick}>
+        <button style={buttonStyle} onClick={onClick} onMouseEnter={handleHover} onMouseLeave={handleHoverEnd}>
         {shouldDisplayCircle && <span style={circleStyle}>{quantity}</span>}
         {name}
         </button>
