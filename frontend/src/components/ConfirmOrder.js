@@ -3,6 +3,7 @@ import { React } from 'react';
 import { useLocation } from 'react-router-dom';
 import { breadSandwichData, cheeseSandwichData, toppingsSandwichData, addOnsSandwichData, spreadsCondimentsSandwichData, sidesData, beverageData } from './sandwichIngredientsData';
 import { saucePizzaData, cheesePizzaData, toppingsPizzaData, addOnsPizzaData } from './pizzaIngredientsData';
+import { greensSaladData, proteinsSaladData, toppingsSaladData, dressingsSaladData } from './saladIngredientsData';
 
 export function ConfirmOrder() {
     const location = useLocation();
@@ -16,11 +17,11 @@ export function ConfirmOrder() {
     let fifthId, fifthItem, fifthName, fifthOptionalText;
 
     if(fromPage === "sandwich") {
-        firstId = finalOrder.ingredients.ingredients.bread[0];
+        firstId = finalOrder.ingredients.ingredients.bread;
         firstData = breadSandwichData;
-        firstOptionalText = " Bread";
+        firstOptionalText = "No Bread";
 
-        secondId = finalOrder.ingredients.ingredients.cheese[0];
+        secondId = finalOrder.ingredients.ingredients.cheese;
         secondData = cheeseSandwichData;
         secondOptionalText = " Cheese"
 
@@ -38,11 +39,11 @@ export function ConfirmOrder() {
         fifthName = (fifthItem.length !== 0) ? fifthItem.map(item => item.name) : [fifthOptionalText];
     }
     else if(fromPage === "pizza") {
-        firstId = finalOrder.ingredients.ingredients.sauce[0];
+        firstId = finalOrder.ingredients.ingredients.sauce;
         firstData = saucePizzaData;
         firstOptionalText = " Sauce";
 
-        secondId = finalOrder.ingredients.ingredients.cheese[0];
+        secondId = finalOrder.ingredients.ingredients.cheese;
         secondData = cheesePizzaData;
         secondOptionalText = " Cheese";
 
@@ -54,12 +55,29 @@ export function ConfirmOrder() {
         fourthData = addOnsPizzaData;
         fourthOptionalText = "No Add Ons";
     }
+    else if(fromPage === "salad") {
+        firstId = finalOrder.ingredients.ingredients.green;
+        firstData = greensSaladData;
+        firstOptionalText = "No Greens";
 
-    const firstItem = firstData.find(item => item.id === firstId);
-    const firstName = firstItem ? firstItem.name : 'No';
+        secondId = finalOrder.ingredients.ingredients.protein;
+        secondData = proteinsSaladData;
+        secondOptionalText = "No Salad";
 
-    const secondItem = secondData.find(item => item.id === secondId);
-    const secondName = secondItem ? secondItem.name : 'No';
+        thirdId = finalOrder.ingredients.ingredients.toppings;
+        thirdData = toppingsSaladData;
+        thirdOptionalText = "No Toppings";
+
+        fourthId = finalOrder.ingredients.ingredients.dressing;
+        fourthData = dressingsSaladData;
+        thirdOptionalText = "No Dressing";
+    }
+
+    const firstItem = firstId.flatMap(id => firstData.find(item => item.id === id));
+    const firstName = (firstItem.length !== 0) ? firstItem.map(item => item.name) : [firstOptionalText];
+
+    const secondItem = secondId.flatMap(id => secondData.find(item => item.id === id));
+    const secondName = (secondItem.length !== 0) ? secondItem.map(item => item.name) : [secondOptionalText];
 
     const thirdItem = thirdId.flatMap(id => thirdData.find(item => item.id === id));
     const thirdName = (thirdItem.length !== 0) ? thirdItem.map(item => item.name) : [thirdOptionalText];
@@ -76,7 +94,8 @@ export function ConfirmOrder() {
     const beverageName = beverageItem ? beverageItem.name : 'No Beverage';
 
     const handleEditOrder = () => {
-        window.location.href = '/sandwich';
+        const destination = '/' + fromPage;
+        window.location.href = destination;
     };
 
     const handlePlaceOrder = () => {
@@ -88,8 +107,13 @@ export function ConfirmOrder() {
             <div className = "mainTitle">Rahul, Confirm Your Order!</div>
             <div className = "mainSubtitle">Make sure that your order is correct.</div>
             <div className = "ingredientType">
-                <div className = "finalOrderText">{firstName} {firstOptionalText}</div>
-                <div className = "finalOrderText">{secondName} {secondOptionalText}</div>
+                {/* <div className = "finalOrderText">{firstName} {firstOptionalText}</div> */}
+                {firstName.map((name, index) => (
+                    <div key={index} className = "finalOrderText">{name}</div>
+                ))}
+                {secondName.map((name, index) => (
+                    <div key={index} className = "finalOrderText">{name}</div>
+                ))}
                 {thirdName.map((name, index) => (
                     <div key={index} className = "finalOrderText">{name}</div>
                 ))}
