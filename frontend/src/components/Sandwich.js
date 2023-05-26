@@ -1,55 +1,58 @@
 import './sandwich.scss'
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import ButtonGroup from './IngredientButton';
+import { useNavigate } from 'react-router-dom';
+import { breadData, cheeseData, toppingsData, addOnsData, spreadsCondimentsData } from './ingredientsData';
 
 export function Sandwich() {
-    const breadData = [
-        { name: 'Sourdough', id: 1 },
-        { name: 'Whole Wheat', id: 2 },
-        { name: 'Hoagie Roll', id: 3 },
-    ];
+    const [breadSelected, setBreadSelected] = useState(false);
+    const [errorVisible, setErrorVisible] = useState(false);
+    const [continueClicked, setContinueClicked] = useState(false);
 
-    const cheeseData = [
-        { name: 'Cheddar', id: 1 },
-        { name: 'Mozzarella', id: 2 },
-        { name: 'Provolone', id: 3 },
-        { name: 'Vegan Cheddar', id: 4},
-    ];
+    useEffect(()=> {
+        if(continueClicked) {
+            setErrorVisible(!breadSelected);
+        }
+    }, [breadSelected, continueClicked]);
 
-    const toppingsData = [
-        { name: 'Avocado', id: 1 },
-        { name: 'Bacon', id: 2 },
-        { name: 'Black Forest Ham', id: 3 },
-        { name: 'Egg Salad', id: 4},
-        { name: 'Grilled Chicken', id: 5},
-        { name: 'Pepperoni', id: 6},
-        { name: 'Prosciutto', id: 7},
-        { name: 'Roast Beef', id: 8},
-        { name: 'Turkey', id: 9},
-    ];
+    const navigate = useNavigate();
+    const handleClick = () => {
+        if(breadSelected) {
+            navigate('/sides', {state: ingredients});
+        }
+        else {
+            setContinueClicked(true);
+            setErrorVisible(true);
+        }
+    };
 
-    const addOnsData = [
-        { name: 'Spinach', id: 1 },
-        { name: 'Cucumber', id: 2 },
-        { name: 'Bell Peppers', id: 3 },
-        { name: 'Black Olives', id: 4},
-        { name: 'Pepperoncini', id: 5},
-        { name: 'Pickles', id: 6},
-        { name: 'Red Onion', id: 7},
-        { name: 'Lettuce', id: 8},
-        { name: 'Tomatoes', id: 9},
-        { name: 'Jalapeños', id: 10},
-    ];
+    const [bread, setBread] = useState([]);
+    const [cheese, setCheese] = useState([]);
+    const [toppings, setToppings] = useState([]);
+    const [addOns, setAddOns] = useState([]);
+    const [spreadsCondiments, setSpreadsCondiments] = useState([]);
 
-    const spreadsCondimentsData = [
-        { name: 'Balsamic Vinaigrette', id: 1 },
-        { name: 'Deli Mustard', id: 2 },
-        { name: 'Mayonnaise', id: 3 },
-        { name: 'Olive Oil', id: 4},
-        { name: 'Pesto Sauce', id: 5},
-        { name: 'Red Wine Vinegar', id: 6},
-        { name: 'Sundried Tomato Pesto', id: 7},
-    ];
+    const handleBreadChange = (selectedButtons) => {
+        setBread(selectedButtons);
+    }
+
+    const handleCheeseChange = (selectedButtons) => {
+        setCheese(selectedButtons);
+    }
+
+    const handleToppingsChange = (selectedButtons) => {
+        setToppings(selectedButtons);
+    }
+
+    const handleAddOnsChange = (selectedButtons) => {
+        setAddOns(selectedButtons);
+    }
+
+    const handleSpreadsCondimentsChange = (selectedButtons) => {
+        setSpreadsCondiments(selectedButtons);
+    }
+
+    const ingredients = {bread, cheese, toppings, addOns, spreadsCondiments};
 
     return <div className="sandwichPage">
         <div className = "header">
@@ -57,17 +60,18 @@ export function Sandwich() {
             <div className = "mainSubtitle">Choose 1 bread, 1 type of cheese, and upto 3 toppings, 3 add-ons, and 2 spreads/condiments.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Bread</div>
-                <ButtonGroup data = {breadData} width = {8.5} color = "rgb(150, 75, 0)" maximum = {1}></ButtonGroup>
+                <ButtonGroup name = "bread" data = {breadData} width = {8.5} color = "rgb(150, 75, 0)" maximum = {1} setBreadSelected={setBreadSelected} onSelectedButtonsChange={handleBreadChange}></ButtonGroup>
+                {errorVisible && <div className = "errorMessage" color="red">You must choose a type of bread to continue.</div>}
                 <div className = "ingredientTypeText">Cheese</div>
-                <ButtonGroup data = {cheeseData} width = {8.5} color = "rgb(251, 188, 5)" maximum = {1}></ButtonGroup>
+                <ButtonGroup name = "cheese" data = {cheeseData} width = {8.5} color = "rgb(255, 179, 2)" maximum = {1} onSelectedButtonsChange={handleCheeseChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Toppings</div>
-                <ButtonGroup data = {toppingsData} width = {8.5} color = "rgb(66, 133, 244)" maximum = {2}></ButtonGroup>
+                <ButtonGroup name = "toppings" data = {toppingsData} width = {8.5} color = "rgb(66, 133, 244)" maximum = {2} onSelectedButtonsChange={handleToppingsChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Add-Ons</div>
-                <ButtonGroup data = {addOnsData} width = {7.43} color = "rgb(0, 128, 128)" maximum = {3}></ButtonGroup>
+                <ButtonGroup name = "addOns" data = {addOnsData} width = {7.43} color = "rgb(0, 128, 128)" maximum = {3} onSelectedButtonsChange={handleAddOnsChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Spreads & Condiments</div>
-                <ButtonGroup data = {spreadsCondimentsData} width = {11} color = "rgb(244, 66, 109)" maximum = {2}></ButtonGroup>
+                <ButtonGroup name = "spreadsCondiments" data = {spreadsCondimentsData} width = {11} color = "rgb(244, 66, 109)" maximum = {2} onSelectedButtonsChange={handleSpreadsCondimentsChange}></ButtonGroup>
             </div>
-            <button className = "mainOrderButton">Continue</button>
+            <button className = "mainOrderButton" onClick={handleClick}>Continue</button>
         </div>
     </div>
 }

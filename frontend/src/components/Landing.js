@@ -1,13 +1,10 @@
 import './landing.scss'
 import React from 'react';
 import { InstantOrderCard } from './InstantOrderCard';
-import { useNavigate } from 'react-router-dom';
 
 export function Landing(){
-    const navigate = useNavigate();
 
     const handleClick = () => {
-        //navigate('/sandwich');
         window.location.href = '/sandwich';
     };
 
