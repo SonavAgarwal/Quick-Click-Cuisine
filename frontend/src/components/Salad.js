@@ -41,7 +41,6 @@ export function Salad() {
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Greens</div>
                 <ButtonGroup name = "green" data = {greensSaladData} width = {11} color = "rgb(0, 70, 0)" maximum = {1} onSelectedButtonsChange={handleGreenChange}></ButtonGroup>
-                {/* {errorVisible && <div className = "errorMessage" color="red">You must choose a type of bread to continue.</div>} */}
                 <div className = "ingredientTypeText">Protein</div>
                 <ButtonGroup name = "protein" data = {proteinsSaladData} width = {11} color = "rgb(255, 165, 0)" maximum = {1} onSelectedButtonsChange={handleProteinChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Toppings</div>
