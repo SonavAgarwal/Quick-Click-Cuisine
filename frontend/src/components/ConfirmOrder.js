@@ -1,7 +1,7 @@
 import './sandwich.scss'
 import { React } from 'react';
 import { useLocation } from 'react-router-dom';
-import { breadData, cheeseData, toppingsData, addOnsData, spreadsCondimentsData, sidesData, beverageData } from './ingredientsData';
+import { breadData, cheeseData, toppingsData, addOnsData, spreadsCondimentsData, sidesData, beverageData } from './sandwichIngredientsData';
 
 export function ConfirmOrder() {
     const location = useLocation();
@@ -35,9 +35,13 @@ export function ConfirmOrder() {
     const beverageItem = beverageData.find(item => item.id === beverageId);
     const beverageName = beverageItem ? beverageItem.name : 'No Beverage';
 
-    const handleClick = () => {
+    const handleEditOrder = () => {
+        window.location.href = '/sandwich';
+    };
+
+    const handlePlaceOrder = () => {
         window.location.href = '/';
-    }
+    };
 
     return <div className="sandwichPage">
         <div className = "header">
@@ -58,7 +62,8 @@ export function ConfirmOrder() {
                 <div className = "finalOrderText">{sideName}</div>
                 <div className = "finalOrderText">{beverageName}</div>
             </div>
-            <button className = "mainOrderButton" onClick={handleClick}>Order</button>
+            <button className = "mainOrderButton" onClick={handleEditOrder}>Edit Order</button>
+            <button className = "mainOrderButton" onClick={handlePlaceOrder}>Place Order</button>
         </div>
     </div>
 }

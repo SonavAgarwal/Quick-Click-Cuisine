@@ -4,8 +4,12 @@ import { InstantOrderCard } from './InstantOrderCard';
 
 export function Landing(){
 
-    const handleClick = () => {
+    const handleClickSandwich = () => {
         window.location.href = '/sandwich';
+    };
+
+    const handleClickPizza = () => {
+        window.location.href = '/pizza';
     };
 
     return <div className="landingPage">
@@ -13,7 +17,8 @@ export function Landing(){
             <div className="mainTitle">Welcome, Rahul</div>
             <div className ="mainSubtitle">The estimated wait time at the Study is <span id = "subtitleBold">69 minutes.</span></div>
             <button className = "mainOrderButton">Order</button>
-            <button className = "mainOrderButton" onClick = {handleClick}>Sandwich Test</button>
+            <button className = "mainOrderButton" onClick = {handleClickSandwich}>Sandwich Test</button>
+            <button className = "mainOrderButton" onClick = {handleClickPizza}>Pizza Test</button>
         </div>
         <div className="instantOrder">
             <div className = "sectionTitle">Instant Order</div>

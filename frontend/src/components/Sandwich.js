@@ -2,9 +2,11 @@ import './sandwich.scss'
 import { React, useState, useEffect } from 'react';
 import ButtonGroup from './IngredientButton';
 import { useNavigate } from 'react-router-dom';
-import { breadData, cheeseData, toppingsData, addOnsData, spreadsCondimentsData } from './ingredientsData';
+import { breadData, cheeseData, toppingsData, addOnsData, spreadsCondimentsData } from './sandwichIngredientsData';
 
 export function Sandwich() {
+    const navigate = useNavigate();
+
     const [breadSelected, setBreadSelected] = useState(false);
     const [errorVisible, setErrorVisible] = useState(false);
     const [continueClicked, setContinueClicked] = useState(false);
@@ -15,10 +17,10 @@ export function Sandwich() {
         }
     }, [breadSelected, continueClicked]);
 
-    const navigate = useNavigate();
+
     const handleClick = () => {
         if(breadSelected) {
-            navigate('/sides', {state: ingredients});
+            navigate('/sides', {state: ingredients });
         }
         else {
             setContinueClicked(true);
