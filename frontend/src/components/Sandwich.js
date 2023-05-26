@@ -65,7 +65,7 @@ export function Sandwich() {
                 <ButtonGroup name = "bread" data = {breadSandwichData} width = {8.5} color = "rgb(150, 75, 0)" maximum = {1} setBreadSelected={setBreadSelected} onSelectedButtonsChange={handleBreadChange}></ButtonGroup>
                 {errorVisible && <div className = "errorMessage" color="red">You must choose a type of bread to continue.</div>}
                 <div className = "ingredientTypeText">Cheese</div>
-                <ButtonGroup name = "cheese" data = {cheeseSandwichData} width = {8.5} color = "rgb(255, 179, 2)" maximum = {1} onSelectedButtonsChange={handleCheeseChange}></ButtonGroup>
+                <ButtonGroup name = "cheese" data = {cheeseSandwichData} width = {8.5} color = "rgb(255, 165, 0)" maximum = {1} onSelectedButtonsChange={handleCheeseChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Toppings</div>
                 <ButtonGroup name = "toppings" data = {toppingsSandwichData} width = {8.5} color = "rgb(66, 133, 244)" maximum = {2} onSelectedButtonsChange={handleToppingsChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Add-Ons</div>

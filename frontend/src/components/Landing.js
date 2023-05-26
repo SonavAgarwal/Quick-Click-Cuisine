@@ -12,6 +12,10 @@ export function Landing(){
         window.location.href = '/pizza';
     };
 
+    const handleClickSalad = () => {
+        window.location.href = '/salad';
+    };
+
     return <div className="landingPage">
         <div className = "header">
             <div className="mainTitle">Welcome, Rahul</div>
@@ -19,6 +23,7 @@ export function Landing(){
             <button className = "mainOrderButton">Order</button>
             <button className = "mainOrderButton" onClick = {handleClickSandwich}>Sandwich Test</button>
             <button className = "mainOrderButton" onClick = {handleClickPizza}>Pizza Test</button>
+            <button className = "mainOrderButton" onClick = {handleClickSalad}>Salad Test</button>
         </div>
         <div className="instantOrder">
             <div className = "sectionTitle">Instant Order</div>
