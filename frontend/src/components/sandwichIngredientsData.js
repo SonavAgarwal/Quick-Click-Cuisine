@@ -1,17 +1,17 @@
-export const breadData = [
+export const breadSandwichData = [
     { name: 'Sourdough', id: 1 },
     { name: 'Whole Wheat', id: 2 },
     { name: 'Hoagie Roll', id: 3 },
 ];
 
-export const cheeseData = [
+export const cheeseSandwichData = [
     { name: 'Cheddar', id: 1 },
     { name: 'Mozzarella', id: 2 },
     { name: 'Provolone', id: 3 },
     { name: 'Vegan Cheddar', id: 4},
 ];
 
-export const toppingsData = [
+export const toppingsSandwichData = [
     { name: 'Avocado', id: 1 },
     { name: 'Bacon', id: 2 },
     { name: 'Black Forest Ham', id: 3 },
@@ -23,7 +23,7 @@ export const toppingsData = [
     { name: 'Turkey', id: 9},
 ];
 
-export const addOnsData = [
+export const addOnsSandwichData = [
     { name: 'Spinach', id: 1 },
     { name: 'Cucumber', id: 2 },
     { name: 'Bell Peppers', id: 3 },
@@ -36,7 +36,7 @@ export const addOnsData = [
     { name: 'Jalapeños', id: 10},
 ];
 
-export const spreadsCondimentsData = [
+export const spreadsCondimentsSandwichData = [
     { name: 'Balsamic Vinaigrette', id: 1 },
     { name: 'Deli Mustard', id: 2 },
     { name: 'Mayonnaise', id: 3 },

@@ -1,4 +1,4 @@
-export const sauceData = [
+export const saucePizzaData = [
     { name: 'BBQ', id: 1 },
     { name: 'Bechamel', id: 2 },
     { name: 'Buffalo', id: 3 },
@@ -8,13 +8,13 @@ export const sauceData = [
     { name: 'Spicy Marinara', id: 7 },
 ];
 
-export const cheeseData = [
+export const cheesePizzaData = [
     { name: 'Four Cheese', id: 1 },
     { name: 'Mozzarella', id: 2 },
     { name: 'Vegan Mozzarella', id: 3 },
 ];
 
-export const toppingsData = [
+export const toppingsPizzaData = [
     { name: 'Bacon', id: 1 },
     { name: 'Black Forest Ham', id: 2 },
     { name: 'Grilled Chicken', id: 3 },
@@ -24,7 +24,7 @@ export const toppingsData = [
     { name: 'Vegan Sausage', id: 7},
 ];
 
-export const addOnsData = [
+export const addOnsPizzaData = [
     { name: 'Basil', id: 1 },
     { name: 'Red Onion', id: 2 },
     { name: 'Mixed Peppers', id: 3 },
