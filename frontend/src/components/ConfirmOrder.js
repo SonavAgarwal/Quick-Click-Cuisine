@@ -23,7 +23,7 @@ export function ConfirmOrder() {
 
         secondId = finalOrder.ingredients.ingredients.cheese;
         secondData = cheeseSandwichData;
-        secondOptionalText = " Cheese"
+        secondOptionalText = "No Cheese"
 
         thirdId = finalOrder.ingredients.ingredients.toppings;
         thirdData = toppingsSandwichData;
@@ -41,11 +41,11 @@ export function ConfirmOrder() {
     else if(fromPage === "pizza") {
         firstId = finalOrder.ingredients.ingredients.sauce;
         firstData = saucePizzaData;
-        firstOptionalText = " Sauce";
+        firstOptionalText = "No Sauce";
 
         secondId = finalOrder.ingredients.ingredients.cheese;
         secondData = cheesePizzaData;
-        secondOptionalText = " Cheese";
+        secondOptionalText = "No Cheese";
 
         thirdId = finalOrder.ingredients.ingredients.toppings;
         thirdData = toppingsPizzaData;
@@ -62,7 +62,7 @@ export function ConfirmOrder() {
 
         secondId = finalOrder.ingredients.ingredients.protein;
         secondData = proteinsSaladData;
-        secondOptionalText = "No Salad";
+        secondOptionalText = "No Protein";
 
         thirdId = finalOrder.ingredients.ingredients.toppings;
         thirdData = toppingsSaladData;
@@ -126,8 +126,10 @@ export function ConfirmOrder() {
                 <div className = "finalOrderText">{sideName}</div>
                 <div className = "finalOrderText">{beverageName}</div>
             </div>
-            <button className = "mainOrderButton" onClick={handleEditOrder}>Edit Order</button>
-            <button className = "mainOrderButton" onClick={handlePlaceOrder}>Place Order</button>
+            <div className = "confirmButtons">
+                <button className = "confirmOrderButton" onClick={handleEditOrder}>Edit Order</button>
+                <button className = "confirmOrderButton" onClick={handlePlaceOrder}>Place Order</button>
+            </div>
         </div>
     </div>
 }
