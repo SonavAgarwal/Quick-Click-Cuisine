@@ -62,14 +62,14 @@ export function Sandwich() {
             <div className = "mainSubtitle">Choose 1 bread, 1 type of cheese, and upto 3 toppings, 3 add-ons, and 2 spreads/condiments.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Bread</div>
-                <ButtonGroup name = "bread" data = {breadSandwichData} width = {8.5} color = "rgb(150, 75, 0)" maximum = {1} setBreadSelected={setBreadSelected} onSelectedButtonsChange={handleBreadChange}></ButtonGroup>
+                <ButtonGroup name = "bread" data = {breadSandwichData} width = {11} color = "rgb(150, 75, 0)" maximum = {1} setRequiredSelected={setBreadSelected} onSelectedButtonsChange={handleBreadChange}></ButtonGroup>
                 {errorVisible && <div className = "errorMessage" color="red">You must choose a type of bread to continue.</div>}
                 <div className = "ingredientTypeText">Cheese</div>
-                <ButtonGroup name = "cheese" data = {cheeseSandwichData} width = {8.5} color = "rgb(255, 165, 0)" maximum = {1} onSelectedButtonsChange={handleCheeseChange}></ButtonGroup>
+                <ButtonGroup name = "cheese" data = {cheeseSandwichData} width = {11} color = "rgb(255, 165, 0)" maximum = {1} onSelectedButtonsChange={handleCheeseChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Toppings</div>
-                <ButtonGroup name = "toppings" data = {toppingsSandwichData} width = {8.5} color = "rgb(66, 133, 244)" maximum = {2} onSelectedButtonsChange={handleToppingsChange}></ButtonGroup>
+                <ButtonGroup name = "toppings" data = {toppingsSandwichData} width = {11} color = "rgb(66, 133, 244)" maximum = {2} onSelectedButtonsChange={handleToppingsChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Add-Ons</div>
-                <ButtonGroup name = "addOns" data = {addOnsSandwichData} width = {7.43} color = "rgb(0, 128, 128)" maximum = {3} onSelectedButtonsChange={handleAddOnsChange}></ButtonGroup>
+                <ButtonGroup name = "addOns" data = {addOnsSandwichData} width = {11} color = "rgb(0, 128, 128)" maximum = {3} onSelectedButtonsChange={handleAddOnsChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Spreads & Condiments</div>
                 <ButtonGroup name = "spreadsCondiments" data = {spreadsCondimentsSandwichData} width = {11} color = "rgb(244, 66, 109)" maximum = {2} onSelectedButtonsChange={handleSpreadsCondimentsChange}></ButtonGroup>
             </div>

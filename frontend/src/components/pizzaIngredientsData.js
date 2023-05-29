@@ -1,38 +1,39 @@
 export const saucePizzaData = [
     { name: 'BBQ', id: 1 },
-    { name: 'Bechamel', id: 2 },
-    { name: 'Buffalo', id: 3 },
-    { name: 'Dill Shallot Cream Cheese', id: 4 },
-    { name: 'Pesto', id: 5 },
+    { name: 'Buffalo', id: 2 },
+    { name: 'Creamy Alfredo', id: 3 },
+    { name: 'Herbed Cream Cheese', id: 4 },
+    { name: 'Pesto Alla Genovese', id: 5 },
     { name: 'Smoked Tomato', id: 6 },
     { name: 'Spicy Marinara', id: 7 },
 ];
 
 export const cheesePizzaData = [
-    { name: 'Four Cheese', id: 1 },
+    { name: 'Vegan Cheese', id: 1 },
     { name: 'Mozzarella', id: 2 },
-    { name: 'Vegan Mozzarella', id: 3 },
+    { name: 'Four Cheese Blend', id: 3 },
 ];
 
 export const toppingsPizzaData = [
-    { name: 'Bacon', id: 1 },
-    { name: 'Black Forest Ham', id: 2 },
-    { name: 'Grilled Chicken', id: 3 },
-    { name: 'Italian Sausage', id: 4},
-    { name: 'Pepperoni', id: 5},
-    { name: 'Salmon', id: 6},
-    { name: 'Vegan Sausage', id: 7},
+    { name: 'Vegan Sausage', id: 1 },
+    { name: 'Grilled Chicken', id: 2 },
+    { name: 'Smoked Ham', id: 3 },
+    { name: 'Bacon', id: 4},
+    { name: 'Salmon Trout', id: 5},
+    { name: 'Pepperoni', id: 6},
+    { name: 'Sausage', id: 7},
 ];
 
 export const addOnsPizzaData = [
-    { name: 'Basil', id: 1 },
-    { name: 'Red Onion', id: 2 },
-    { name: 'Mixed Peppers', id: 3 },
-    { name: 'Mushroom', id: 4},
-    { name: 'Pineapple', id: 5},
-    { name: 'Ranch Dressing', id: 6},
-    { name: 'Olives', id: 7},
-    { name: 'Jalapeños', id: 8},
+    { name: 'Bell Peppers', id: 1 },
+    { name: 'Basil', id: 2 },
+    { name: 'Black Olives', id: 3 },
+    { name: 'Jalapeño', id: 4},
+    { name: 'Mushrooms', id: 5},
+    { name: 'Pineapple', id: 6},
+    { name: 'Ranch', id: 7},
+    { name: 'Red Onions', id: 8},
+    { name: 'Marinated Artichokes', id: 9},
 ];
 
 export const sidesData = [

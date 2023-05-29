@@ -12,11 +12,9 @@ const IngredientButton = ({ name, color, width, isActive, onClick, shouldDisplay
     borderColor: color,
     cursor: 'pointer',
     borderRadius: '1rem',
-    width: width + '%', //8.5%
+    width: width + '%',
     height: '3rem',
-    marginTop: '1rem',
-    marginBottom: '1.5rem',
-    marginRight: '2%',
+    margin: '15px',
     fontSize: '0.82rem',
     fontWeight: 'bold',
     transition: 'transform 0.6s ease-out',
@@ -56,7 +54,7 @@ const IngredientButton = ({ name, color, width, isActive, onClick, shouldDisplay
   );
 };
 
-const ButtonGroup = ( {name, data, color, width, maximum, setBreadSelected, onSelectedButtonsChange} ) => {
+const ButtonGroup = ( {name, data, color, width, maximum, setRequiredSelected, onSelectedButtonsChange} ) => {
     const [selectedButtons, setSelectedButtons] = useState([]);
     const [ingredientQuantity, setIngredientQuantity] = useState(data.map(() => 0));
 
@@ -96,20 +94,20 @@ const ButtonGroup = ( {name, data, color, width, maximum, setBreadSelected, onSe
     else if(maximum === 1) {
         if(selectedButtons.includes(buttonId)) {
             setSelectedButtons(selectedButtons.filter((id) => id !== buttonId));
-            if(name === "bread") {
-                setBreadSelected(false);
+            if(name === "bread" || name === "green") {
+                setRequiredSelected(false);
             }
         }
         else if(selectedButtons.length === maximum) {
             setSelectedButtons([buttonId]);
-            if(name === "bread") {
-                setBreadSelected(true);
+            if(name === "bread" || name === "green") {
+                setRequiredSelected(true);
             }
         }
         else if(selectedButtons.length < maximum) {
             setSelectedButtons([...selectedButtons, buttonId]);
-            if(name === "bread") {
-                setBreadSelected(true);
+            if(name === "bread" || name === "green") {
+                setRequiredSelected(true);
             }
         }
     }
