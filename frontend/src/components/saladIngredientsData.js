@@ -40,19 +40,3 @@ export const dressingsSaladData = [
     { name: 'Roasted Red Pepper', id: 5},
     { name: 'Ranch', id: 6},
 ];
-
-export const sidesData = [
-    { name: 'Banana', id: 1 },
-    { name: 'Apple', id: 2 },
-    { name: 'Orange', id: 3 },
-    { name: 'Barbecue Potato Chips', id: 4 },
-    { name: 'Sea Salt Potato Chips', id: 5 },
-    { name: 'Cheddar Popcorn', id: 6 },
-];
-
-export const beverageData = [
-    { name: 'Fountain Beverage', id: 1 },
-    { name: 'Apple Juice', id: 2 },
-    { name: 'Orange Juice', id: 3 },
-    { name: 'Chocolate Milk', id: 4},
-];

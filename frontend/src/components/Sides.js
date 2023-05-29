@@ -32,9 +32,9 @@ export function Sides() {
             <div className = "mainSubtitle">Choose upto 1 side & 1 beverage.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Sides</div>
-                <ButtonGroup data = {sidesData} width = {11.8} color = "rgb(115, 79, 150)" maximum = {1} onSelectedButtonsChange={handleSideChange}></ButtonGroup>
+                <ButtonGroup data = {sidesData} width = {13} color = "rgb(115, 79, 150)" maximum = {1} onSelectedButtonsChange={handleSideChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Beverages</div>
-                <ButtonGroup data = {beverageData} width = {11.8} color = "rgb(0, 128, 128)" maximum = {1} onSelectedButtonsChange={handleBeverageChange}></ButtonGroup>
+                <ButtonGroup data = {beverageData} width = {13} color = "rgb(0, 128, 128)" maximum = {1} onSelectedButtonsChange={handleBeverageChange}></ButtonGroup>
             </div>
             <button className = "mainOrderButton" onClick={handleClick}>Continue</button>
         </div>

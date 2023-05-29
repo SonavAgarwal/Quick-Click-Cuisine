@@ -48,17 +48,22 @@ export const spreadsCondimentsSandwichData = [
 ];
 
 export const sidesData = [
-    { name: 'Banana', id: 1 },
-    { name: 'Apple', id: 2 },
+    { name: 'Apple', id: 1 },
+    { name: 'Banana', id: 2 },
     { name: 'Orange', id: 3 },
-    { name: 'Barbecue Potato Chips', id: 4 },
-    { name: 'Sea Salt Potato Chips', id: 5 },
-    { name: 'Cheddar Popcorn', id: 6 },
+    { name: 'Hickory BBQ Kettle Chips', id: 4 },
+    { name: 'Sea Salt Kettle Chips', id: 5 },
+    { name: 'White Cheddar Popcorn', id: 6 },
 ];
 
 export const beverageData = [
-    { name: 'Fountain Beverage', id: 1 },
-    { name: 'Apple Juice', id: 2 },
-    { name: 'Orange Juice', id: 3 },
-    { name: 'Chocolate Milk', id: 4},
+    { name: 'Vanilla Soy Milk', id: 1 },
+    { name: 'Hot Brewed Coffee', id: 2 },
+    { name: 'Apple Juice', id: 3 },
+    { name: 'Low Fat Milk', id: 4 },
+    { name: 'Chocolate Milk', id: 5 },
+    { name: 'Fountain Beverage', id: 6 },
+    { name: 'Hot Brewed Tea', id: 7 },
+    { name: 'Orange Juice', id: 8},
+    { name: 'Non Fat Milk', id: 9 },
 ];
