@@ -34,7 +34,7 @@ export const addOnsSandwichData = [
     { name: 'Pickles', id: 8},
     { name: 'Red Onions', id: 9},
     { name: 'Spinach', id: 10},
-    { name: 'Tomatoes', id: 10},
+    { name: 'Tomatoes', id: 11},
 ];
 
 export const spreadsCondimentsSandwichData = [
