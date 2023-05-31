@@ -1,123 +1,121 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
-.sandwichPage{
-        --limeGreen: rgb(126, 219, 103);
-        --breadBrown: rgb(150, 75, 0);
-        font-family: 'Inter';
+.sandwichPage {
+	--limeGreen: rgb(126, 219, 103);
+	--breadBrown: rgb(150, 75, 0);
+	font-family: "Inter";
 
-        >.header{
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            //align-items: center;
+	> .header {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		//align-items: center;
 
-            >.mainTitle{
-                    margin: 0;
-                    padding: 0;
-                    font-weight: 700;
-                    font-size: 2rem;
-                    line-height: 2.4375rem;
-                    margin-top: 2.125rem;
-                    margin-bottom: 0.8125rem;
-                    text-align: center;
-            }
-            >.mainSubtitle{
-                font-weight: 400;
-                font-size: 1rem;
-                line-height: 1.1875rem;
-                padding-left: 20%;
-                padding-right: 20%;
-                text-align: center;
-        
-                >#subtitleBold{
-                    font-weight: 700;
-                }
-            }
+		> .mainTitle {
+			margin: 0;
+			padding: 0;
+			font-weight: 700;
+			font-size: 2rem;
+			line-height: 2.4375rem;
+			margin-top: 2.125rem;
+			margin-bottom: 0.8125rem;
+			text-align: center;
+		}
+		> .mainSubtitle {
+			font-weight: 400;
+			font-size: 1rem;
+			line-height: 1.1875rem;
+			padding-left: 20%;
+			padding-right: 20%;
+			text-align: center;
 
-            >.ingredientType {
-                margin-top: 1.25rem;
-                padding-left: 10%;
+			> #subtitleBold {
+				font-weight: 700;
+			}
+		}
 
-                >.ingredientTypeText {
-                    font-weight: bold;
-                    text-decoration: underline;
-                }
+		> .ingredientType {
+			margin-top: 1.25rem;
+			padding-left: 10%;
 
-                >.finalOrderText {
-                    margin-bottom: 0.7rem;
-                    font-size: 1.2rem;
-                }
+			> .ingredientTypeText {
+				font-weight: bold;
+				text-decoration: underline;
+			}
 
-                >.errorMessage {
-                    margin-bottom: 1.25rem;
-                    color: red;
-                    font-weight: bold;
-                }
+			> .finalOrderText {
+				margin-bottom: 0.7rem;
+				font-size: 1.2rem;
+			}
 
-                >.ingredient {
-                    margin-top: 1rem;
-                    margin-right: 2%;
-                    background: white;
-                    color: var(--breadBrown);
-                    border: 1px solid var(--breadBrown);
-                    border-radius: 1rem;
-                    width: 6.5%;
-                    height: 3rem;
-                    font-size: 0.82rem;
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
+			> .errorMessage {
+				margin-bottom: 1.25rem;
+				color: red;
+				font-weight: bold;
+			}
 
-            >.mainOrderButton{
-                margin-top: 1.75rem;
-                margin-left: auto;
-                margin-right: auto;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background: var(--limeGreen);
-                color: white;
-                border: none;
-                width: 41.8%;
-                height: 3.3125rem;
-                text-align: center;
-                font-size: 1.5rem;
-                font-weight: 700;
-                border-radius: 1rem;
-                margin-bottom: 2rem;
+			> .ingredient {
+				margin-top: 1rem;
+				margin-right: 2%;
+				background: white;
+				color: var(--breadBrown);
+				border: 1px solid var(--breadBrown);
+				border-radius: 1rem;
+				width: 6.5%;
+				height: 3rem;
+				font-size: 0.82rem;
+				&:hover {
+					cursor: pointer;
+				}
+			}
+		}
 
-                &:hover{
-                    filter: brightness(0.9);
-                    cursor: pointer;
-                }
-            }
+		> .mainOrderButton {
+			margin-top: 1.75rem;
+			margin-left: auto;
+			margin-right: auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: var(--limeGreen);
+			color: white;
+			border: none;
+			width: 41.8%;
+			height: 3.3125rem;
+			text-align: center;
+			font-size: 1.5rem;
+			font-weight: 700;
+			border-radius: 1rem;
+			margin-bottom: 2rem;
 
-            >.confirmButtons {
-                margin-top: 1.25rem;
-                display: flex;
-                justify-content: center;
-                
-                >.confirmOrderButton{
-                    margin: 10px;
-                    background: var(--limeGreen);
-                    color: white;
-                    border: none;
-                    width: 15%;
-                    height: 3.3125rem;
-                    text-align: center;
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                    border-radius: 1rem;
-    
-                    &:hover{
-                        filter: brightness(0.9);
-                        cursor: pointer;
-                    }
-                }
-            }
+			&:hover {
+				filter: brightness(0.9);
+				cursor: pointer;
+			}
+		}
 
-            
-        }
+		> .confirmButtons {
+			margin-top: 1.25rem;
+			display: flex;
+			justify-content: center;
+
+			> .confirmOrderButton {
+				margin: 10px;
+				background: var(--limeGreen);
+				color: white;
+				border: none;
+				width: 15%;
+				height: 3.3125rem;
+				text-align: center;
+				font-size: 1.5rem;
+				font-weight: 700;
+				border-radius: 1rem;
+
+				&:hover {
+					filter: brightness(0.9);
+					cursor: pointer;
+				}
+			}
+		}
+	}
 }
