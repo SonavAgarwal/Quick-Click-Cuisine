@@ -17,7 +17,7 @@
 
 .landingPage{
     //@media only screen and (max-width: 50rem){
-        --limeGreen: rgb(126, 219, 103);
+        --limeGreen: #57DE54;
         font-family: 'Inter';
 
         >.header{
@@ -92,6 +92,12 @@
             margin-top: 1.875rem;
             @include section;
 
+        }
+
+        >.orderHistory{
+            margin-top: 1.875rem;
+            @include section;
+            margin-bottom: 4rem;
         }
     //}
 }
