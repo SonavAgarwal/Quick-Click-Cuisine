@@ -1,6 +1,7 @@
 import './landing.scss'
 import React from 'react';
 import { InstantOrderCard } from './InstantOrderCard';
+import { PendingOrderCard } from './PendingOrderCard';
 
 export function Landing(){
 
@@ -31,6 +32,12 @@ export function Landing(){
             <InstantOrderCard type ="pizza" name = "Rahul's Dumpy 🍑"/>
             <InstantOrderCard type = "sandwich" name = "Sonav 😋" />
             <InstantOrderCard type = "salad" name = "Willie 🥵" />
+        </div>
+        <div className = "pendingOrders">
+            <div className = "sectionTitle">Pending Orders</div>
+            <PendingOrderCard type = "Sandwich" desc = "Sandwich with bro idk someone help me please oh dear lord" />
+            <PendingOrderCard type = "Pizza" desc = "a pizza bro i really don't know how much longer i can take this at this point"/>
+            <PendingOrderCard type = "Salad" desc = "a salad bro i really don't know how much longer i can take this at this point" />
         </div>
 
     </div>

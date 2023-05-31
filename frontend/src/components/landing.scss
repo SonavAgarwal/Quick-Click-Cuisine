@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
+@mixin section{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: left;
+    margin-left: 8%;
+    margin-right: 8%;
+
+    >.sectionTitle{
+        font-size: 1rem;
+        line-height: 1.1875rem;
+        text-decoration: underline;
+    }
+}
+
 .landingPage{
     //@media only screen and (max-width: 50rem){
         --limeGreen: rgb(126, 219, 103);
@@ -56,20 +71,27 @@
 
         >.instantOrder{
             margin-top: 4.4375rem;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: left;
-            margin-left: 8%;
-            margin-right: 8%;
+            @include section;
+            // display: flex;
+            // justify-content: center;
+            // flex-direction: column;
+            // align-items: left;
+            // margin-left: 8%;
+            // margin-right: 8%;
             //background: orange;
 
-            >.sectionTitle{
-                font-size: 1rem;
-                line-height: 1.1875rem;
-                text-decoration: underline;
+            // >.sectionTitle{
+            //     font-size: 1rem;
+            //     line-height: 1.1875rem;
+            //     text-decoration: underline;
 
-            }
+            // }
+        }
+
+        >.pendingOrders{
+            margin-top: 1.875rem;
+            @include section;
+
         }
     //}
 }
