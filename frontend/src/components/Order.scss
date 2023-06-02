@@ -1,0 +1,14 @@
+.orderContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    >.orderTitle{
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+}
