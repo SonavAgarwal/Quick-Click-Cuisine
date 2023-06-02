@@ -1,11 +1,15 @@
 import './sandwich.scss'
 import { React, useState, useEffect } from 'react';
 import ButtonGroup from './IngredientButton';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { greensSaladData, proteinsSaladData, toppingsSaladData, dressingsSaladData } from './saladIngredientsData';
 
 export function Salad() {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const fromPage = location.state.fromPage;
+    const finalOrder = location.state.finalOrder || null;
 
     const [greenSelected, setGreenSelected] = useState(false);
     const [errorVisible, setErrorVisible] = useState(false);
@@ -18,7 +22,7 @@ export function Salad() {
     }, [greenSelected, continueClicked]);
 
     const handleClick = () => {
-        if(greenSelected) {
+        if(greenSelected || green.length !== 0) {
             navigate('/sides', {state: { ingredients, fromPage : "salad" }});
         }
         else {
@@ -56,14 +60,14 @@ export function Salad() {
             <div className = "mainSubtitle">Choose 1 green, 1 protein, 1 dressing, and upto 4 toppings.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Greens</div>
-                <ButtonGroup name = "green" data = {greensSaladData} width = {11} color = "rgb(0, 70, 0)" maximum = {1} setRequiredSelected={setGreenSelected} onSelectedButtonsChange={handleGreenChange}></ButtonGroup>
+                <ButtonGroup from = {fromPage} finalOrder = {finalOrder && finalOrder.ingredients.ingredients.green} name = "green" data = {greensSaladData} width = {11} color = "rgb(0, 70, 0)" maximum = {1} setRequiredSelected={setGreenSelected} onSelectedButtonsChange={handleGreenChange}></ButtonGroup>
                 {errorVisible && <div className = "errorMessage" color="red">You must choose a green to continue.</div>}
                 <div className = "ingredientTypeText">Protein</div>
-                <ButtonGroup name = "protein" data = {proteinsSaladData} width = {11} color = "rgb(255, 165, 0)" maximum = {1} onSelectedButtonsChange={handleProteinChange}></ButtonGroup>
+                <ButtonGroup from = {fromPage} finalOrder = {finalOrder && finalOrder.ingredients.ingredients.protein} name = "protein" data = {proteinsSaladData} width = {11} color = "rgb(255, 165, 0)" maximum = {1} onSelectedButtonsChange={handleProteinChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Toppings</div>
-                <ButtonGroup name = "toppings" data = {toppingsSaladData} width = {11} color = "rgb(66, 133, 244)" maximum = {4} onSelectedButtonsChange={handleToppingsChange}></ButtonGroup>
+                <ButtonGroup from = {fromPage} finalOrder = {finalOrder && finalOrder.ingredients.ingredients.toppings} name = "toppings" data = {toppingsSaladData} width = {11} color = "rgb(66, 133, 244)" maximum = {4} onSelectedButtonsChange={handleToppingsChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Dressing</div>
-                <ButtonGroup name = "dressing" data = {dressingsSaladData} width = {11} color = "rgb(244, 66, 109)" maximum = {1} onSelectedButtonsChange={handleDressingChange}></ButtonGroup>
+                <ButtonGroup from = {fromPage} finalOrder = {finalOrder && finalOrder.ingredients.ingredients.dressing} name = "dressing" data = {dressingsSaladData} width = {11} color = "rgb(244, 66, 109)" maximum = {1} onSelectedButtonsChange={handleDressingChange}></ButtonGroup>
             </div>
             <button className = "mainOrderButton" onClick={handleClick}>Continue</button>
         </div>

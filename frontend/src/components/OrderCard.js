@@ -3,26 +3,31 @@ import "./OrderCard.scss";
 import pizzaFull from '../static/pizza.png';
 import sandwichFull from '../static/sandwich.png';
 import saladFull from '../static/salad.png';
+import { useNavigate } from 'react-router-dom';
 
 export const OrderCard = (props) => {
 
     const type = props.type;
     const desc = props.desc;
     let redirect;
-    
     let image; 
-    if (type === "Sandwich"){
+
+    const navigate = useNavigate();
+    const destination = "/" + type;
+
+    if (type === "sandwich"){
         image = sandwichFull;
-        redirect = '/sandwich';
     }
-    if (type === "Pizza"){
+    if (type === "pizza"){
         image = pizzaFull;
-        redirect = '/pizza';
     }
-    if (type === "Salad"){
+    if (type === "salad"){
         image = saladFull;
-        redirect = '/salad';
     }
+
+    const handleClick = () => {
+        navigate(destination, {state: {fromPage : "order" }});
+    };
 
     return (
         <div className = "orderCard">
@@ -33,7 +38,7 @@ export const OrderCard = (props) => {
                     <div className = "orderDesc">{desc}</div>
                 </div>
             </div>
-            <button className = "orderButton" onClick = {() => window.location.href = redirect}>Select</button>
+            <button className = "orderButton" onClick = {handleClick}>Select</button>
         </div>
     );
 }

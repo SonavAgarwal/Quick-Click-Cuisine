@@ -1,6 +1,6 @@
 import './sandwich.scss'
 import { React } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { breadSandwichData, cheeseSandwichData, toppingsSandwichData, addOnsSandwichData, spreadsCondimentsSandwichData, sidesData, beverageData } from './sandwichIngredientsData';
 import { saucePizzaData, cheesePizzaData, toppingsPizzaData, addOnsPizzaData } from './pizzaIngredientsData';
 import { greensSaladData, proteinsSaladData, toppingsSaladData, dressingsSaladData } from './saladIngredientsData';
@@ -93,9 +93,15 @@ export function ConfirmOrder() {
     const beverageItem = beverageData.find(item => item.id === beverageId);
     const beverageName = beverageItem ? beverageItem.name : 'No Beverage';
 
+    const navigate = useNavigate();
+    
     const handleEditOrder = () => {
         const destination = '/' + fromPage;
-        window.location.href = destination;
+        navigate(destination, {state: { finalOrder, fromPage : "confirmOrder" }});
+        //window.location.href = destination;
+        //const destination = `/sandwich/${finalOrder}`;
+        //const state = { finalOrder };
+        //navigate('/sandwich', { state });
     };
 
     const handlePlaceOrder = () => {

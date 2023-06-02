@@ -77,6 +77,8 @@ const IngredientButton = ({
 };
 
 const ButtonGroup = ({
+	from,
+	finalOrder,
 	name,
 	data,
 	color,
@@ -86,9 +88,22 @@ const ButtonGroup = ({
 	onSelectedButtonsChange,
 }) => {
 	const [selectedButtons, setSelectedButtons] = useState([]);
-	const [ingredientQuantity, setIngredientQuantity] = useState(
-		data.map(() => 0)
-	);
+	const [ingredientQuantity, setIngredientQuantity] = useState(data.map(() => 0));
+
+	useEffect(() => {
+		if(from === "confirmOrder") {
+			const updatedSelectedButtons = finalOrder.flatMap(id =>
+				data.filter(button => button.id === id).map(button => button.id)
+			);
+			setSelectedButtons(updatedSelectedButtons);
+	
+			const updatedIngredientQuantity = data.map(button => {
+		  	const count = finalOrder.filter(id => id === button.id).length;
+		  		return count;
+			});
+			setIngredientQuantity(updatedIngredientQuantity);
+		}
+	}, [data, finalOrder, from]);
 
 	useEffect(() => {
 		onSelectedButtonsChange(selectedButtons);
@@ -114,10 +129,8 @@ const ButtonGroup = ({
 
 	const handleButtonClick = (buttonId) => {
 		if (maximum !== 1) {
-			if (
-				selectedButtons.length === maximum &&
-				selectedButtons.includes(buttonId)
-			) {
+			console.log(selectedButtons);
+			if ( selectedButtons.length === maximum && selectedButtons.includes(buttonId)) {
 				decrementQuantity(buttonId - 1, ingredientQuantity[buttonId - 1]);
 				setSelectedButtons(selectedButtons.filter((id) => id !== buttonId));
 			} else if (selectedButtons.length < maximum) {
