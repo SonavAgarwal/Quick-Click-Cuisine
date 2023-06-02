@@ -1,0 +1,56 @@
+.order-card {
+    background-color: #F8f8f8;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    padding: 1rem;
+    width: 30vw;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.info > h1 {
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.order-items {
+    display: flex;
+    flex-direction: row;
+    /* margin-top: 1rem; */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.items-list {
+    flex: 1;
+
+}
+
+.items-list > h1 {
+    margin: 0;
+}
+
+/* green button that takes up full width and turns darker when pressed, has white text, rounded corners */
+.order-card > button{
+    background-color: #57DE54;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.order-card > button:hover {
+    background-color: #4cc34a;
+}
