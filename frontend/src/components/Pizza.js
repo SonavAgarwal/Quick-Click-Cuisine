@@ -3,6 +3,7 @@ import { React, useState } from 'react';
 import ButtonGroup from './IngredientButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { saucePizzaData, cheesePizzaData, toppingsPizzaData, addOnsPizzaData } from './pizzaIngredientsData';
+import { NameText } from './NameText';
 
 export function Pizza() {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ export function Pizza() {
 
     return <div className="sandwichPage">
         <div className = "header">
-            <div className = "mainTitle">Rahul, Craft Your Pizza Below!</div>
+            <div className = "mainTitle"><NameText/>, Craft Your Pizza Below!</div>
             <div className = "mainSubtitle">Choose 1 sauce, 1 type of cheese, 1 topping, and upto 3 add-ons.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Sauce</div>
