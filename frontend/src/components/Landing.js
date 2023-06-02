@@ -6,26 +6,11 @@ import { HistoryCard } from './HistoryCard';
 
 export function Landing(){
 
-    const handleClickSandwich = () => {
-        window.location.href = '/sandwich';
-    };
-
-    const handleClickPizza = () => {
-        window.location.href = '/pizza';
-    };
-
-    const handleClickSalad = () => {
-        window.location.href = '/salad';
-    };
-
     return <div className="landingPage">
         <div className = "header">
             <div className="mainTitle">Welcome, Rahul</div>
             <div className ="mainSubtitle">The estimated wait time at the Study is <span id = "subtitleBold">69 minutes.</span></div>
-            <button className = "mainOrderButton">Order</button>
-            {/* <button className = "mainOrderButton" onClick = {handleClickSandwich}>Sandwich Test</button>
-            <button className = "mainOrderButton" onClick = {handleClickPizza}>Pizza Test</button>
-            <button className = "mainOrderButton" onClick = {handleClickSalad}>Salad Test</button> */}
+            <button className = "mainOrderButton" onClick = {() => window.location.href = '/order'}>Order</button>
         </div>
         <div className="instantOrder">
             <div className = "sectionTitle">Instant Order</div>

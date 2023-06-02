@@ -4,6 +4,7 @@ import { Sandwich } from "./components/Sandwich";
 import { Pizza } from "./components/Pizza";
 import { Sides } from "./components/Sides";
 import { Salad } from "./components/Salad";
+import { Order } from "./components/Order";
 import { ConfirmOrder } from "./components/ConfirmOrder";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { auth } from "./firebase.js";
@@ -33,6 +34,7 @@ function App() {
 		<div>
 			<Routes>
 				<Route path="/" element={<Landing />} />
+				<Route path="/order" element ={<Order />} />
 				<Route path="sandwich" element={<Sandwich />} />
 				<Route path="pizza" element={<Pizza />} />
 				<Route path="salad" element={<Salad />} />
