@@ -9,20 +9,23 @@ export const OrderCard = (props) => {
 
     const type = props.type;
     const desc = props.desc;
-    let redirect;
-    let image; 
+    let image;
+    let altText;
 
     const navigate = useNavigate();
     const destination = "/" + type;
 
     if (type === "sandwich"){
         image = sandwichFull;
+        altText = "Sandwich";
     }
     if (type === "pizza"){
         image = pizzaFull;
+        altText = "Pizza";
     }
     if (type === "salad"){
         image = saladFull;
+        altText = "Salad";
     }
 
     const handleClick = () => {
@@ -32,7 +35,7 @@ export const OrderCard = (props) => {
     return (
         <div className = "orderCard">
             <div className = "content">
-                <img src = {image}></img>
+                <img src = {image} alt = {altText}></img>
                 <div className = "textContainer">
                     <div className = "orderTitle">{type}</div>
                     <div className = "orderDesc">{desc}</div>
