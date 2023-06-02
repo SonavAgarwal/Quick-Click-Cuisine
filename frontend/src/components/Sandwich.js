@@ -11,6 +11,13 @@ export function Sandwich() {
     const fromPage = location.state.fromPage;
     const finalOrder = location.state.finalOrder || null;
 
+    let side;
+    let beverage;
+    if(finalOrder) {
+        side = finalOrder.side;
+        beverage = finalOrder.beverage;
+    }
+
     const [breadSelected, setBreadSelected] = useState(false);
     const [errorVisible, setErrorVisible] = useState(false);
     const [continueClicked, setContinueClicked] = useState(false);
@@ -23,7 +30,12 @@ export function Sandwich() {
 
     const handleClick = () => {
         if(breadSelected || bread.length !== 0) {
-            navigate('/sides', {state: { ingredients, fromPage : "sandwich" }});
+            if(fromPage === "order") {
+                navigate('/sides', {state: { ingredients, side, beverage, fromPage : "sandwich", type: "sandwich" }});
+            }
+            else {
+                navigate('/sides', {state: { ingredients, side, beverage, fromPage : "confirmOrder", type: "sandwich" }});
+            }
         }
         else {
             setContinueClicked(true);

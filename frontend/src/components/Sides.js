@@ -8,9 +8,14 @@ export function Sides() {
     const location = useLocation();
     const ingredients = location.state || [];
 
+    const fromPage = location.state.fromPage;
+    const type = location.state.type;
+    const editSide = location.state.side || [];
+    const editBeverage = location.state.beverage || [];
+
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate('/confirmOrder', {state: {finalOrder, fromPage : location.state.fromPage }});
+        navigate('/confirmOrder', {state: {finalOrder, fromPage : location.state.fromPage, type: type }});
     };
 
     const [side, setSide] = useState([]);
@@ -32,9 +37,9 @@ export function Sides() {
             <div className = "mainSubtitle">Choose upto 1 side & 1 beverage.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Sides</div>
-                <ButtonGroup data = {sidesData} width = {13} color = "rgb(115, 79, 150)" maximum = {1} onSelectedButtonsChange={handleSideChange}></ButtonGroup>
+                <ButtonGroup from = {fromPage} finalOrder = {editSide} data = {sidesData} width = {13} color = "rgb(115, 79, 150)" maximum = {1} onSelectedButtonsChange={handleSideChange}></ButtonGroup>
                 <div className = "ingredientTypeText">Beverages</div>
-                <ButtonGroup data = {beverageData} width = {13} color = "rgb(0, 128, 128)" maximum = {1} onSelectedButtonsChange={handleBeverageChange}></ButtonGroup>
+                <ButtonGroup from = {fromPage} finalOrder = {editBeverage} data = {beverageData} width = {13} color = "rgb(0, 128, 128)" maximum = {1} onSelectedButtonsChange={handleBeverageChange}></ButtonGroup>
             </div>
             <button className = "mainOrderButton" onClick={handleClick}>Continue</button>
         </div>

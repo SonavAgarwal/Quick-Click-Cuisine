@@ -29,7 +29,7 @@ export const toppingsSaladData = [
     { name: 'Black Olives', id: 12},
     { name: 'Farro', id: 13},
     { name: 'Chopped Eggs', id: 14},
-    { name: 'Crumbled Feta Cheese', id: 14},
+    { name: 'Crumbled Feta Cheese', id: 15},
 ];
 
 export const dressingsSaladData = [
