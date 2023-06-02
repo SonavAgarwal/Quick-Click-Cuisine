@@ -12,6 +12,13 @@ export function Salad() {
     const fromPage = location.state.fromPage;
     const finalOrder = location.state.finalOrder || null;
 
+    let side;
+    let beverage;
+    if(finalOrder) {
+        side = finalOrder.side;
+        beverage = finalOrder.beverage;
+    }
+
     const [greenSelected, setGreenSelected] = useState(false);
     const [errorVisible, setErrorVisible] = useState(false);
     const [continueClicked, setContinueClicked] = useState(false);
@@ -24,7 +31,12 @@ export function Salad() {
 
     const handleClick = () => {
         if(greenSelected || green.length !== 0) {
-            navigate('/sides', {state: { ingredients, fromPage : "salad" }});
+            if(fromPage === "order") {
+                navigate('/sides', {state: { ingredients, side, beverage, fromPage : "salad", type: "salad" }});
+            }
+            else {
+                navigate('/sides', {state: { ingredients, side, beverage, fromPage : "confirmOrder", type: "salad" }});
+            }
         }
         else {
             setContinueClicked(true);

@@ -9,6 +9,7 @@ import { NameText } from './NameText';
 export function ConfirmOrder() {
     const location = useLocation();
     const fromPage = location.state.fromPage;
+    const type = location.state.type;
     const finalOrder = location.state.finalOrder || [];
 
     let firstId, firstData, firstOptionalText;
@@ -17,7 +18,7 @@ export function ConfirmOrder() {
     let fourthId, fourthData, fourthOptionalText;
     let fifthId, fifthItem, fifthName, fifthOptionalText;
 
-    if(fromPage === "sandwich") {
+    if(type === "sandwich" || (type === "sandwich" && fromPage === "confirmOrder")) {
         firstId = finalOrder.ingredients.ingredients.bread;
         firstData = breadSandwichData;
         firstOptionalText = "No Bread";
@@ -39,7 +40,7 @@ export function ConfirmOrder() {
         fifthOptionalText = "No Spreads or Condiments";
         fifthName = (fifthItem.length !== 0) ? fifthItem.map(item => item.name) : [fifthOptionalText];
     }
-    else if(fromPage === "pizza") {
+    else if(type === "pizza" || (type === "pizza" && fromPage === "confirmOrder")) {
         firstId = finalOrder.ingredients.ingredients.sauce;
         firstData = saucePizzaData;
         firstOptionalText = "No Sauce";
@@ -56,7 +57,7 @@ export function ConfirmOrder() {
         fourthData = addOnsPizzaData;
         fourthOptionalText = "No Add Ons";
     }
-    else if(fromPage === "salad") {
+    else if(type === "salad" || (type === "salad" && fromPage === "confirmOrder")) {
         firstId = finalOrder.ingredients.ingredients.green;
         firstData = greensSaladData;
         firstOptionalText = "No Greens";
@@ -97,7 +98,7 @@ export function ConfirmOrder() {
     const navigate = useNavigate();
     
     const handleEditOrder = () => {
-        const destination = '/' + fromPage;
+        const destination = '/' + type;
         navigate(destination, {state: { finalOrder, fromPage : "confirmOrder" }});
         //window.location.href = destination;
         //const destination = `/sandwich/${finalOrder}`;
@@ -127,7 +128,7 @@ export function ConfirmOrder() {
                 {fourthName.map((name, index) => (
                     <div key={index} className = "finalOrderText">{name}</div>
                 ))}
-                {fromPage === "sandwich" && (fifthName.map((name, index) => (
+                {(type === "sandwich" || (type === "sandwich" && fromPage === "confirmOrder")) && (fifthName.map((name, index) => (
                     <div key={index} className = "finalOrderText">{name}</div>
                 )))}
                 <div className = "finalOrderText">{sideName}</div>

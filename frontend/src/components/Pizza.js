@@ -12,8 +12,20 @@ export function Pizza() {
     const fromPage = location.state.fromPage;
     const finalOrder = location.state.finalOrder || null;
 
+    let side;
+    let beverage;
+    if(finalOrder) {
+        side = finalOrder.side;
+        beverage = finalOrder.beverage;
+    }
+
     const handleClick = () => {
-        navigate('/sides', {state: { ingredients, fromPage : "pizza" }});
+        if(fromPage === "order") {
+            navigate('/sides', {state: { ingredients, side, beverage, fromPage : "pizza", type: "pizza" }});
+        }
+        else {
+            navigate('/sides', {state: { ingredients, side, beverage, fromPage : "confirmOrder", type: "pizza" }});
+        }
     };
 
     const [sauce, setSauce] = useState([]);
