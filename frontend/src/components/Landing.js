@@ -3,6 +3,8 @@ import React from 'react';
 import { InstantOrderCard } from './InstantOrderCard';
 import { PendingOrderCard } from './PendingOrderCard';
 import { HistoryCard } from './HistoryCard';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 export function Landing(){
 
@@ -11,6 +13,7 @@ export function Landing(){
             <div className="mainTitle">Welcome, Rahul</div>
             <div className ="mainSubtitle">The estimated wait time at the Study is <span id = "subtitleBold">69 minutes.</span></div>
             <button className = "mainOrderButton" onClick = {() => window.location.href = '/order'}>Order</button>
+            <button className = "mainOrderButton" onClick = {() => signOut(auth)}>Sign out button (Temporary)</button>
         </div>
         <div className="instantOrder">
             <div className = "sectionTitle">Instant Order</div>
