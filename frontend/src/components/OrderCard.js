@@ -13,17 +13,17 @@ export const OrderCard = (props) => {
     let altText;
 
     const navigate = useNavigate();
-    const destination = "/" + type;
+    const destination = "/" + type.charAt(0).toLowerCase() + type.slice(1);
 
-    if (type === "sandwich"){
+    if (type === "Sandwich"){
         image = sandwichFull;
         altText = "Sandwich";
     }
-    if (type === "pizza"){
+    if (type === "Pizza"){
         image = pizzaFull;
         altText = "Pizza";
     }
-    if (type === "salad"){
+    if (type === "Salad"){
         image = saladFull;
         altText = "Salad";
     }
