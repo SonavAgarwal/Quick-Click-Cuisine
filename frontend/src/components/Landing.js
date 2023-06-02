@@ -5,12 +5,13 @@ import { PendingOrderCard } from './PendingOrderCard';
 import { HistoryCard } from './HistoryCard';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
+import { NameText } from './NameText';
 
 export function Landing(){
 
     return <div className="landingPage">
         <div className = "header">
-            <div className="mainTitle">Welcome, Rahul</div>
+            <div className="mainTitle">Welcome, <NameText/></div>
             <div className ="mainSubtitle">The estimated wait time at the Study is <span id = "subtitleBold">69 minutes.</span></div>
             <button className = "mainOrderButton" onClick = {() => window.location.href = '/order'}>Order</button>
             <button className = "mainOrderButton" onClick = {() => signOut(auth)}>Sign out button (Temporary)</button>

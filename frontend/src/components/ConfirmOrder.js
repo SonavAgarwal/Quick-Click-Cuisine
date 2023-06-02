@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { breadSandwichData, cheeseSandwichData, toppingsSandwichData, addOnsSandwichData, spreadsCondimentsSandwichData, sidesData, beverageData } from './sandwichIngredientsData';
 import { saucePizzaData, cheesePizzaData, toppingsPizzaData, addOnsPizzaData } from './pizzaIngredientsData';
 import { greensSaladData, proteinsSaladData, toppingsSaladData, dressingsSaladData } from './saladIngredientsData';
+import { NameText } from './NameText';
 
 export function ConfirmOrder() {
     const location = useLocation();
@@ -110,7 +111,7 @@ export function ConfirmOrder() {
 
     return <div className="sandwichPage">
         <div className = "header">
-            <div className = "mainTitle">Rahul, Confirm Your Order!</div>
+            <div className = "mainTitle"><NameText/>, Confirm Your Order!</div>
             <div className = "mainSubtitle">Make sure that your order is correct.</div>
             <div className = "ingredientType">
                 {/* <div className = "finalOrderText">{firstName} {firstOptionalText}</div> */}

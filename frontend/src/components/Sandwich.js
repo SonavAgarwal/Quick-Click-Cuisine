@@ -3,6 +3,7 @@ import { React, useState, useEffect } from 'react';
 import ButtonGroup from './IngredientButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { breadSandwichData, cheeseSandwichData, toppingsSandwichData, addOnsSandwichData, spreadsCondimentsSandwichData } from './sandwichIngredientsData';
+import { NameText } from './NameText';
 
 export function Sandwich() {
     const navigate = useNavigate();
@@ -61,7 +62,7 @@ export function Sandwich() {
 
     return <div className="sandwichPage">
         <div className = "header">
-            <div className = "mainTitle">Rahul, Craft Your Sandwich Below!</div>
+            <div className = "mainTitle"><NameText/>, Craft Your Sandwich Below!</div>
             <div className = "mainSubtitle">Choose 1 bread, 1 type of cheese, and upto 3 toppings, 3 add-ons, and 2 spreads/condiments.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Bread</div>

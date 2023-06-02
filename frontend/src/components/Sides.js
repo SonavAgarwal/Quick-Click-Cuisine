@@ -3,6 +3,7 @@ import { React, useState } from 'react';
 import ButtonGroup from './IngredientButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { sidesData, beverageData } from './sandwichIngredientsData';
+import { NameText } from './NameText';
 
 export function Sides() {
     const location = useLocation();
@@ -28,7 +29,7 @@ export function Sides() {
 
     return <div className="sandwichPage">
         <div className = "header">
-            <div className = "mainTitle">Rahul, Choose Your Sides & Beverages!</div>
+            <div className = "mainTitle"><NameText/>, Choose Your Sides & Beverages!</div>
             <div className = "mainSubtitle">Choose upto 1 side & 1 beverage.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Sides</div>
