@@ -39,7 +39,7 @@ def create_order():
 @app.route('/orders/inprogress', methods=['GET'])
 def get_in_progress_orders():
     try:
-        in_progress_orders = mongo.db.orders.find({'status': 'in progress'})
+        in_progress_orders = mongo.db.orders.find({})
         newList = list(in_progress_orders)
         newList = [json_util.dumps(doc) for doc in newList]
         return jsonify(newList), 200
