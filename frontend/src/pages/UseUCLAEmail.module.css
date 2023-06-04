@@ -1,0 +1,23 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* justify-content: center; */
+	height: 100vh;
+}
+
+.page > img {
+	margin-top: 20vh;
+}
+
+.page > button {
+	margin-top: 10vh;
+	width: 20vw;
+	height: 5vh;
+	font-size: 1.5rem;
+	border-radius: 5px;
+	border: none;
+	background-color: #3b7ea1;
+	color: white;
+	cursor: pointer;
+}
