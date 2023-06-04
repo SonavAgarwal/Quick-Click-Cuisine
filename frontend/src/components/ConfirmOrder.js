@@ -24,12 +24,17 @@ import {
 } from "./saladIngredientsData";
 import { NameText } from "./NameText";
 import axios from "axios";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase";
 
 export function ConfirmOrder() {
 	const location = useLocation();
 	const fromPage = location.state.fromPage;
 	const type = location.state.type;
 	const finalOrder = location.state.finalOrder || [];
+
+	const [user] = useAuthState(auth);
+	const navigate = useNavigate();
 
 	let firstId, firstData, firstOptionalText;
 	let secondId, secondData, secondOptionalText;
@@ -146,8 +151,6 @@ export function ConfirmOrder() {
 	const beverageItem = beverageData.find((item) => item.id === beverageId);
 	const beverageName = beverageItem ? beverageItem.name : "No Beverage";
 
-	const navigate = useNavigate();
-
 	const handleEditOrder = () => {
 		const destination = "/" + type;
 		navigate(destination, { state: { finalOrder, fromPage: "confirmOrder" } });
@@ -158,10 +161,25 @@ export function ConfirmOrder() {
 	};
 
 	async function sendPostRequest() {
+		if (!user) {
+			alert("Please log in to place an order!");
+			return;
+		}
+
+		let ingredients = [];
+		ingredients = ingredients.concat(
+			firstName,
+			secondName,
+			thirdName,
+			fourthName
+		);
 		const data = {
-			user_id: 123,
-			ingredients: ["bread", "cheese", "ham"],
-			type: "sandwich",
+			user_id: user?.uid,
+			ingredients: ingredients,
+			type: type,
+			side: sideName,
+			beverage: beverageName,
+			user_name: user?.displayName,
 		};
 
 		const response = await axios.post("http://127.0.0.1:5000/order", data);
@@ -169,14 +187,15 @@ export function ConfirmOrder() {
 		if (response.status === 201) {
 			console.log("Order placed successfully!");
 			console.log(response.data);
+			navigate("/");
 		} else {
 			console.log("Error placing order!");
 			console.log(response.data);
+			alert("Error placing order!");
 		}
 	}
 
 	const handlePlaceOrder = () => {
-		// window.location.href = "/";
 		sendPostRequest();
 	};
 
@@ -196,21 +215,25 @@ export function ConfirmOrder() {
 							{name}
 						</div>
 					))}
+					----
 					{secondName.map((name, index) => (
 						<div key={index} className="finalOrderText">
 							{name}
 						</div>
 					))}
+					----
 					{thirdName.map((name, index) => (
 						<div key={index} className="finalOrderText">
 							{name}
 						</div>
 					))}
+					----
 					{fourthName.map((name, index) => (
 						<div key={index} className="finalOrderText">
 							{name}
 						</div>
 					))}
+					----
 					{(type === "sandwich" ||
 						(type === "sandwich" && fromPage === "confirmOrder")) &&
 						fifthName.map((name, index) => (

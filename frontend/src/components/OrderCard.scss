@@ -1,64 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
-.orderCard{
-    --greenBar: #57DE54;
-    --redBar: #DE5454;
-    --orangeBar: #DEC854;
-    
-    height: 10rem;
-    margin-bottom: 2.25rem;
-    width: 20.625rem;
-    background: #F8F8F8;
-    border-radius: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    padding-top: 0.5rem;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+.orderCard {
+	--greenBar: #57de54;
+	--redBar: #de5454;
+	--orangeBar: #dec854;
 
-    >.content{
-        display: flex;
-        flex-direction: row;
-        margin-top: 0.7rem;
-        margin-left: 0.7rem;
+	height: 10rem;
+	margin-bottom: 2.25rem;
+	width: 20.625rem;
+	background: #f8f8f8;
+	border-radius: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	padding-top: 0.5rem;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-        >.textContainer{
-            margin-left: 1rem;
-            display: flex;
-            flex-direction: column;
+	> .content {
+		display: flex;
+		flex-direction: row;
+		margin-top: 0.7rem;
+		margin-left: 0.7rem;
 
-            >.orderTitle{
-                font-weight: 700;
-                font-size: 1.25rem;
-                line-height: 1.5rem;
-            }
+		> .textContainer {
+			margin-left: 1rem;
+			display: flex;
+			flex-direction: column;
 
-            >.orderDesc{
-                margin-top: 3px;
-                width: 11.3125rem;
-                height: 3.75rem;
-                overflow-y: auto;
+			> .orderTitle {
+				font-weight: 700;
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+			}
 
-            }
-        }
-    }
+			> .orderDesc {
+				margin-top: 3px;
+				width: 11.3125rem;
+				height: 3.75rem;
+				overflow-y: auto;
+			}
+		}
 
-    >.orderButton{
-        background: #57DE54;
-        border: none;
-        height: 2rem;
-        width: 7.25rem;
-        border-radius: 0.75rem;
-        margin-top: 0.75rem;
-        margin-left: 202px;
-        font-family: 'Inter';
-        color: white;
-        font-weight: 700;
-        font-size: 1rem;
+		img {
+			width: 5rem;
+		}
+	}
 
-        &:hover{
-            cursor: pointer;
-            filter: brightness(0.8);
-        }
+	> .orderButton {
+		background: #57de54;
+		border: none;
+		height: 2rem;
+		width: 7.25rem;
+		border-radius: 0.75rem;
+		margin-top: 0.75rem;
+		margin-left: 202px;
+		font-family: "Inter";
+		color: white;
+		font-weight: 700;
+		font-size: 1rem;
 
-    }
+		&:hover {
+			cursor: pointer;
+			filter: brightness(0.8);
+		}
+	}
 }
