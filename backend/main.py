@@ -23,8 +23,9 @@ def create_order():
         'status': 'in progress',
         'timestamp': datetime.utcnow()  # add timestamp when the order is created
     }
+    res = requests.get("http://127.0.0.1:5000/orders/inprogress").json()
     mongo.db.orders.insert_one(order)
-    return jsonify({'message': 'Order placed successfully', 'order_id': order_id}), 201
+    return jsonify({'message': 'Order placed successfully', 'order_id': order_id, 'order_position': str(len(res) + 1)}), 201
 
 
 @app.route('/orders/inprogress', methods=['GET'])
