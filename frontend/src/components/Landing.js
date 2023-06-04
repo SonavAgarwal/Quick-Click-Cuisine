@@ -47,7 +47,7 @@ export function Landing() {
 						// 854a22ca-ba72-4f0a-839f-23a9dc985150
 
 						const data = {
-							order_id: "854a22ca-ba72-4f0a-839f-23a9dc985150",
+							order_id: "7002ad47-f100-4b1d-a3ad-64be96bf63da",
 						};
 
 						const response = await axios.post(
@@ -65,15 +65,6 @@ export function Landing() {
 					}}
 				>
 					bump order
-				</button>
-
-				<button
-					className="mainOrderButton"
-					onClick={function () {
-						sendPostRequest();
-					}}
-				>
-					Send post request
 				</button>
 			</div>
 			<div className="landingContent">
