@@ -46,14 +46,21 @@ export const HistoryCard = (props) => {
         }
      };
 
+     const redirectToInputField = (event) => {
+        event.preventDefault();
+        const inputField = document.getElementById("inputField");
+        inputField.scrollIntoView({ behavior: 'smooth' });
+        inputField.focus();
+      };
+
     return (
         <div className = "historyCard">
             <div className = "content">
                 <img src = {image}></img>
                 <div className = "textContainer">
                     <div className = "orderContainer">
-                        <input className = "orderTitle" defaultValue={orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
-                        {!isEditing && <img className = "writeIcon" src = {writeIcon}></img>}
+                        <input className = "orderTitle" id = "inputField" defaultValue={orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
+                        {!isEditing && <img className = "writeIcon" src = {writeIcon} onClick={redirectToInputField}></img>}
                     </div>
                     <div className = "date">{date}</div>
                     <div className = "orderDesc">{desc}</div>
