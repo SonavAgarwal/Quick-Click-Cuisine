@@ -32,6 +32,15 @@ def get_in_progress_orders():
         return jsonify(list(in_progress_orders)), 200
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
+    
+
+@app.route('/orders/user/<user_id>', methods=['GET'])
+def get_past_orders(user_id):
+    try:
+        past_orders = mongo.db.orders.find({'user_id': user_id, 'status': 'completed'})
+        return jsonify(list(past_orders)), 200
+    except Exception as e:
+        return jsonify({'error': 'Database error', 'message': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
