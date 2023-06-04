@@ -52,5 +52,17 @@ def get_all_orders():
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
     
+@app.route('/orders/complete', methods=['POST'])
+def finish_order():
+    data = request.get_json()
+    if not data or 'order_id' not in data:
+        return jsonify({'error': 'Missing required fields'}), 400
+    order = mongo.db.orders.find_one({'order_id': data.get('order_id')})
+    if not order:
+        return jsonify({'error': 'Order not found'}), 404
+    order_id = data.get('order_id')
+    mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': 'completed'}})
+    return jsonify({'message': 'Order set to completed'}), 200
+    
 if __name__ == '__main__':
     app.run(debug=True)
