@@ -73,7 +73,7 @@ const QueueSection = ({ orders, fetchData }) => {
     <div className="section">
       <h2>Queue</h2>
       {orders.map((order, index) => (
-        <Order key={index} column={1} order={order}fetchData={fetchData} />
+        <Order key={index} column={1} order={order} fetchData={fetchData} />
       ))}
     </div>
   );
@@ -84,7 +84,7 @@ const InProgressSection = ({ orders, fetchData }) => {
     <div className="section">
       <h2>In Progress</h2>
       {orders.map((order, index) => (
-        <Order key={index} column={2} order={order}fetchData={fetchData} />
+        <Order key={index} column={2} order={order} fetchData={fetchData} />
       ))}
     </div>
   );
@@ -95,7 +95,7 @@ const CompleteSection = ({ orders, fetchData }) => {
     <div className="section">
       <h2>Complete</h2>
       {orders.map((order, index) => (
-        <Order key={index} column={3} order={order}fetchData={fetchData}  />
+        <Order key={index} column={3} order={order} fetchData={fetchData}  />
       ))}
     </div>
   );
