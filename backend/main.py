@@ -50,7 +50,7 @@ def get_in_progress_orders():
 @app.route('/orders/user/<user_id>', methods=['GET'])
 def get_past_orders(user_id):
     try:
-        past_orders = mongo.db.orders.find({'user_id': user_id, 'status': 'completed'})
+        past_orders = mongo.db.orders.find({'user_id': user_id })
         newList = list(past_orders)
         newList = [json_util.dumps(doc) for doc in newList]
         return jsonify(newList), 200
