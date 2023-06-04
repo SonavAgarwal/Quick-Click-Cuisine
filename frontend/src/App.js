@@ -12,6 +12,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
 import { Auth } from "./pages/Auth";
 import UseUCLAEmail from "./pages/UseUCLAEmail";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
 	const [user, loading, error] = useAuthState(auth);
@@ -45,6 +46,7 @@ function App() {
 				<Route path="confirmOrder" element={<ConfirmOrder />} />
 				<Route path="login" element={<Auth />} />
 				<Route path="useUCLAEmail" element={<UseUCLAEmail />} />
+				<Route path="leaderboard" element={<Leaderboard />} />
 			</Routes>
 		</div>
 	);
