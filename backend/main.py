@@ -51,7 +51,9 @@ def get_in_progress_orders():
 def get_past_orders(user_id):
     try:
         past_orders = mongo.db.orders.find({'user_id': user_id, 'status': 'completed'})
-        return jsonify(list(past_orders)), 200
+        newList = list(past_orders)
+        newList = [json_util.dumps(doc) for doc in newList]
+        return jsonify(newList), 200
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
 
@@ -59,7 +61,9 @@ def get_past_orders(user_id):
 def get_all_orders():
     try:
         all_orders = mongo.db.orders.find()
-        return jsonify(list(all_orders)), 200
+        newList = list(all_orders)
+        newList = [json_util.dumps(doc) for doc in newList]
+        return jsonify(newList), 200
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
     
