@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 export const Order = ({column, order, fetchData}) => {
-
     function getButtonText() {
         if (column == 1) {
             return "Start"
@@ -32,6 +31,8 @@ export const Order = ({column, order, fetchData}) => {
         if (response.status === 200) {
             console.log("Order changed successfully!");
             console.log(response.data);
+            setData(response.data);
+            setUsername(response.data.user_name);
 
             setTimeout(() => {
                 fetchData();
@@ -47,9 +48,9 @@ export const Order = ({column, order, fetchData}) => {
   return (
     <div className='order-card'>
         <div className='info'>
-            <h1>4:20 PM</h1>
-            <h1>666</h1>
-            <h1>Rahul Ravi (123456789)</h1>
+            <h1>{new Date(order.timestamp.$date).toLocaleTimeString()}</h1>
+            <h1>{order.order_number}</h1>
+            <h1>{order.user_name}</h1>
         </div>
         
         <div className='order-items'>
