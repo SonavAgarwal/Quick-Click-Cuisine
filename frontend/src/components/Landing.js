@@ -17,6 +17,7 @@ export function Landing() {
 	useEffect(() => {
 		if (!user) return;
 		const user_id = user?.uid;
+		console.log(user_id);
 		fetch("http://127.0.0.1:5000/orders/inprogress")
 			.then((res) => res.json())
 			.then((data) => {
@@ -26,6 +27,7 @@ export function Landing() {
 			.then((res) => res.json())
 			.then((data) => {
 				setPendingOrders(data);
+				console.log("yes ", data);
 			});
 	}, [user]);
 
