@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 import requests
 from datetime import datetime
-from helpers import generate_id
+from helpers import generate_id, generate_estimate
 
 app = Flask(__name__)
 
@@ -64,5 +64,22 @@ def finish_order():
     mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': 'completed'}})
     return jsonify({'message': 'Order set to completed'}), 200
     
+
+@app.route('/orders/status/<order_id>', methods=['GET'])
+def get_order_status(order_id):
+    order = mongo.db.orders.find_one({'order_id': order_id})
+    if not order_id:
+        return jsonify({'error': 'Missing order_id'}), 400
+    if order:
+        order_timestamp = order.get('timestamp')
+        orders_ahead = mongo.db.orders.count_documents({'status': 'in progress', 'timestamp': {'$lt': order_timestamp}})
+        order_position = orders_ahead + 1
+    else:
+        return jsonify({'error': 'Order not found'}), 404
+
+    estimated_time = generate_estimate(orders_ahead)
+
+    return jsonify({'status': order['status'], 'position': order_position, 'estimated_time': estimated_time}), 200
+
 if __name__ == '__main__':
     app.run(debug=True)
