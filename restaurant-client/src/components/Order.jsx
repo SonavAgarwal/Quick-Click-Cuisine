@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './Order.css'
+import axios from 'axios';
 
-export const Order = ({column}) => {
+
+export const Order = ({column, order, fetchData}) => {
 
     function getButtonText() {
         if (column == 1) {
@@ -16,39 +18,59 @@ export const Order = ({column}) => {
 
         return "Broken"
     }
+
+    async function incrementColumn() {
+        const data = {
+            order_id: order.order_id,
+        };
+
+        const response = await axios.post(
+            "http://127.0.0.1:5000/order/bumpStatus",
+            data
+        );
+
+        if (response.status === 200) {
+            console.log("Order changed successfully!");
+            console.log(response.data);
+
+            setTimeout(() => {
+                fetchData();
+            }, 50);
+        } else {
+            console.log("Error changing order!");
+            console.log(response.data);
+        }
+    }
+
+    if (!order) return null
+
   return (
     <div className='order-card'>
         <div className='info'>
             <h1>4:20 PM</h1>
             <h1>666</h1>
             <h1>Rahul Ravi (123456789)</h1>
-
         </div>
         
         <div className='order-items'>
             <div className='items-list'>
-                <h1>Sandwich</h1>
+                <h1>{order.type}</h1>
                 <ul>
-                    <li>Sourdough</li>
-                    <li>Provolone</li>
-                    <li>Roasted Turkey</li>
-                    <li>Pepperoni</li>
-                    <li>Black Olives</li>
-                    <li>Black Olives</li>
-                    <li>Pickles</li>
-                    <li>Mayonnaise</li>
+                {order.ingredients.map((ingredient, index) => (
+                    <li key={index}>{ingredient}</li>
+                ))}
                 </ul>
             </div>
             <div className='items-list'>
-                <h1>Sides</h1>
+                <h1>sides</h1>
                 <ul>
-                    <li>Orange</li>
-                    <li>Hot Brewed Coffee</li>
+                    <li>{order.side}</li>
+                    <li>{order.beverage}</li>
                 </ul>
             </div>
         </div>
         
-        <button>{getButtonText()}</button>
+        <button onClick = {incrementColumn}>{getButtonText()}</button>
 
     </div>
   )
