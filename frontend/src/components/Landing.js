@@ -21,24 +21,6 @@ export function Landing() {
 			});
 	}, []);
 
-	async function sendPostRequest() {
-		const data = {
-			user_id: 123,
-			ingredients: ["bread", "cheese", "ham"],
-			type: "sandwich",
-		};
-
-		const response = await axios.post("http://127.0.0.1:5000/order", data);
-
-		if (response.status === 201) {
-			console.log("Order placed successfully!");
-			console.log(response.data);
-		} else {
-			console.log("Error placing order!");
-			console.log(response.data);
-		}
-	}
-
 	return (
 		<div className="landingPage">
 			<div className="header">
