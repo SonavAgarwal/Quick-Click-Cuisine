@@ -39,13 +39,20 @@ export const HistoryCard = (props) => {
         console.log(orderTitle);
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          event.target.blur(); // Trigger the onBlur event
+        }
+     };
+
     return (
         <div className = "historyCard">
             <div className = "content">
                 <img src = {image}></img>
                 <div className = "textContainer">
                     <div className = "orderContainer">
-                        <input className = "orderTitle" defaultValue={orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange}></input>
+                        <input className = "orderTitle" defaultValue={orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
                         {!isEditing && <img className = "writeIcon" src = {writeIcon}></img>}
                     </div>
                     <div className = "date">{date}</div>
