@@ -29,23 +29,26 @@ export const PendingOrderCard = (props) => {
 
     //Tracks stage of completion for bar width and color
     const [completion, setCompletion] = useState(0);
-    const [status, setStatus] = useState("Pending");
+    let status = "Pending";
 
     let barStyle;
     let buttonStyle;
 
-    if (completion === 0){
+    if (progress === 0){
         barStyle = "pending";
         buttonStyle = "buttonPending";
+        status = "Pending";
     }
-    if (completion === 1){
+    if (progress === 1){
         barStyle = "inProgress";
         buttonStyle = "buttonProgress";
+        status = "In Progress";
     }
 
-    if (completion === 2){
+    if (progress === 2){
         barStyle = "completed";
         buttonStyle = "buttonReady";
+        status = "Ready!";
     }
 
     const updateCompletion = () =>{
@@ -54,21 +57,6 @@ export const PendingOrderCard = (props) => {
         }
         else{
             setCompletion(0);
-        }
-    }
-
-    const updateStatus = () =>{
-        if (status === "Pending"){
-            setStatus("20 min");
-            updateCompletion();
-        }
-        if (status === "20 min"){
-            setStatus("Ready!");
-            updateCompletion();
-        }
-        if (status === "Ready!"){
-            setStatus("Pending");
-            updateCompletion();
         }
     }
 
@@ -82,7 +70,7 @@ export const PendingOrderCard = (props) => {
                     <div className = "orderDesc">{desc}</div>
                 </div>
             </div>
-            <button className = {`status ${buttonStyle}`} onClick = {updateStatus}>{status}</button>
+            <button className = {`status ${buttonStyle}`}>{status}</button>
 
         </div>
     );

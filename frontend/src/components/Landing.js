@@ -7,19 +7,27 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { NameText } from "./NameText";
 import axios from "axios";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export function Landing() {
 	const [estimatedTime, setEstimatedTime] = useState("Loading");
 	const [pendingOrders, setPendingOrders] = useState([]);
+	const [user] = useAuthState(auth);
 
 	useEffect(() => {
+		if (!user) return;
+		const user_id = user?.uid;
 		fetch("http://127.0.0.1:5000/orders/inprogress")
 			.then((res) => res.json())
 			.then((data) => {
 				setEstimatedTime(data?.length * 5);
+			});
+		fetch("http://127.0.0.1:5000/orders/user/" + user_id)
+			.then((res) => res.json())
+			.then((data) => {
 				setPendingOrders(data);
 			});
-	}, []);
+	}, [user]);
 
 	return (
 		<div className="landingPage">
@@ -81,11 +89,13 @@ export function Landing() {
 						const parsed = JSON.parse(order);
 						const type = parsed.type;
 						const ingredients = parsed.ingredients;
+						const status = parsed.status;
+						console.log(status);
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
 						// console.log(type);
 						return (
 							<div>
-								<PendingOrderCard type={typeUpper} ingredients={ingredients} />
+								<PendingOrderCard type={typeUpper} ingredients={ingredients} status = {status}/>
 							</div>
 						);
 					})}
