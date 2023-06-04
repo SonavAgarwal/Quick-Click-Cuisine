@@ -26,3 +26,12 @@ def create_order():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+@app.route('/orders/inprogress', methods=['GET'])
+def get_in_progress_orders():
+    try:
+        in_progress_orders = mongo.db.orders.find({'status': 'in progress'})
+        return jsonify(list(in_progress_orders)), 200
+    except Exception as e:
+        return jsonify({'error': 'Database error', 'message': str(e)}), 500
