@@ -24,9 +24,6 @@ def create_order():
     mongo.db.orders.insert_one(order)
     return jsonify({'message': 'Order placed successfully', 'order_id': order_id}), 201
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 
 @app.route('/orders/inprogress', methods=['GET'])
 def get_in_progress_orders():
@@ -35,3 +32,6 @@ def get_in_progress_orders():
         return jsonify(list(in_progress_orders)), 200
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
