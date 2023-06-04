@@ -10,7 +10,9 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { auth } from "./firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
-import { Auth } from "./pages/Auth.tsx";
+import { Auth } from "./pages/Auth";
+import UseUCLAEmail from "./pages/UseUCLAEmail";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
 	const [user, loading, error] = useAuthState(auth);
@@ -27,6 +29,8 @@ function App() {
 
 		if (!user) {
 			navigate("/login");
+		} else if (!user?.email.includes("ucla.edu")) {
+			navigate("/useUCLAEmail");
 		}
 	}, [user, loading, error]);
 
@@ -34,13 +38,15 @@ function App() {
 		<div>
 			<Routes>
 				<Route path="/" element={<Landing />} />
-				<Route path="/order" element ={<Order />} />
+				<Route path="/order" element={<Order />} />
 				<Route path="sandwich" element={<Sandwich />} />
 				<Route path="pizza" element={<Pizza />} />
 				<Route path="salad" element={<Salad />} />
 				<Route path="sides" element={<Sides />} />
 				<Route path="confirmOrder" element={<ConfirmOrder />} />
 				<Route path="login" element={<Auth />} />
+				<Route path="useUCLAEmail" element={<UseUCLAEmail />} />
+				<Route path="leaderboard" element={<Leaderboard />} />
 			</Routes>
 		</div>
 	);

@@ -16,23 +16,24 @@ export function Landing(){
             <button className = "mainOrderButton" onClick = {() => window.location.href = '/order'}>Order</button>
             <button className = "mainOrderButton" onClick = {() => signOut(auth)}>Sign out button (Temporary)</button>
         </div>
-        <div className="instantOrder">
-            <div className = "sectionTitle">Instant Order</div>
-            <InstantOrderCard type="salad" name = "Ishan Garg 😩"/>
-            <InstantOrderCard type ="pizza" name = "Rahul's Dumpy 🍑"/>
-            <InstantOrderCard type = "sandwich" name = "Sonav 😋" />
-            <InstantOrderCard type = "salad" name = "Willie 🥵" />
+        <div className = "landingContent">
+            <div className="instantOrder">
+                <div className = "sectionTitle">Instant Order</div>
+                <InstantOrderCard type="salad" name = "Ishan Garg 😩"/>
+                <InstantOrderCard type ="pizza" name = "Rahul's Dumpy 🍑"/>
+                <InstantOrderCard type = "sandwich" name = "Sonav 😋" />
+                <InstantOrderCard type = "salad" name = "Willie 🥵" />
+            </div>
+            <div className = "pendingOrders">
+                <div className = "sectionTitle">Pending Orders</div>
+                <PendingOrderCard type = "Sandwich" desc = "Sandwich with bro idk someone help me please oh dear lord" />
+                <PendingOrderCard type = "Pizza" desc = "a pizza bro i really don't know how much longer i can take this at this point"/>
+                <PendingOrderCard type = "Salad" desc = "a salad bro i really don't know how much longer i can take this at this point" />
+            </div>
+            <div className = "orderHistory">
+                <div className = "sectionTitle">Order History</div>
+                <HistoryCard type = "Sandwich" desc = "great sandwich that was eaten like many days ago" date = "4/20/23"/>
+            </div>
         </div>
-        <div className = "pendingOrders">
-            <div className = "sectionTitle">Pending Orders</div>
-            <PendingOrderCard type = "Sandwich" desc = "Sandwich with bro idk someone help me please oh dear lord" />
-            <PendingOrderCard type = "Pizza" desc = "a pizza bro i really don't know how much longer i can take this at this point"/>
-            <PendingOrderCard type = "Salad" desc = "a salad bro i really don't know how much longer i can take this at this point" />
-        </div>
-        <div className = "orderHistory">
-            <div className = "sectionTitle">Order History</div>
-            <HistoryCard type = "Sandwich" desc = "great sandwich that was eaten like many days ago" date = "4/20/23"/>
-        </div>
-
     </div>
 }

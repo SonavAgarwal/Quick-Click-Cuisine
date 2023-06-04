@@ -8,6 +8,14 @@
     margin-left: 8%;
     margin-right: 8%;
 
+    @media only screen and (min-aspect-ratio: 1){
+        margin-left: 4rem;
+        margin-right: none;
+        flex-start: top;
+        margin-top: 3rem;
+        justify-content: flex-start;
+    }
+
     >.sectionTitle{
         font-size: 1rem;
         line-height: 1.1875rem;
@@ -69,8 +77,20 @@
             }
         }
 
+        >.landingContent{
+
+            display: flex;
+            flex-direction: column;
+
+            @media only screen and (min-aspect-ratio: 1){
+                flex-direction: row;
+                margin-bottom: 1rem;
+            }
+
         >.instantOrder{
-            margin-top: 4.4375rem;
+            @media only screen and (max-aspect-ratio: 1){
+                margin-top: 4.4375rem;
+            }
             @include section;
             // display: flex;
             // justify-content: center;
@@ -89,15 +109,19 @@
         }
 
         >.pendingOrders{
-            margin-top: 1.875rem;
+            @media only screen and (max-aspect-ratio: 1){
+                margin-top: 1.875rem;
+            }
             @include section;
 
         }
 
         >.orderHistory{
-            margin-top: 1.875rem;
             @include section;
-            margin-bottom: 4rem;
+            @media only screen and (max-aspect-ratio: 1){
+                margin-top: 1.875rem;
+            }
+        }
         }
     //}
 }
