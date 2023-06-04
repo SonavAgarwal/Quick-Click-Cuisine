@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
+import bson
+from bson import json_util
 import requests
 from datetime import datetime
 from helpers import generate_id, generate_estimate
@@ -19,7 +21,7 @@ def create_order():
     order_id = generate_id()
     order = {
         'user_id': data.get('user_id'),
-        'order_id': order_id,
+        'order_id': str(order_id),
         'ingredients': data.get('ingredients'),
         'type': data.get('type'),
         'status': 'in progress',
@@ -34,7 +36,9 @@ def create_order():
 def get_in_progress_orders():
     try:
         in_progress_orders = mongo.db.orders.find({'status': 'in progress'})
-        return jsonify(list(in_progress_orders)), 200
+        newList = list(in_progress_orders)
+        newList = [json_util.dumps(doc) for doc in newList]
+        return jsonify(newList), 200
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
     
