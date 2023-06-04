@@ -4,7 +4,7 @@ import bson
 from bson import json_util
 import requests
 from datetime import datetime
-from helpers import generate_id, generate_estimate
+from helpers import generate_id, generate_estimate, generate_order_number
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -21,8 +21,12 @@ def create_order():
     order_id = generate_id()
     order = {
         'user_id': data.get('user_id'),
+        'user_name': data.get('user_name'),
         'order_id': str(order_id),
+        'order_number': generate_order_number(),
         'ingredients': data.get('ingredients'),
+        'side': data.get('side'),
+        'beverage': data.get('beverage'),
         'type': data.get('type'),
         'status': 'in progress',
         'timestamp': datetime.utcnow()  # add timestamp when the order is created
