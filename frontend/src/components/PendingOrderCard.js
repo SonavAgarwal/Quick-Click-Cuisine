@@ -6,8 +6,8 @@ import saladFull from '../static/salad.png';
 
 export const PendingOrderCard = (props) => {
     let type = props.type;
-    let desc = props.desc;
-    let time = props.time;
+    let ingredients = props.ingredients;
+    let progress = props.status;
     let image;
 
     if (type === "Sandwich"){
@@ -19,6 +19,13 @@ export const PendingOrderCard = (props) => {
     if (type === "Salad"){
         image = saladFull;
     }
+
+    let desc = type + " with ";
+    for (let i = 0; i < ingredients.length - 1; i++){
+        desc += ingredients[i] + ", ";
+    }
+
+    desc += "and " + ingredients[ingredients.length - 1];
 
     //Tracks stage of completion for bar width and color
     const [completion, setCompletion] = useState(0);

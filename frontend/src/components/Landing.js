@@ -10,12 +10,14 @@ import axios from "axios";
 
 export function Landing() {
 	const [estimatedTime, setEstimatedTime] = useState("Loading");
+	const [pendingOrders, setPendingOrders] = useState([]);
 
 	useEffect(() => {
 		fetch("http://127.0.0.1:5000/orders/inprogress")
 			.then((res) => res.json())
 			.then((data) => {
 				setEstimatedTime(data?.length * 5);
+				setPendingOrders(data);
 			});
 	}, []);
 
@@ -75,7 +77,15 @@ export function Landing() {
 				</div>
 				<div className="pendingOrders">
 					<div className="sectionTitle">Pending Orders</div>
-					<PendingOrderCard
+					{pendingOrders?.map((order, index) => {
+						const parsed = JSON.parse(order);
+						const type = parsed.type;
+						const ingredients = parsed.ingredients;
+						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
+						// console.log(type);
+						return <div><PendingOrderCard type={typeUpper} ingredients={ingredients}/></div>
+					})}
+					{/* <PendingOrderCard
 						type="Sandwich"
 						desc="Sandwich with bro idk someone help me please oh dear lord"
 					/>
@@ -86,7 +96,7 @@ export function Landing() {
 					<PendingOrderCard
 						type="Salad"
 						desc="a salad bro i really don't know how much longer i can take this at this point"
-					/>
+					/> */}
 				</div>
 				<div className="orderHistory">
 					<div className="sectionTitle">Order History</div>
