@@ -10,8 +10,8 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { auth } from "./firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
-import { Auth } from "./pages/Auth.tsx";
-import UseUCLAEmail from "./pages/UseUCLAEmail.tsx";
+import { Auth } from "./pages/Auth";
+import UseUCLAEmail from "./pages/UseUCLAEmail";
 
 function App() {
 	const [user, loading, error] = useAuthState(auth);
