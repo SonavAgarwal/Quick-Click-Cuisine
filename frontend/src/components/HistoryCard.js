@@ -12,7 +12,6 @@ export const HistoryCard = (props) => {
     let date = props.date;
     let image;
 
-
     if (type === "Sandwich"){
         image = sandwichFull;
     }
@@ -23,13 +22,32 @@ export const HistoryCard = (props) => {
         image = saladFull;
     }
 
+    const [orderTitle, setOrderTitle] = useState(type);
+    const [isEditing, setIsEditing] = useState(false);
+
+
+    const handleTitleClick = () => {
+        setIsEditing(true);
+     };
+    
+    const handleTitleBlur = () => {
+        setIsEditing(false);
+    };
+
+    const handleNameChange = (event) => {
+        setOrderTitle(event.target.value);
+        console.log(orderTitle);
+    }
+
     return (
         <div className = "historyCard">
-            {/* <div className = {`bar ${barStyle}`}></div> */}
             <div className = "content">
                 <img src = {image}></img>
                 <div className = "textContainer">
-                    <div className = "orderTitle">{type}</div>
+                    <div className = "orderContainer">
+                        <input className = "orderTitle" defaultValue={orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange}></input>
+                        {!isEditing && <img className = "writeIcon" src = {writeIcon}></img>}
+                    </div>
                     <div className = "date">{date}</div>
                     <div className = "orderDesc">{desc}</div>
                 </div>
@@ -37,7 +55,6 @@ export const HistoryCard = (props) => {
             <div className = "historyFooter">
                 <img  className = "starIcon" src = {starIcon}></img>
                 <div className = "spacer"></div>
-                <img classname = "writeIcon" src = {writeIcon}></img>
                 <button className = "reorder">Reorder</button>
             </div>
 

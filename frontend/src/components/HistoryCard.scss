@@ -21,6 +21,32 @@
             display: flex;
             flex-direction: column;
 
+            >.orderContainer {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+
+                >.orderTitle {
+                    font-weight: 700;
+                    font-size: 1.25rem;
+                    line-height: 1.5rem;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    max-width: 7.2rem;
+                    overflow: hidden;
+                    border: none;
+                    background: #F8F8F8;
+                }
+
+                >.orderTitle:focus {
+                    outline: none;
+                }
+
+                >.writeIcon {
+                    height: 1.25rem;
+                }
+            }
+
             >.orderTitle{
                 font-weight: 700;
                 font-size: 1.25rem;
