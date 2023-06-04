@@ -23,12 +23,18 @@ export function Landing() {
 			.then((data) => {
 				setEstimatedTime(data?.length * 5);
 			});
-		fetch("http://127.0.0.1:5000/orders/user/" + user_id)
-			.then((res) => res.json())
-			.then((data) => {
-				setPendingOrders(data);
-				console.log("yes ", data);
-			});
+
+		let intervalID = setInterval(() => {
+			
+			fetch("http://127.0.0.1:5000/orders/user/" + user_id)
+				.then((res) => res.json())
+				.then((data) => {
+					setPendingOrders(data);
+					console.log("yes ", data);
+				});
+		}, 1000);
+
+		return () => clearInterval(intervalID)
 	}, [user]);
 
 	return (
