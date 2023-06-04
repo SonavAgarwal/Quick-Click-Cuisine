@@ -3,8 +3,10 @@ from flask_pymongo import PyMongo
 import requests
 from datetime import datetime
 from helpers import generate_id, generate_estimate
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["MONGO_URI"] = "mongodb+srv://quickclickcuisine:egzUt9nRmDlZPZSr@qcc.xnffmnn.mongodb.net/restaurant?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
 mongo = PyMongo(app)
