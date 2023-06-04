@@ -14,28 +14,35 @@ export function Landing() {
 	const [pendingOrders, setPendingOrders] = useState([]);
 	const [user] = useAuthState(auth);
 
+	function fetchPendingOrders() {
+		const user_id = user?.uid;
+		fetch("http://127.0.0.1:5000/orders/user/" + user_id)
+		.then((res) => res.json())
+		.then((data) => {
+			setPendingOrders(data);
+			console.log("yes ", data);
+		});
+	}
+
 	useEffect(() => {
 		if (!user) return;
-		const user_id = user?.uid;
-		console.log(user_id);
 		fetch("http://127.0.0.1:5000/orders/inprogress")
 			.then((res) => res.json())
 			.then((data) => {
 				setEstimatedTime(data?.length * 5);
 			});
 
-		let intervalID = setInterval(() => {
+			fetchPendingOrders()
 			
-			fetch("http://127.0.0.1:5000/orders/user/" + user_id)
-				.then((res) => res.json())
-				.then((data) => {
-					setPendingOrders(data);
-					console.log("yes ", data);
-				});
+		let intervalID = setInterval(() => {
+			fetchPendingOrders();
+			
 		}, 1000);
 
 		return () => clearInterval(intervalID)
 	}, [user]);
+
+
 
 	return (
 		<div className="landingPage">
