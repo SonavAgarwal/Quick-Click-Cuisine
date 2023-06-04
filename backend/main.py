@@ -28,7 +28,7 @@ def create_order():
         'side': data.get('side'),
         'beverage': data.get('beverage'),
         'type': data.get('type'),
-        'status': 'in progress',
+        'status': 0,
         'timestamp': datetime.utcnow()  # add timestamp when the order is created
     }
     res = requests.get("http://127.0.0.1:5000/orders/inprogress").json()
@@ -67,19 +67,6 @@ def get_all_orders():
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
     
-@app.route('/orders/complete', methods=['POST'])
-def finish_order():
-    data = request.get_json()
-    if not data or 'order_id' not in data:
-        return jsonify({'error': 'Missing required fields'}), 400
-    order = mongo.db.orders.find_one({'order_id': data.get('order_id')})
-    if not order:
-        return jsonify({'error': 'Order not found'}), 404
-    order_id = data.get('order_id')
-    mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': 'completed'}})
-    return jsonify({'message': 'Order set to completed'}), 200
-    
-
 @app.route('/orders/status/<order_id>', methods=['GET'])
 def get_order_status(order_id):
     order = mongo.db.orders.find_one({'order_id': order_id})
@@ -95,6 +82,24 @@ def get_order_status(order_id):
     estimated_time = generate_estimate(orders_ahead)
 
     return jsonify({'status': order['status'], 'position': order_position, 'estimated_time': estimated_time}), 200
+
+@app.route('/order/bumpStatus', methods=['POST'])
+def finish_order():
+    data = request.get_json()
+    if not data or 'order_id' not in data:
+        return jsonify({'error': 'Missing required fields'}), 400
+    order = mongo.db.orders.find_one({'order_id': data.get('order_id')})
+    if not order:
+        return jsonify({'error': 'Order not found'}), 404
+    order_id = data.get('order_id')
+    if (order.get('status') == 3):
+        mongo.db.orders.delete_one({'order_id': order_id})
+        return jsonify({'message': 'Order deleted'}), 200
+    else:
+        mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
+        return jsonify({'message': 'Order status changed'}), 200
+    
+
 
 if __name__ == '__main__':
     app.run(debug=True)

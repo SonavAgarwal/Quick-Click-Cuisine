@@ -58,6 +58,33 @@ export function Landing() {
 				<button className="mainOrderButton" onClick={() => signOut(auth)}>
 					Sign out button (Temporary)
 				</button>
+
+				<button
+					className="mainOrderButton"
+					onClick={async () => {
+						// 854a22ca-ba72-4f0a-839f-23a9dc985150
+
+						const data = {
+							order_id: "854a22ca-ba72-4f0a-839f-23a9dc985150",
+						};
+
+						const response = await axios.post(
+							"http://127.0.0.1:5000/order/bumpStatus",
+							data
+						);
+
+						if (response.status === 200) {
+							console.log("Order changed successfully!");
+							console.log(response.data);
+						} else {
+							console.log("Error changing order!");
+							console.log(response.data);
+						}
+					}}
+				>
+					bump order
+				</button>
+
 				<button
 					className="mainOrderButton"
 					onClick={function () {
@@ -83,7 +110,11 @@ export function Landing() {
 						const ingredients = parsed.ingredients;
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
 						// console.log(type);
-						return <div><PendingOrderCard type={typeUpper} ingredients={ingredients}/></div>
+						return (
+							<div>
+								<PendingOrderCard type={typeUpper} ingredients={ingredients} />
+							</div>
+						);
 					})}
 					{/* <PendingOrderCard
 						type="Sandwich"
