@@ -127,5 +127,19 @@ def favorite_order():
     mongo.db.users.update_one({'user_id': user_id}, {'$set': {f'favorites.{order_id}': order_favorite[order_id]}})
     return jsonify({'message': 'Order favorited!'}), 200
 
+@app.route('/user/<user_id>/favorites', methods=['GET'])
+def get_user_favorites(user_id):
+    try:
+        user_doc = mongo.db.users.find_one({'user_id': user_id})
+        if not user_doc:
+            return jsonify({'error': 'User not found'}), 404
+        favorites = user_doc.get('favorites', {})
+        # if you want to send as json array instead of a dict
+        favorites_list = list(favorites.values())
+        favorites_list = [json_util.dumps(doc) for doc in favorites_list]
+        return jsonify(favorites_list), 200
+    except Exception as e:
+        return jsonify({'error': 'Database error', 'message': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(debug=True)
