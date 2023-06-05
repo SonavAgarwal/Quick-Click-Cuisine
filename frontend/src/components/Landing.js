@@ -12,6 +12,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 export function Landing() {
 	const [estimatedTime, setEstimatedTime] = useState("Loading");
 	const [pendingOrders, setPendingOrders] = useState([]);
+	const [orderHistory, setOrderHistory] = useState([]);
 	const [user] = useAuthState(auth);
 
 	function fetchPendingOrders() {
@@ -21,6 +22,16 @@ export function Landing() {
 		.then((data) => {
 			setPendingOrders(data);
 			console.log("yes ", data);
+		});
+	}
+
+	function fetchOrderHistory() {
+		const user_id = user?.uid;
+		fetch("http://127.0.0.1:5000/orders/past/user/" + user_id)
+		.then((res) => res.json())
+		.then((data) => {
+			setOrderHistory(data);
+			console.log("history ", data);
 		});
 	}
 
@@ -36,6 +47,7 @@ export function Landing() {
 			
 		let intervalID = setInterval(() => {
 			fetchPendingOrders();
+			fetchOrderHistory();
 			
 		}, 1000);
 
@@ -131,11 +143,27 @@ export function Landing() {
 				</div>
 				<div className="orderHistory">
 					<div className="sectionTitle">Order History</div>
-					<HistoryCard
+					{orderHistory?.map((order, index) => {
+						const parsed = JSON.parse(order);
+						const type = parsed.type;
+						const ingredients = parsed.ingredients;
+						const beverage = parsed.beverage;
+						const side = parsed.side;
+						// const timestamp = parsed.timestamp;
+						// const date = new Date(timestamp.slice(0, -1));
+						// console.log(date);
+						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
+						return (
+						<div>
+							<HistoryCard type ={typeUpper} ingredients = {ingredients} beverage = {beverage} side = {side}/>
+						</div>
+						);
+					})}
+					{/* <HistoryCard
 						type="Sandwich"
 						desc="great sandwich that was eaten like many days ago"
 						date="4/20/23"
-					/>
+					/> */}
 				</div>
 			</div>
 		</div>

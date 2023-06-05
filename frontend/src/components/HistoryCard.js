@@ -12,17 +12,30 @@ export const HistoryCard = (props) => {
     const location = useLocation();
 
     let type = props.type;
-    let desc = props.desc;
-    let date = props.date;
+    let pastIngredients = props.ingredients;
+    let pastSide = props.side;
+    let pastBeverage = props.beverage;
+    let timestamp = props.timestamp;
     let image;
 
-    const [ingredients, setIngredients] = useState(["Hoagie Roll", "Cucumber", "Sundried Tomato Pesto"]);
-    const [side, setSide] = useState("Orange");
-    const [beverage, setBeverage] = useState("Fountain Beverage");
-    const [orderType, setOrderType] = useState("sandwich");
+    // const [ingredients, setIngredients] = useState(["Hoagie Roll", "Cucumber", "Sundried Tomato Pesto"]);
+    // const [side, setSide] = useState("Orange");
+    // const [beverage, setBeverage] = useState("Fountain Beverage");
+    // const [orderType, setOrderType] = useState("sandwich");
+    const [ingredients, setIngredients] = useState(pastIngredients);
+    const [side, setSide] = useState(pastSide);
+    const [beverage, setBeverage] = useState(pastBeverage);
+    const [orderType, setOrderType] = useState(type);
+
+    let desc = type + " with ";
+    for (let i = 0; i < ingredients.length - 1; i++){
+        desc += ingredients[i] + ", ";
+    }
+
+    desc += "and " + ingredients[ingredients.length - 1];
 
     useEffect(() =>{
-        
+
     }, []);
 
     if (type === "Sandwich"){
@@ -85,7 +98,7 @@ export const HistoryCard = (props) => {
                         {/* {!isEditing && <img className = "writeIcon" src = {writeIcon} onClick={redirectToInputField}></img>} */}
                         <div className = "writeIcon" onClick={redirectToInputField}>✏️</div>
                     </div>
-                    <div className = "date">{date}</div>
+                    <div className = "date">{timestamp}</div>
                     <div className = "orderDesc">{desc}</div>
                 </div>
             </div>
