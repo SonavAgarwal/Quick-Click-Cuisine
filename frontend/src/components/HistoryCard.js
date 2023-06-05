@@ -5,12 +5,21 @@ import sandwichFull from '../static/sandwich.png';
 import saladFull from '../static/salad.png';
 import starIcon from '../static/starIcon.svg';
 import writeIcon from '../static/writeIcon.svg';
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const HistoryCard = (props) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
     let type = props.type;
     let desc = props.desc;
     let date = props.date;
     let image;
+
+    const [ingredients, setIngredients] = useState(["Hoagie Roll", "Cucumber", "Sundried Tomato Pesto"]);
+    const [side, setSide] = useState("Orange");
+    const [beverage, setBeverage] = useState("Fountain Beverage");
+    const [orderType, setOrderType] = useState("sandwich");
 
     if (type === "Sandwich"){
         image = sandwichFull;
@@ -53,6 +62,15 @@ export const HistoryCard = (props) => {
         inputField.focus();
       };
 
+    //   setIngredients(["Hoagie Roll", "Cucumber", "Sundried Tomato Pesto"]);
+    //   setSide("Orange");
+    //   setBeverage("Fountain Beverage");
+
+      const handleReorderClick = () => {
+        console.log(orderType);
+        navigate('/reorder', {state: { ingredients, side, beverage, orderType}});
+      }
+
     return (
         <div className = "historyCard">
             <div className = "content">
@@ -70,7 +88,7 @@ export const HistoryCard = (props) => {
             <div className = "historyFooter">
                 <img  className = "starIcon" src = {starIcon}></img>
                 <div className = "spacer"></div>
-                <button className = "reorder">Reorder</button>
+                <button className = "reorder" onClick={handleReorderClick}>Reorder</button>
             </div>
 
         </div>
