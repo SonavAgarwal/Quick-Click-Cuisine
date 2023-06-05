@@ -163,6 +163,7 @@ export function Landing() {
 						</div>
 						);
 					})}
+					<div className ="historyLink" onClick= {() => {window.location.href ="/orderHistory"}}>View Full History</div>
 					{/* <HistoryCard
 						type="Sandwich"
 						desc="great sandwich that was eaten like many days ago"
