@@ -104,10 +104,22 @@ def get_in_progress_orders():
     
 
 @app.route('/orders/user/<user_id>', methods=['GET'])
-def get_past_orders(user_id):
+def get_user_orders(user_id):
     try:
         past_orders = mongo.db.orders.find({'user_id': user_id })
         newList = list(past_orders)
+        newList = [json_util.dumps(doc) for doc in newList]
+        return jsonify(newList), 200
+    except Exception as e:
+        return jsonify({'error': 'Database error', 'message': str(e)}), 500
+
+@app.route('/orders/past/user/<user_id>', methods=['GET'])
+def get_past_orders(user_id):
+    try:
+        # include status in the query
+        past_orders = mongo.db.orders.find({'user_id': user_id, 'status': 3})
+        newList = list(past_orders)
+        # convert each document to a JSON string
         newList = [json_util.dumps(doc) for doc in newList]
         return jsonify(newList), 200
     except Exception as e:
@@ -148,12 +160,9 @@ def finish_order():
     if not order:
         return jsonify({'error': 'Order not found'}), 404
     order_id = data.get('order_id')
-    if (order.get('status') == 2):
-        # mongo.db.orders.delete_one({'order_id': order_id})
-        return jsonify({'message': 'Order deleted'}), 200
-    else:
-        mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
-        return jsonify({'message': 'Order status changed'}), 200
+    
+    mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
+    return jsonify({'message': 'Order status changed'}), 200
     
 @app.route('/order/favorite', methods=['POST'])
 def favorite_order():
