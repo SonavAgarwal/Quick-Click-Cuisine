@@ -17,7 +17,7 @@ mongo = PyMongo(app)
 def create_order():
     data = request.get_json()
     if not data or 'user_id' not in data or 'ingredients' not in data or 'type' not in data:
-        return jsonify({'error': 'Missing required fields'}), 400
+        return jsonify({'error': 'Missing erequired fields'}), 400
     order_id = generate_id()
     order = {
         'user_id': data.get('user_id'),
@@ -93,7 +93,7 @@ def finish_order():
         return jsonify({'error': 'Order not found'}), 404
     order_id = data.get('order_id')
     if (order.get('status') == 2):
-        mongo.db.orders.delete_one({'order_id': order_id})
+        # mongo.db.orders.delete_one({'order_id': order_id})
         return jsonify({'message': 'Order deleted'}), 200
     else:
         mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
