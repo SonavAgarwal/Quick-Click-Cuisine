@@ -22,7 +22,7 @@ def create_order():
     order = {
         'user_id': data.get('user_id'),
         'user_name': data.get('user_name'),
-        'order_id': str(order_id),
+        'order_id': order_id,
         'order_number': generate_order_number(),
         'ingredients': data.get('ingredients'),
         'side': data.get('side'),
@@ -99,7 +99,33 @@ def finish_order():
         mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
         return jsonify({'message': 'Order status changed'}), 200
     
+@app.route('/order/favorite', methods=['POST'])
+def favorite_order():
+    data = request.get_json()
+    if not data or 'order_id' not in data:
+        return jsonify({'error': 'Missing required fields'}), 400
 
+    user_id = data.get('user_id')
+    order_id = data.get('order_id')
+
+    order_favorite = {
+        order_id: {
+            'user_name': data.get('user_name'),
+            'order_number': data.get('order_number'),
+            'ingredients': data.get('ingredients'),
+            'side': data.get('side'),
+            'beverage': data.get('beverage'),
+            'type': data.get('type'),
+        }
+    }
+
+    # create user if not exists
+    if not mongo.db.users.find_one({'user_id': user_id}):
+        mongo.db.users.insert_one({'user_id': user_id, 'favorites': {}})
+
+    # add favorite to the user's favorite array
+    mongo.db.users.update_one({'user_id': user_id}, {'$set': {f'favorites.{order_id}': order_favorite[order_id]}})
+    return jsonify({'message': 'Order favorited!'}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
