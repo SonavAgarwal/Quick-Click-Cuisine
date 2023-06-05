@@ -92,12 +92,9 @@ def finish_order():
     if not order:
         return jsonify({'error': 'Order not found'}), 404
     order_id = data.get('order_id')
-    if (order.get('status') == 2):
-        # mongo.db.orders.delete_one({'order_id': order_id})
-        return jsonify({'message': 'Order deleted'}), 200
-    else:
-        mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
-        return jsonify({'message': 'Order status changed'}), 200
+    
+    mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
+    return jsonify({'message': 'Order status changed'}), 200
     
 @app.route('/order/favorite', methods=['POST'])
 def favorite_order():
