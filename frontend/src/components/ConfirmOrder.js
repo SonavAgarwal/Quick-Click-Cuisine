@@ -32,6 +32,7 @@ export function ConfirmOrder() {
 	const fromPage = location.state.fromPage;
 	const type = location.state.type;
 	const finalOrder = location.state.finalOrder || [];
+	console.log(finalOrder);
 
 	const [user] = useAuthState(auth);
 	const navigate = useNavigate();
