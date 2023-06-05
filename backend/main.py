@@ -33,6 +33,19 @@ def create_order():
     }
     res = requests.get("http://127.0.0.1:5000/orders/inprogress").json()
     mongo.db.orders.insert_one(order)
+
+    # update user order count
+
+    # update total order count
+    mongo.db.globals.update_one(
+        {'title': 'food_type_count'},
+        {
+            '$inc': {
+                data.get('type'): 1
+            }
+        }
+    )
+
     return jsonify({'message': 'Order placed successfully', 'order_id': order_id, 'order_position': str(len(res) + 1)}), 201
 
 
