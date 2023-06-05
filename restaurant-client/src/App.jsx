@@ -1,35 +1,3 @@
-// import { useEffect, useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-// import { Order } from './components/Order'
-
-// function App() {
-
-//   const [orders, setOrders] = useState([])
-
-//   useEffect(() => {
-//     let intervalID = setInterval(() => {
-//       fetch("http://127.0.0.1:5000/orders/inprogress")
-//         .then((res) => res.json())
-//         .then((data) => {
-//               const parsedData = data?.map((d) => JSON.parse(d));
-//               setOrders(parsedData)
-//         });
-//     }, 5000);
-//     return () => clearInterval(intervalID);
-// 	}, []);
-
-//   return (
-//     <div>
-//     {orders.map((order, index) => (
-//         <Order key={index} column = {1} order={order}></Order>
-//     ))}
-//     </div>)
-// }
-
-// export default App
-
 import './App.css';
 import { Order } from './components/Order';
 import { useEffect, useState } from 'react'
@@ -75,6 +43,7 @@ const QueueSection = ({ orders, fetchData }) => {
       {orders.map((order, index) => (
         <Order key={index} column={1} order={order} fetchData={fetchData} />
       ))}
+      {orders.length === 0 && <div className="noneMessage">No Orders In Queue</div>}
     </div>
   );
 };
@@ -86,6 +55,7 @@ const InProgressSection = ({ orders, fetchData }) => {
       {orders.map((order, index) => (
         <Order key={index} column={2} order={order} fetchData={fetchData} />
       ))}
+      {orders.length === 0 && <div className="noneMessage">No In-Progress Orders</div>}
     </div>
   );
 };
@@ -97,6 +67,7 @@ const CompleteSection = ({ orders, fetchData }) => {
       {orders.map((order, index) => (
         <Order key={index} column={3} order={order} fetchData={fetchData}  />
       ))}
+      {orders.length === 0 && <div className="noneMessage">No Completed Orders</div>}
     </div>
   );
 };

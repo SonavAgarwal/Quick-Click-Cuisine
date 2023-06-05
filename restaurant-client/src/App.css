@@ -9,5 +9,16 @@
 }
 
 .section {
-    min-width: 15rem;
+    width: 37rem;
+}
+
+.noneMessage {
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 1730px) {
+    .section {
+        width: 34rem;
+    }
 }

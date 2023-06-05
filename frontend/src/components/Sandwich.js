@@ -75,7 +75,7 @@ export function Sandwich() {
     return <div className="sandwichPage">
         <div className = "header">
             <div className = "mainTitle"><NameText/>, Craft Your Sandwich Below!</div>
-            <div className = "mainSubtitle">Choose 1 bread, 1 type of cheese, and upto 3 toppings, 3 add-ons, and 2 spreads/condiments.</div>
+            <div className = "mainSubtitle">Choose 1 bread, 1 type of cheese, and upto 2 toppings, 3 add-ons, and 2 spreads/condiments.</div>
             <div className = "ingredientType">
                 <div className = "ingredientTypeText">Bread</div>
                 <ButtonGroup from = {fromPage} finalOrder = {finalOrder && finalOrder.ingredients.ingredients.bread} name = "bread" data = {breadSandwichData} width = {11} color = "rgb(150, 75, 0)" maximum = {1} setRequiredSelected={setBreadSelected} onSelectedButtonsChange={handleBreadChange}></ButtonGroup>
