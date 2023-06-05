@@ -5,6 +5,8 @@ import { NameText } from "./NameText";
 import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
+import searchIcon from '../static/search.png';
+import magnifyingGlass from '../static/magnifying-glass.png'
 
 export function OrderHistory() {
 	const [user] = useAuthState(auth);
@@ -43,8 +45,10 @@ export function OrderHistory() {
 					</button>
 				</div>
                 <div className="searchBar">
-                    <input type="text" placeholder="Search" value={searchQuery} onChange={handleSearchChange} onKeyDown={handleKeyDown}/>
-                    <button onClick={handleSearch}>Search</button>
+                    <input type="text" placeholder="Search for an ingredient..." value={searchQuery} onChange={handleSearchChange} onKeyDown={handleKeyDown}/>
+                    <button onClick={handleSearch}>
+                        <img className = "searchIcon" src = {magnifyingGlass}></img>
+                    </button>
                 </div>
                 <div className="mainSubtitle">
 					{searchQuery}
