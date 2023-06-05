@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import './HistoryCard.scss';
 import pizzaFull from '../static/pizza.png';
 import sandwichFull from '../static/sandwich.png';
@@ -20,6 +20,10 @@ export const HistoryCard = (props) => {
     const [side, setSide] = useState("Orange");
     const [beverage, setBeverage] = useState("Fountain Beverage");
     const [orderType, setOrderType] = useState("sandwich");
+
+    useEffect(() =>{
+        
+    }, []);
 
     if (type === "Sandwich"){
         image = sandwichFull;

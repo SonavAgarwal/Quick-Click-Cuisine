@@ -108,11 +108,13 @@ export function Landing() {
 						console.log(status);
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
 						// console.log(type);
-						return (
-							<div>
-								<PendingOrderCard type={typeUpper} ingredients={ingredients} status = {status}/>
-							</div>
-						);
+						if (status !== 3){
+							return (
+								<div>
+									<PendingOrderCard type={typeUpper} ingredients={ingredients} status = {status}/>
+								</div>
+							);
+						}
 					})}
 					{/* <PendingOrderCard
 						type="Sandwich"
