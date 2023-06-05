@@ -13,6 +13,30 @@ CORS(app)
 app.config["MONGO_URI"] = "mongodb+srv://quickclickcuisine:egzUt9nRmDlZPZSr@qcc.xnffmnn.mongodb.net/restaurant?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true"
 mongo = PyMongo(app)
 
+# UTILITIES
+
+# create new object in users collection with default values
+def create_user(user_id, user_name="no name"):
+
+    print('Creating new user object:')
+    print('    user_id =', user_id)
+    print('    user_name =', user_name)
+
+    mongo.db.users.insert_one({
+        'user_id': user_id,
+        'user_name': user_name,
+        'favorites': {},
+        'orders': {},
+        'food_type_count': {
+            'pizza': 0,
+            'salad': 0,
+            'sandwich': 0
+        }
+    })
+
+
+# ROUTES
+
 @app.route('/order', methods=['POST'])
 def create_order():
     data = request.get_json()
@@ -134,7 +158,7 @@ def favorite_order():
 
     # create user if not exists
     if not mongo.db.users.find_one({'user_id': user_id}):
-        mongo.db.users.insert_one({'user_id': user_id, 'favorites': {}})
+        create_user(user_id=user_id)
 
     # add favorite to the user's favorite array
     mongo.db.users.update_one({'user_id': user_id}, {'$set': {f'favorites.{order_id}': order_favorite[order_id]}})
