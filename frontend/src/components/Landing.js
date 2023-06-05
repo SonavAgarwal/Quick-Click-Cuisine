@@ -76,6 +76,10 @@ export function Landing() {
 					Sign out button (Temporary)
 				</button>
 
+				<button className="mainOrderButton" onClick={() => (window.location.href = "/orderHistory")}>
+					Order History (Temporary)
+				</button>
+
 				<button
 					className="mainOrderButton"
 					onClick={async () => {

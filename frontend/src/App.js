@@ -7,6 +7,7 @@ import { Salad } from "./components/Salad";
 import { Order } from "./components/Order";
 import { ConfirmOrder } from "./components/ConfirmOrder";
 import { Reorder } from "./components/Reorder";
+import { OrderHistory } from "./components/OrderHistory";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { auth } from "./firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -46,6 +47,7 @@ function App() {
 				<Route path="sides" element={<Sides />} />
 				<Route path="confirmOrder" element={<ConfirmOrder />} />
 				<Route path="reorder" element={<Reorder />} />
+				<Route path="orderHistory" element={<OrderHistory />} />
 				<Route path="login" element={<Auth />} />
 				<Route path="useUCLAEmail" element={<UseUCLAEmail />} />
 				<Route path="leaderboard" element={<Leaderboard />} />
