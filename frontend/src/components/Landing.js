@@ -54,8 +54,6 @@ export function Landing() {
 		return () => clearInterval(intervalID)
 	}, [user]);
 
-
-
 	return (
 		<div className="landingPage">
 			<div className="header">
@@ -74,10 +72,6 @@ export function Landing() {
 				</button>
 				<button className="mainOrderButton" onClick={() => signOut(auth)}>
 					Sign out button (Temporary)
-				</button>
-
-				<button className="mainOrderButton" onClick={() => (window.location.href = "/orderHistory")}>
-					Order History (Temporary)
 				</button>
 
 				<button
