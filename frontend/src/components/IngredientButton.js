@@ -27,11 +27,10 @@ const IngredientButton = ({
 		fontSize: "0.82rem",
 		fontWeight: "bold",
 		transition: "transform 0.6s ease-out",
-		transform: isHovered ? "translateY(9px)" : "translateY(0)",
+		transform: isHovered ? "translateY(7px)" : "translateY(0)",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		// float: "left",
 	};
 
 	const circleStyle = {

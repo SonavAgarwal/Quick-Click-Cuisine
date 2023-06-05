@@ -37,7 +37,7 @@
                     overflow: hidden;
                     border: none;
                     background: #F8F8F8;
-                    margin-right: -0.2rem;
+                    margin-right: 0rem;
                 }
 
                 >.orderTitle:focus {
@@ -45,7 +45,9 @@
                 }
 
                 >.writeIcon {
-                    height: 1.25rem;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
 

@@ -61,7 +61,7 @@ export const HistoryCard = (props) => {
                     <div className = "orderContainer">
                         <input className = "orderTitle" id = "inputField" defaultValue={orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
                         {/* {!isEditing && <img className = "writeIcon" src = {writeIcon} onClick={redirectToInputField}></img>} */}
-                        <div>✏️</div>
+                        <div className = "writeIcon" onClick={redirectToInputField}>✏️</div>
                     </div>
                     <div className = "date">{date}</div>
                     <div className = "orderDesc">{desc}</div>
