@@ -6,6 +6,7 @@ import requests
 from datetime import datetime
 from helpers import generate_id, generate_estimate, generate_order_number
 from flask_cors import CORS
+import sys
 
 app = Flask(__name__)
 CORS(app)
@@ -18,15 +19,15 @@ mongo = PyMongo(app)
 # create new object in users collection with default values
 def create_user(user_id, user_name="no name"):
 
-    print('Creating new user object:')
-    print('    user_id =', user_id)
-    print('    user_name =', user_name)
+    print('Creating new user object:', file=sys.stderr)
+    print('    user_id =', user_id, file=sys.stderr)
+    print('    user_name =', user_name, file=sys.stderr)
 
     mongo.db.users.insert_one({
         'user_id': user_id,
         'user_name': user_name,
-        'favorites': {},
-        'orders': {},
+        'favorites': [],
+        'orders': [],
         'food_type_count': {
             'pizza': 0,
             'salad': 0,
@@ -39,7 +40,10 @@ def create_user(user_id, user_name="no name"):
 
 @app.route('/order', methods=['POST'])
 def create_order():
+    print('/order', file=sys.stderr)
     data = request.get_json()
+    # return 'test', 201
+    print(data, file=sys.stderr)
     if not data or 'user_id' not in data or 'ingredients' not in data or 'type' not in data:
         return jsonify({'error': 'Missing erequired fields'}), 400
     order_id = generate_id()
@@ -58,9 +62,24 @@ def create_order():
     res = requests.get("http://127.0.0.1:5000/orders/inprogress").json()
     mongo.db.orders.insert_one(order)
 
-    # update user order count
+    # create user if not exists
+    if not mongo.db.users.find_one({'user_id': data.get('user_id')}):
+        create_user(user_id=data.get('user_id'), user_name=data.get('user_name'))
 
-    # update total order count
+    # update user orders and food type count
+    mongo.db.users.update_one(
+        {'user_id': data.get('user_id')},
+        {
+            '$push': {
+                'orders': order_id
+            },
+            '$inc': {
+                'food_type_count.' + data.get('type'): 1
+            }
+        }
+    )
+
+    # update total food type count
     mongo.db.globals.update_one(
         {'title': 'food_type_count'},
         {
