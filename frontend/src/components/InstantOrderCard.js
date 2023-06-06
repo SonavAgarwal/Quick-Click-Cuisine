@@ -12,7 +12,7 @@ export function InstantOrderCard(props){
     let image;
     let time = 20;
     const navigate = useNavigate();
-    const [type, setType] = useState();
+    const [orderType, setType] = useState();
     const [ingredients, setIngredients] = useState([]);
     const [beverage, setBeverage] = useState();
     const [side, setSide] = useState();
@@ -24,7 +24,7 @@ export function InstantOrderCard(props){
         .then((data) => {
             const typeUpper = data.type.charAt(0).toUpperCase() + data.type.slice(1);
             setType(typeUpper);
-            console.log("type is " + type);
+            // console.log("type is " + type);
             setIngredients(data.ingredients);
             setBeverage(data.beverage);
             setSide(data.side);
@@ -32,17 +32,17 @@ export function InstantOrderCard(props){
     }, [])
 
     const handleOrder = () => {
-        console.log(type);
-        navigate('/reorder', {state: { ingredients, side, beverage, type}});
+        // console.log(type);
+        navigate('/reorder', {state: { ingredients, side, beverage, orderType}});
       }
 
-    if (type === "Sandwich"){
+    if (orderType === "Sandwich"){
         image = sandwichImage;
     }
-    else if (type === "Pizza"){
+    else if (orderType === "Pizza"){
         image = pizzaImage;
     }
-    else if (type === "Salad"){
+    else if (orderType === "Salad"){
         image = saladImage;
     }
 
