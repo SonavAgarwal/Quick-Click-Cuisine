@@ -38,6 +38,11 @@
                     border: none;
                     background: #F8F8F8;
                     margin-right: 0rem;
+
+                    &:hover{
+                        color: #57de54;
+                        cursor: pointer;
+                    }
                 }
 
                 >.orderTitle:focus {
