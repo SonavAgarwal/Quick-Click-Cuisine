@@ -8,7 +8,11 @@
 
 ### GET `/orders/user/<user_id>`
 
+Returns ALL orders with a matching user_id (can be currently open orders).
+
 ### GET `/orders/past/user/<user_id>`
+
+Returns the order history of a user by filtering through the status tag.
 
 ### GET `/orders/all`
 
