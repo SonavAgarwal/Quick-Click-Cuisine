@@ -14,6 +14,19 @@
 
 ### GET `orders/status/<order_id>`
 
+### GET `/orders/type_count`
+
+Returns the count of each type of order for all users.
+
+Return format:
+```json
+{
+    "pizza": Number,
+    "salad": Number,
+    "sandwich": Number
+}
+```
+
 ### GET `order/<order_id>/contents`
 
 Gets the ingredients, side, and beverage of an order.

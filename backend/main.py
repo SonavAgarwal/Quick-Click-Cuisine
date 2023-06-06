@@ -84,7 +84,7 @@ def create_order():
         {'title': 'food_type_count'},
         {
             '$inc': {
-                data.get('type'): 1
+                'content.' + data.get('type'): 1
             }
         }
     )
@@ -150,6 +150,12 @@ def get_order_status(order_id):
     estimated_time = generate_estimate(orders_ahead)
 
     return jsonify({'status': order['status'], 'position': order_position, 'estimated_time': estimated_time}), 200
+
+@app.route('/orders/type_count', methods=['GET'])
+def get_global_type_count():
+    type_count = mongo.db.globals.find_one({'title': 'food_type_count'})
+    return jsonify(type_count['content']), 200
+
 
 @app.route('/order/<order_id>/contents', methods=['GET'])
 def get_order_contents(order_id):
