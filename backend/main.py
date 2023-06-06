@@ -45,7 +45,7 @@ def create_order():
     # return 'test', 201
     print(data, file=sys.stderr)
     if not data or 'user_id' not in data or 'ingredients' not in data or 'type' not in data:
-        return jsonify({'error': 'Missing erequired fields'}), 400
+        return jsonify({'error': 'Missing required fields'}), 400
     order_id = generate_id()
     order = {
         'user_id': data.get('user_id'),
@@ -59,7 +59,8 @@ def create_order():
         'status': 0,
         'timestamp': datetime.utcnow()  # add timestamp when the order is created
     }
-    res = requests.get("http://127.0.0.1:5000/orders/inprogress").json()
+
+    order_position = mongo.db.orders.count_documents({'status': 1})
     mongo.db.orders.insert_one(order)
 
     # create user if not exists
@@ -89,13 +90,17 @@ def create_order():
         }
     )
 
-    return jsonify({'message': 'Order placed successfully', 'order_id': order_id, 'order_position': str(len(res) + 1)}), 201
+    return jsonify({
+        'message': 'Order placed successfully',
+        'order_id': order_id,
+        'order_position': str(order_position + 1)
+    }), 201
 
 
 @app.route('/orders/inprogress', methods=['GET'])
 def get_in_progress_orders():
     try:
-        in_progress_orders = mongo.db.orders.find({})
+        in_progress_orders = mongo.db.orders.find({'status': 1})
         newList = list(in_progress_orders)
         newList = [json_util.dumps(doc) for doc in newList]
         return jsonify(newList), 200
@@ -137,15 +142,16 @@ def get_all_orders():
     
 @app.route('/orders/status/<order_id>', methods=['GET'])
 def get_order_status(order_id):
-    order = mongo.db.orders.find_one({'order_id': order_id})
     if not order_id:
         return jsonify({'error': 'Missing order_id'}), 400
-    if order:
-        order_timestamp = order.get('timestamp')
-        orders_ahead = mongo.db.orders.count_documents({'status': 'in progress', 'timestamp': {'$lt': order_timestamp}})
-        order_position = orders_ahead + 1
-    else:
+
+    order = mongo.db.orders.find_one({'order_id': order_id})
+    if not order:
         return jsonify({'error': 'Order not found'}), 404
+
+    order_timestamp = order.get('timestamp')
+    orders_ahead = mongo.db.orders.count_documents({'status': 1, 'timestamp': {'$lt': order_timestamp}})
+    order_position = orders_ahead + 1
 
     estimated_time = generate_estimate(orders_ahead)
 
@@ -180,12 +186,11 @@ def finish_order():
     data = request.get_json()
     if not data or 'order_id' not in data:
         return jsonify({'error': 'Missing required fields'}), 400
-    order = mongo.db.orders.find_one({'order_id': data.get('order_id')})
-    if not order:
+
+    if not mongo.db.orders.find_one({'order_id': data.get('order_id')}):
         return jsonify({'error': 'Order not found'}), 404
-    order_id = data.get('order_id')
     
-    mongo.db.orders.update_one({'order_id': order_id}, {'$set': {'status': order.get('status') + 1}})
+    mongo.db.orders.update_one({'order_id': data.get('order_id')}, {'$inc': {'status': 1}})
     return jsonify({'message': 'Order status changed'}), 200
     
 @app.route('/order/favorite', methods=['POST'])
