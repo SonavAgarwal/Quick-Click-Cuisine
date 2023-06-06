@@ -184,6 +184,12 @@ def get_order_contents(order_id):
 @app.route('/order/<order_id>/isFavorite', methods=['GET'])
 def get_is_favorite(order_id):
 
+    # # script to update isFavorite for all existing favorites
+    # for user in mongo.db.users.find({}):
+    #     favorites = user['favorites']
+    #     for favorite in favorites:
+    #         mongo.db.orders.update_one( { 'order_id': favorite['order_id'] }, { '$set': {'isFavorite': True} })
+
     order = mongo.db.orders.find_one({'order_id': order_id, 'isFavorite': True})
     if not order:
         return jsonify(False), 200
@@ -293,4 +299,5 @@ def get_user_orders_with_ingredients(user_id):
     return jsonify(return_list), 200
 
 if __name__ == '__main__':
+    
     app.run(debug=True)
