@@ -52,6 +52,9 @@ Example return:
     "beverage": 
 }
 ```
+### GET `order/<order_id>/isFavorite`
+
+Returns true if the order was favorited, false if not or order does not exist.
 
 ### POST `/order/bumpStatus`
 

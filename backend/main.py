@@ -57,6 +57,7 @@ def create_order():
         'beverage': data.get('beverage'),
         'type': data.get('type'),
         'status': 0,
+        'isFavorite': False,
         'timestamp': datetime.utcnow()  # add timestamp when the order is created
     }
 
@@ -180,6 +181,14 @@ def get_order_contents(order_id):
 
     return jsonify(contents), 200
 
+@app.route('/order/<order_id>/isFavorite', methods=['GET'])
+def get_is_favorite(order_id):
+
+    order = mongo.db.orders.find_one({'order_id': order_id, 'isFavorite': True})
+    if not order:
+        return jsonify(False), 200
+
+    return jsonify(True), 200
 
 @app.route('/order/bumpStatus', methods=['POST'])
 def finish_order():
@@ -206,9 +215,20 @@ def favorite_order():
     if not order:
         return jsonify({'error': 'Order ID not found'}), 400
 
-    user_id = order['user_id']
+    # set isFavorite to true for the order
+    mongo.db.orders.update_one(
+        {
+            'order_id': order_id
+        },
+        {
+            '$set': {
+                'isFavorite': True
+            }
+        }
+    )
 
     # create user if not exists
+    user_id = order['user_id']
     if not mongo.db.users.find_one({'user_id': user_id}):
         create_user(user_id=user_id, user_name=order['user_name'])
 
@@ -224,6 +244,7 @@ def favorite_order():
             }
         }
     )
+
 
     return jsonify({'message': 'Order favorited!'}), 200
 
