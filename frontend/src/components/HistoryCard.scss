@@ -82,11 +82,11 @@
         }
 
         >.spacer{
-            width: 1rem;
+            width: 4rem;
         }
 
         >.reorder{
-            margin-top: 0.25rem;
+            margin-top: 1rem;
             width: 7.25rem;
             height: 2rem;
             border-radius: 0.75rem;
@@ -95,11 +95,13 @@
             font-size: 1rem;
             font-weight: 700;
             color: white;
-            background: #45C166;
+            // background: #45C166;
+            background: #dec854;
             margin-left: 7rem;
 
             &:hover{
                 filter: brightness(0.8);
+                cursor: pointer;
             }
         }
 

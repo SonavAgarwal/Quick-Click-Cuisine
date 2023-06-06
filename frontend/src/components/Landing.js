@@ -147,13 +147,14 @@ export function Landing() {
 						const ingredients = parsed.ingredients;
 						const beverage = parsed.beverage;
 						const side = parsed.side;
+						const oid = parsed.order_id;
 						// const timestamp = parsed.timestamp;
 						// const date = new Date(timestamp.slice(0, -1));
 						// console.log(date);
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
 						return (
 						<div>
-							<HistoryCard type ={typeUpper} ingredients = {ingredients} beverage = {beverage} side = {side}/>
+							<HistoryCard type ={typeUpper} ingredients = {ingredients} beverage = {beverage} side = {side} oid = {oid}/>
 						</div>
 						);
 					})}

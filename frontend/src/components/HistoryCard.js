@@ -6,6 +6,7 @@ import saladFull from '../static/salad.png';
 import starIcon from '../static/starIcon.svg';
 import writeIcon from '../static/writeIcon.svg';
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const HistoryCard = (props) => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ export const HistoryCard = (props) => {
     let pastSide = props.side;
     let pastBeverage = props.beverage;
     let timestamp = props.timestamp;
+    let orderId = props.oid;
     let image;
 
     // const [ingredients, setIngredients] = useState(["Hoagie Roll", "Cucumber", "Sundried Tomato Pesto"]);
@@ -26,6 +28,8 @@ export const HistoryCard = (props) => {
     const [side, setSide] = useState(pastSide);
     const [beverage, setBeverage] = useState(pastBeverage);
     const [orderType, setOrderType] = useState(type);
+    const [orderTitle, setOrderTitle] = useState(type);
+    const [isEditing, setIsEditing] = useState(false);
 
     let desc = type + " with ";
     for (let i = 0; i < ingredients.length - 1; i++){
@@ -47,9 +51,6 @@ export const HistoryCard = (props) => {
     if (type === "Salad"){
         image = saladFull;
     }
-
-    const [orderTitle, setOrderTitle] = useState(type);
-    const [isEditing, setIsEditing] = useState(false);
 
 
     const handleTitleClick = () => {
@@ -88,6 +89,21 @@ export const HistoryCard = (props) => {
         navigate('/reorder', {state: { ingredients, side, beverage, orderType}});
       }
 
+      async function addFavorite () {
+        const data = {
+            "order_id": orderId,
+            "order_nickname": orderTitle
+        }
+
+        const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
+        if (response.status === 200){
+            console.log("order favorited successfully!");
+        }
+        else{
+            console.log("shit")
+        }
+      }
+
     return (
         <div className = "historyCard">
             <div className = "content">
@@ -103,9 +119,10 @@ export const HistoryCard = (props) => {
                 </div>
             </div>
             <div className = "historyFooter">
-                <img  className = "starIcon" src = {starIcon}></img>
+                {/* <img  className = "starIcon" src = {starIcon}></img> */}
                 <div className = "spacer"></div>
-                <button className = "reorder" onClick={handleReorderClick}>Reorder</button>
+                {/* <button className = "reorder" onClick={handleReorderClick}>Favorite</button> */}
+                <button className = "reorder" onClick = {addFavorite}>Favorite</button>
             </div>
 
         </div>
