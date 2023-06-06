@@ -25,9 +25,6 @@ export const HistoryCard = (props) => {
     // const [beverage, setBeverage] = useState("Fountain Beverage");
     // const [orderType, setOrderType] = useState("sandwich");
     const [ingredients, setIngredients] = useState(pastIngredients);
-    const [side, setSide] = useState(pastSide);
-    const [beverage, setBeverage] = useState(pastBeverage);
-    const [orderType, setOrderType] = useState(type);
     const [orderTitle, setOrderTitle] = useState(type);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -83,11 +80,6 @@ export const HistoryCard = (props) => {
     //   setIngredients(["Hoagie Roll", "Cucumber", "Sundried Tomato Pesto"]);
     //   setSide("Orange");
     //   setBeverage("Fountain Beverage");
-
-      const handleReorderClick = () => {
-        console.log(orderType);
-        navigate('/reorder', {state: { ingredients, side, beverage, orderType}});
-      }
 
       async function addFavorite () {
         const data = {
