@@ -228,6 +228,17 @@ def get_user_favorites(user_id):
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
 
+@app.route('/user/<user_id>/type_count', methods=['GET'])
+def get_user_type_count(user_id):
+    try:
+        user = mongo.db.users.find_one({'user_id': user_id})
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+        return jsonify(user['food_type_count']), 200
+
+    except Exception as e:
+        return jsonify({'error': 'Database error', 'message': str(e)}), 500
+
 @app.route('/user/<user_id>/searchIngredients', methods=['GET'])
 def get_user_orders_with_ingredients(user_id):
 

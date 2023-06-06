@@ -61,6 +61,19 @@ Return format:
 ]
 ```
 
+### GET `/user/<user_id>/type_count`
+
+Returns the count of each type of order the user has made.
+
+Return format:
+```json
+{
+    "pizza": Number,
+    "salad": Number,
+    "sandwich": Number
+}
+```
+
 ### GET `/user/<user_id>/searchIngredients`
 
 Given a list of ingredients, returns the `order_id`'s of all orders that contain all these ingredients from `user_id`.
