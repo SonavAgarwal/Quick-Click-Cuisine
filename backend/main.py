@@ -188,27 +188,18 @@ def favorite_order():
     if not data or 'order_id' not in data or 'order_nickname' not in data:
         return jsonify({'error': 'Missing required fields'}), 400
 
-    user_id = data.get('user_id')
     order_id = data.get('order_id')
     order_nickname = data.get('order_nickname')
 
-    if not mongo.db.orders.find_one({'order_id': order_id}):
+    order = mongo.db.orders.find_one({'order_id': order_id})
+    if not order:
         return jsonify({'error': 'Order ID not found'}), 400
 
-    # order_favorite = {
-    #     order_id: {
-    #         'user_name': data.get('user_name'),
-    #         'order_number': data.get('order_number'),
-    #         'ingredients': data.get('ingredients'),
-    #         'side': data.get('side'),
-    #         'beverage': data.get('beverage'),
-    #         'type': data.get('type'),
-    #     }
-    # }
+    user_id = order['user_id']
 
     # create user if not exists
     if not mongo.db.users.find_one({'user_id': user_id}):
-        create_user(user_id=user_id)
+        create_user(user_id=user_id, user_name=order['user_name'])
 
     # add favorite to the user's favorite array
     mongo.db.users.update_one(
@@ -236,6 +227,27 @@ def get_user_favorites(user_id):
 
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
+
+@app.route('/user/<user_id>/searchIngredients', methods=['GET'])
+def get_user_orders_with_ingredients(user_id):
+
+    data = request.get_json()
+    if not data or 'ingredients' not in data:
+        return jsonify({'error': 'Missing required fields'}), 400
+
+    orders = mongo.db.orders.find({
+        'user_id': user_id,
+        'ingredients': {
+            '$all': data.get('ingredients')
+        }
+    })
+
+    return_list = []
+
+    for order in orders:
+        return_list.append(order['order_id'])
+
+    return jsonify(return_list), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

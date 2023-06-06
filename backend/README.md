@@ -60,3 +60,27 @@ Return format:
     ...
 ]
 ```
+
+### GET `/user/<user_id>/searchIngredients`
+
+Given a list of ingredients, returns the `order_id`'s of all orders that contain all these ingredients from `user_id`.
+
+Body:
+```json
+{
+    "ingredients": [
+        "ingredient_1",
+        "ingredient_2",
+        ...
+    ]
+}
+```
+
+Return format: 
+```json
+[
+    "order_id_1",
+    "order_id_2",
+    ...
+]
+```
