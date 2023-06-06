@@ -22,8 +22,27 @@ export function Landing() {
 			.then((res) => res.json())
 			.then((data) => {
 				setPendingOrders(data);
-			});
+		});
 	}
+
+	// function fetchPendingOrders() {
+	// 	const user_id = user?.uid;
+	// 	fetch("http://127.0.0.1:5000/orders/user/" + user_id)
+	// 		.then((res) => {
+	// 			if (!res.ok) {
+	// 				//fetchPendingOrders();
+	// 				//throw new Error("Network response was not ok");
+	// 			}
+	// 			return res.json();
+	// 		})
+	// 		.then((data) => {
+	// 			setPendingOrders(data);
+	// 		})
+	// 		.catch((error) => {
+	// 			//fetchPendingOrders();
+	// 			console.error("Error fetching pending orders:", error);
+	// 		});
+	// }
 
 	function fetchOrderHistory() {
 		const user_id = user?.uid;
@@ -33,6 +52,25 @@ export function Landing() {
 				setOrderHistory(data);
 			});
 	}
+
+	// function fetchOrderHistory() {
+	// 	const user_id = user?.uid;
+	// 	fetch("http://127.0.0.1:5000/orders/past/user/" + user_id)
+	// 		.then((res) => {
+	// 			if (!res.ok) {
+	// 				//fetchOrderHistory();
+	// 				//throw new Error("Network response was not ok");
+	// 			}
+	// 			return res.json();
+	// 		})
+	// 		.then((data) => {
+	// 			setOrderHistory(data);
+	// 		})
+	// 		.catch((error) => {
+	// 			//fetchOrderHistory();
+	// 			console.error("Error fetching order history:", error);
+	// 		});
+	// }
 
 	function fetchFavorites() {
 		const user_id = user?.uid;
@@ -48,6 +86,30 @@ export function Landing() {
 				// console.log("favorites ", data);
 			});
 	}
+
+	// function fetchFavorites() {
+	// const user_id = user?.uid;
+	// fetch("http://127.0.0.1:5000/user/" + user_id + "/favorites")
+	// 	.then((res) => {
+	// 		if (!res.ok) {
+	// 			//fetchFavorites();
+	// 			//throw new Error("Network response was not ok");
+	// 		}
+	// 		return res.json();
+	// 	})
+	// 	.then((data) => {
+	// 		if (Array.isArray(data)) {
+	// 			setFavorites(data);
+	// 		} else {
+	// 			setFavorites([]);
+	// 		}
+	// 		// console.log("favorites ", data);
+	// 	})
+	// 	.catch((error) => {
+	// 		//fetchFavorites();
+	// 		console.error("Error fetching favorites:", error);
+	// 	});
+	// }
 
 	useEffect(() => {
 		if (!user) return;
