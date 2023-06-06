@@ -18,12 +18,12 @@
 
 Returns the count of each type of order for all users.
 
-Return format:
+Example return:
 ```json
 {
-    "pizza": Number,
-    "salad": Number,
-    "sandwich": Number
+    "pizza": 1,
+    "salad": 2,
+    "sandwich": 3
 }
 ```
 
@@ -31,7 +31,7 @@ Return format:
 
 Gets the ingredients, side, and beverage of an order.
 
-Return format:
+Example return:
 ```json
 {
     "type": ,
@@ -59,7 +59,7 @@ Body:
 
 Returns the list of `order_id`'s of the user's favorite orders.
 
-Return format:
+Example return:
 ```json
 [
     {
@@ -70,7 +70,7 @@ Return format:
         "order_id": "order_id_2",
         "order_nickname": "order_nickname_2"
     }
-    ...
+    // ...
 ]
 ```
 
@@ -78,12 +78,12 @@ Return format:
 
 Returns the count of each type of order the user has made.
 
-Return format:
+Example return:
 ```json
 {
-    "pizza": Number,
-    "salad": Number,
-    "sandwich": Number
+    "pizza": 1,
+    "salad": 2,
+    "sandwich": 3 
 }
 ```
 
@@ -97,16 +97,16 @@ Body:
     "ingredients": [
         "ingredient_1",
         "ingredient_2",
-        ...
+        // ...
     ]
 }
 ```
 
-Return format: 
+Example return:
 ```json
 [
     "order_id_1",
     "order_id_2",
-    ...
+    // ...
 ]
 ```
