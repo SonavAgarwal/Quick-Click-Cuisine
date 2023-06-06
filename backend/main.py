@@ -167,29 +167,44 @@ def finish_order():
 @app.route('/order/favorite', methods=['POST'])
 def favorite_order():
     data = request.get_json()
-    if not data or 'order_id' not in data:
+    if not data or 'order_id' not in data or 'order_nickname' not in data:
         return jsonify({'error': 'Missing required fields'}), 400
 
     user_id = data.get('user_id')
     order_id = data.get('order_id')
+    order_nickname = data.get('order_nickname')
 
-    order_favorite = {
-        order_id: {
-            'user_name': data.get('user_name'),
-            'order_number': data.get('order_number'),
-            'ingredients': data.get('ingredients'),
-            'side': data.get('side'),
-            'beverage': data.get('beverage'),
-            'type': data.get('type'),
-        }
-    }
+    if not mongo.db.orders.find_one({'order_id': order_id}):
+        return jsonify({'error': 'Order ID not found'}), 400
+
+    # order_favorite = {
+    #     order_id: {
+    #         'user_name': data.get('user_name'),
+    #         'order_number': data.get('order_number'),
+    #         'ingredients': data.get('ingredients'),
+    #         'side': data.get('side'),
+    #         'beverage': data.get('beverage'),
+    #         'type': data.get('type'),
+    #     }
+    # }
 
     # create user if not exists
     if not mongo.db.users.find_one({'user_id': user_id}):
         create_user(user_id=user_id)
 
     # add favorite to the user's favorite array
-    mongo.db.users.update_one({'user_id': user_id}, {'$set': {f'favorites.{order_id}': order_favorite[order_id]}})
+    mongo.db.users.update_one(
+        {'user_id': user_id},
+        {
+            '$push': {
+                'favorites': {
+                    'order_nickname': order_nickname,
+                    'order_id': order_id
+                }
+            }
+        }
+    )
+
     return jsonify({'message': 'Order favorited!'}), 200
 
 @app.route('/user/<user_id>/favorites', methods=['GET'])
@@ -198,11 +213,26 @@ def get_user_favorites(user_id):
         user_doc = mongo.db.users.find_one({'user_id': user_id})
         if not user_doc:
             return jsonify({'error': 'User not found'}), 404
-        favorites = user_doc.get('favorites', {})
-        # if you want to send as json array instead of a dict
-        favorites_list = list(favorites.values())
-        favorites_list = [json_util.dumps(doc) for doc in favorites_list]
-        return jsonify(favorites_list), 200
+        favorites = user_doc['favorites']
+
+        return_list = []
+
+        for fav_order in favorites:
+            order_id = fav_order['order_id']
+            order = mongo.db.orders.find_one({'order_id': order_id})
+            return_list.append({
+                'order_nickname': fav_order['order_nickname'],
+                'order_id': order_id,
+                'ingredients': order['ingredients'],
+                'side': order['side'],
+                'beverage': order['beverage'],
+                'type': order['type']
+            })
+
+        print(return_list, file=sys.stderr)
+
+        return jsonify(return_list), 200
+
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
 
