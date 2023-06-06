@@ -227,7 +227,7 @@ def get_user_favorites(user_id):
     try:
         user_doc = mongo.db.users.find_one({'user_id': user_id})
         if not user_doc:
-            return jsonify({'error': 'User not found'}), 404
+            return jsonify({'error': 'User not found'}), 200
 
         return jsonify(user_doc['favorites']), 200
 

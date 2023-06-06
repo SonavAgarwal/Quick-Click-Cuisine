@@ -19,29 +19,34 @@ export function Landing() {
 	function fetchPendingOrders() {
 		const user_id = user?.uid;
 		fetch("http://127.0.0.1:5000/orders/user/" + user_id)
-		.then((res) => res.json())
-		.then((data) => {
-			setPendingOrders(data);
-		});
+			.then((res) => res.json())
+			.then((data) => {
+				setPendingOrders(data);
+			});
 	}
 
 	function fetchOrderHistory() {
 		const user_id = user?.uid;
 		fetch("http://127.0.0.1:5000/orders/past/user/" + user_id)
-		.then((res) => res.json())
-		.then((data) => {
-			setOrderHistory(data);
-		});
+			.then((res) => res.json())
+			.then((data) => {
+				setOrderHistory(data);
+			});
 	}
 
 	function fetchFavorites() {
 		const user_id = user?.uid;
 		fetch("http://127.0.0.1:5000/user/" + user_id + "/favorites")
-		.then((res) => res.json())
-		.then((data => {
-			setFavorites(data);
-			console.log("favorites ", data);
-		}))
+			.then((res) => res.json())
+			.then((data) => {
+				if (Array.isArray(data)) {
+					setFavorites(data);
+				} else {
+					setFavorites([]);
+				}
+
+				console.log("favorites ", data);
+			});
 	}
 
 	useEffect(() => {
@@ -52,16 +57,15 @@ export function Landing() {
 				setEstimatedTime(data?.length * 5);
 			});
 
-			fetchPendingOrders()
-			
+		fetchPendingOrders();
+
 		let intervalID = setInterval(() => {
 			fetchPendingOrders();
 			fetchOrderHistory();
 			fetchFavorites();
-			
 		}, 1000);
 
-		return () => clearInterval(intervalID)
+		return () => clearInterval(intervalID);
 	}, [user]);
 
 	return (
@@ -90,7 +94,11 @@ export function Landing() {
 					{favorites?.map((favorite, index) => {
 						const oid = favorite.order_id;
 						const nickname = favorite.order_nickname;
-						return (<div><InstantOrderCard oid = {oid} nickname = {nickname}/></div>)
+						return (
+							<div>
+								<InstantOrderCard oid={oid} nickname={nickname} />
+							</div>
+						);
 					})}
 				</div>
 				<div className="pendingOrders">
@@ -102,10 +110,14 @@ export function Landing() {
 						const status = parsed.status;
 						console.log(status);
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
-						if (status !== 3){
+						if (status !== 3) {
 							return (
 								<div>
-									<PendingOrderCard type={typeUpper} ingredients={ingredients} status = {status}/>
+									<PendingOrderCard
+										type={typeUpper}
+										ingredients={ingredients}
+										status={status}
+									/>
 								</div>
 							);
 						}
@@ -122,12 +134,25 @@ export function Landing() {
 						const oid = parsed.order_id;
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
 						return (
-						<div>
-							<HistoryCard type ={typeUpper} ingredients = {ingredients} beverage = {beverage} side = {side} oid = {oid}/>
-						</div>
+							<div>
+								<HistoryCard
+									type={typeUpper}
+									ingredients={ingredients}
+									beverage={beverage}
+									side={side}
+									oid={oid}
+								/>
+							</div>
 						);
 					})}
-					<div className ="historyLink" onClick= {() => {window.location.href ="/orderHistory"}}>View Full History</div>
+					<div
+						className="historyLink"
+						onClick={() => {
+							window.location.href = "/orderHistory";
+						}}
+					>
+						View Full History
+					</div>
 				</div>
 			</div>
 		</div>
