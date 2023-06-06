@@ -231,24 +231,8 @@ def get_user_favorites(user_id):
         user_doc = mongo.db.users.find_one({'user_id': user_id})
         if not user_doc:
             return jsonify({'error': 'User not found'}), 404
-        favorites = user_doc['favorites']
 
-        return_list = []
-
-        for fav_order in favorites:
-            return_list.append(fav_order['order_id'])
-
-            # order = mongo.db.orders.find_one({'order_id': order_id})
-            # return_list.append({
-            #     'order_nickname': fav_order['order_nickname'],
-            #     'order_id': order_id,
-            #     'ingredients': order['ingredients'],
-            #     'side': order['side'],
-            #     'beverage': order['beverage'],
-            #     'type': order['type']
-            # })
-
-        return jsonify(return_list), 200
+        return jsonify(user_doc['favorites']), 200
 
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500

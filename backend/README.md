@@ -49,8 +49,14 @@ Returns the list of `order_id`'s of the user's favorite orders.
 Return format:
 ```json
 [
-    "order_id_1",
-    "order_id_2",
+    {
+        "order_id": "order_id_1",
+        "order_nickname": "order_nickname_1"
+    },
+    {
+        "order_id": "order_id_2",
+        "order_nickname": "order_nickname_2"
+    }
     ...
 ]
 ```
