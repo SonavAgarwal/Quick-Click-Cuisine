@@ -21,6 +21,7 @@ Gets the ingredients, side, and beverage of an order.
 Return format:
 ```json
 {
+    "type": ,
     "ingredients": [],
     "side": ,
     "beverage": 

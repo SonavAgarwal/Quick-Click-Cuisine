@@ -151,6 +151,24 @@ def get_order_status(order_id):
 
     return jsonify({'status': order['status'], 'position': order_position, 'estimated_time': estimated_time}), 200
 
+@app.route('/order/<order_id>/contents', methods=['GET'])
+def get_order_contents(order_id):
+
+    order = mongo.db.orders.find_one({'order_id': order_id})
+
+    if not order:
+        return jsonify({'error': 'Order not found'}), 404
+
+    contents = {
+        'type': order['type'],
+        'ingredients': order['ingredients'],
+        'side': order['side'],
+        'beverage': order['beverage']
+    }
+
+    return jsonify(contents), 200
+
+
 @app.route('/order/bumpStatus', methods=['POST'])
 def finish_order():
     data = request.get_json()
