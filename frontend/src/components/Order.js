@@ -7,9 +7,9 @@ export const Order = () => {
     return (
         <div className = "orderContent">
             <div className = "orderTitle">Order</div>
-            <OrderCard type="Sandwich" desc="filler la dee da dee da"/>
-            <OrderCard type = "Pizza" desc = "filler la dee da dee da"/>
-            <OrderCard type = "Salad" desc = "filler la dee da dee da"/>
+            <OrderCard type="Sandwich" desc="Bread, cheese, toppings, add-ons, spread, side, and beverage."/>
+            <OrderCard type = "Pizza" desc = "Sauce, cheese, toppings, add-ons, side, and beverage."/>
+            <OrderCard type = "Salad" desc = "Greens, protein, toppings, dressing, side, and beverage."/>
         </div>
     );
 
