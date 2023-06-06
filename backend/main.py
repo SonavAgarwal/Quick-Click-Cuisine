@@ -236,18 +236,17 @@ def get_user_favorites(user_id):
         return_list = []
 
         for fav_order in favorites:
-            order_id = fav_order['order_id']
-            order = mongo.db.orders.find_one({'order_id': order_id})
-            return_list.append({
-                'order_nickname': fav_order['order_nickname'],
-                'order_id': order_id,
-                'ingredients': order['ingredients'],
-                'side': order['side'],
-                'beverage': order['beverage'],
-                'type': order['type']
-            })
+            return_list.append(fav_order['order_id'])
 
-        print(return_list, file=sys.stderr)
+            # order = mongo.db.orders.find_one({'order_id': order_id})
+            # return_list.append({
+            #     'order_nickname': fav_order['order_nickname'],
+            #     'order_id': order_id,
+            #     'ingredients': order['ingredients'],
+            #     'side': order['side'],
+            #     'beverage': order['beverage'],
+            #     'type': order['type']
+            # })
 
         return jsonify(return_list), 200
 

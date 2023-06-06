@@ -34,7 +34,7 @@ Return format:
 
 Adds `order_id` to the list of favorite orders of the user that made the order, under the name `order_nickname`.
 
-Data:
+Body:
 ```json
 {
     "order_id": ,
