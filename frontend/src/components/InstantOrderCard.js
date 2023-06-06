@@ -16,9 +16,9 @@ export function InstantOrderCard(props){
     const [ingredients, setIngredients] = useState([]);
     const [beverage, setBeverage] = useState();
     const [side, setSide] = useState();
+    const [isFavorite, setFavorite] = useState();
 
-
-    useEffect(() => {
+    const fetchContents = () => {
         fetch("http://127.0.0.1:5000/order/" + order_id + "/contents")
         .then((res) => res.json())
         .then((data) => {
@@ -29,6 +29,12 @@ export function InstantOrderCard(props){
             setBeverage(data.beverage);
             setSide(data.side);
         })
+    }
+
+
+    useEffect(() => {
+        //Gets contents of the order
+        fetchContents();
     }, [])
 
     const handleOrder = () => {

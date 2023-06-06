@@ -45,7 +45,7 @@ export function Landing() {
 					setFavorites([]);
 				}
 
-				console.log("favorites ", data);
+				// console.log("favorites ", data);
 			});
 	}
 
@@ -108,7 +108,7 @@ export function Landing() {
 						const type = parsed.type;
 						const ingredients = parsed.ingredients;
 						const status = parsed.status;
-						console.log(status);
+						// console.log(status);
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
 						if (status !== 3) {
 							return (
@@ -125,7 +125,8 @@ export function Landing() {
 				</div>
 				<div className="orderHistory">
 					<div className="sectionTitle">Order History</div>
-					{orderHistory?.map((order, index) => {
+					{
+					orderHistory.slice(-3)?.map((order, index) => {
 						const parsed = JSON.parse(order);
 						const type = parsed.type;
 						const ingredients = parsed.ingredients;
@@ -133,17 +134,19 @@ export function Landing() {
 						const side = parsed.side;
 						const oid = parsed.order_id;
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
-						return (
-							<div>
-								<HistoryCard
-									type={typeUpper}
-									ingredients={ingredients}
-									beverage={beverage}
-									side={side}
-									oid={oid}
-								/>
-							</div>
-						);
+						if (index < 4){
+							return (
+								<div>
+									<HistoryCard
+										type={typeUpper}
+										ingredients={ingredients}
+										beverage={beverage}
+										side={side}
+										oid={oid}
+									/>
+								</div>
+							);
+						}
 					})}
 					<div
 						className="historyLink"

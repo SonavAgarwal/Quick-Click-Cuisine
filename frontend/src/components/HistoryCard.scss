@@ -110,5 +110,14 @@
             }
         }
 
+        >.green{
+            background: #57de54;
+
+            &:hover{
+                cursor: default;
+                filter: brightness(1);
+            }
+        }
+
     }
 }

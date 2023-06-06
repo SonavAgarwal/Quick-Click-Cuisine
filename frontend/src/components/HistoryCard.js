@@ -20,13 +20,24 @@ export const HistoryCard = (props) => {
     let orderId = props.oid;
     let image;
 
-    // const [ingredients, setIngredients] = useState(["Hoagie Roll", "Cucumber", "Sundried Tomato Pesto"]);
-    // const [side, setSide] = useState("Orange");
-    // const [beverage, setBeverage] = useState("Fountain Beverage");
-    // const [orderType, setOrderType] = useState("sandwich");
     const [ingredients, setIngredients] = useState(pastIngredients);
     const [orderTitle, setOrderTitle] = useState(type);
     const [isEditing, setIsEditing] = useState(false);
+    const[isFavorite, setFavorite] = useState(false);
+    const [buttonStyle, setButtonStyle] = useState("yellow");
+    const [buttonContent, setButtonContent] = useState("Favorite");
+
+    const fetchFavorite = () => {
+        console.log("fetchFavorite is called");
+        fetch("http://127.0.0.1:5000/order/" + orderId + "/isFavorite")
+        .then((res) => res.json())
+        .then((data) => {
+            // console.log("favorite request went through");
+            // console.log("data is " + data);
+            setFavorite(data);
+            console.log("favorite is now " + isFavorite);
+        })
+    }
 
     let desc = type + " with ";
     for (let i = 0; i < ingredients.length - 1; i++){
@@ -36,8 +47,12 @@ export const HistoryCard = (props) => {
     desc += "and " + ingredients[ingredients.length - 1];
 
     useEffect(() =>{
-
-    }, []);
+        fetchFavorite();
+        if (isFavorite === true){
+            setButtonStyle("green");
+            setButtonContent("Favorited");
+        }
+    });
 
     if (type === "Sandwich"){
         image = sandwichFull;
@@ -82,17 +97,19 @@ export const HistoryCard = (props) => {
     //   setBeverage("Fountain Beverage");
 
       async function addFavorite () {
-        const data = {
-            "order_id": orderId,
-            "order_nickname": orderTitle
-        }
-
-        const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
-        if (response.status === 200){
-            console.log("order favorited successfully!");
-        }
-        else{
-            console.log("shit")
+        if (isFavorite !== true){
+            const data = {
+                "order_id": orderId,
+                "order_nickname": orderTitle
+            }
+    
+            const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
+            if (response.status === 200){
+                console.log("order favorited successfully!");
+            }
+            else{
+                console.log("shit")
+            }
         }
       }
 
@@ -114,7 +131,7 @@ export const HistoryCard = (props) => {
                 {/* <img  className = "starIcon" src = {starIcon}></img> */}
                 <div className = "spacer"></div>
                 {/* <button className = "reorder" onClick={handleReorderClick}>Favorite</button> */}
-                <button className = "reorder" onClick = {addFavorite}>Favorite</button>
+                <button className = {`reorder ${buttonStyle}`} onClick = {addFavorite}>{buttonContent}</button>
             </div>
 
         </div>
