@@ -168,9 +168,11 @@ export function ConfirmOrder() {
 			firstName,
 			secondName,
 			thirdName,
-			fourthName,
-			fifthName
+			fourthName
 		);
+		if(fifthName !== null) {
+			ingredients.concat(fifthName);
+		}
 		const data = {
 			user_id: user?.uid,
 			ingredients: ingredients,
