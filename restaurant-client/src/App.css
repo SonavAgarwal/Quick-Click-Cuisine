@@ -32,5 +32,45 @@
 
 .stats-page {
 	width: 100vw;
-	height: calc(100vh - 5rem);
+	/* height: calc(100vh - 5rem); */
+
+	/* display: grid; */
+	grid-template-columns: 1fr 1fr;
+
+	box-sizing: border-box;
+	padding: 4rem;
+}
+
+.stats-page > canvas {
+	/* width: 40vw; */
+	margin-bottom: 2rem;
+}
+
+.stats-page > h1 {
+	text-align: center;
+}
+
+.stats-button {
+	background-color: #57de54;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 12px;
+	width: 100%;
+	font-weight: bold;
+	max-width: 30rem;
+	/* center */
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2rem;
+
+	/* fix to bototm */
+	position: fixed;
+	bottom: 0;
+	margin-left: 2rem;
 }
