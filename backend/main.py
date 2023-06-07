@@ -280,10 +280,13 @@ def get_user_type_count(user_id):
 @app.route('/user/<user_id>/searchIngredients/<ingredients>', methods=['GET'])
 def get_user_orders_with_ingredients(user_id, ingredients):
 
+    pattern = re.compile(ingredient, re.IGNORECASE)
+
     orders = mongo.db.orders.find({
         'user_id': user_id,
         'ingredients': {
-            '$all': ingredients.split(",")
+            #'$all': ingredients.split(",")
+            '$regex': pattern
         }
     })
 
