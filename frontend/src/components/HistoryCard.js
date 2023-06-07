@@ -59,7 +59,7 @@ export const HistoryCard = (props) => {
 
     // const [ingredients, setIngredients] = useState(props.ingredients);
     // const [newType, setNewType] = useState(type);
-    const [orderTitle, setOrderTitle] = useState(type);
+    const [orderTitle, setOrderTitle] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     // const [image, setImage] = useState();
 
@@ -144,7 +144,7 @@ export const HistoryCard = (props) => {
                 <img src = {image}></img>
                 <div className = "textContainer">
                     <div className = "orderContainer">
-                        <div className = "orderTitle" id = "inputField" contentEditable ={true} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}>{type}</div>
+                        <input className = "orderTitle" id = "inputField" placeholder={type} value = {orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
                     </div>
                     {/* <div className = "date">{timestamp}</div> */}
                     <div className = "orderDesc">{desc}</div>
