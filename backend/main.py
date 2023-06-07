@@ -289,11 +289,9 @@ def get_user_orders_with_ingredients(user_id, ingredients):
 
     return_list = []
 
-    for order in orders:
-        return_list.append(order['order_id'])
-    return_list = [json_util.dumps(doc) for doc in return_list]
-
-    return jsonify(return_list), 200
+    newList = list(orders)
+    newList = [json_util.dumps(doc) for doc in newList]
+    return jsonify(newList), 200
 
 if __name__ == '__main__':
     
