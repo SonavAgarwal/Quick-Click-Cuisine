@@ -7,6 +7,7 @@ from datetime import datetime
 from helpers import generate_id, generate_estimate, generate_order_number
 from flask_cors import CORS
 import sys
+import re
 
 app = Flask(__name__)
 CORS(app)
@@ -277,13 +278,32 @@ def get_user_type_count(user_id):
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
 
+# @app.route('/user/<user_id>/searchIngredients/<ingredients>', methods=['GET'])
+# def get_user_orders_with_ingredients(user_id, ingredients):
+
+#     orders = mongo.db.orders.find({
+#         'user_id': user_id,
+#         'ingredients': {
+#             '$all': ingredients.split(",")
+#         }
+#     })
+
+#     return_list = []
+
+#     newList = list(orders)
+#     newList = [json_util.dumps(doc) for doc in newList]
+#     return jsonify(newList), 200
+
 @app.route('/user/<user_id>/searchIngredients/<ingredients>', methods=['GET'])
 def get_user_orders_with_ingredients(user_id, ingredients):
+
+    pattern = re.compile(ingredients, re.IGNORECASE)
 
     orders = mongo.db.orders.find({
         'user_id': user_id,
         'ingredients': {
-            '$all': ingredients.split(",")
+            #'$all': ingredients.split(",")
+            '$regex': pattern
         }
     })
 
