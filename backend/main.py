@@ -8,6 +8,7 @@ from helpers import generate_id, generate_estimate, generate_order_number
 from flask_cors import CORS
 import sys
 import re
+import math
 
 app = Flask(__name__)
 CORS(app)
@@ -119,7 +120,7 @@ def get_wait_time():
         status_1_orders = mongo.db.orders.find({'status': 1})
         print("SDLFKJSDLKJFSDKLJSFKLDJLKFD")
         size = len(list(status_0_orders)) + len(list(status_1_orders))
-        wait_time = size * 2
+        wait_time = math.ceil(size * 1.37)
         return jsonify({'wait_time': wait_time}), 200
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
@@ -292,22 +293,6 @@ def get_user_type_count(user_id):
 
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
-
-# @app.route('/user/<user_id>/searchIngredients/<ingredients>', methods=['GET'])
-# def get_user_orders_with_ingredients(user_id, ingredients):
-
-#     orders = mongo.db.orders.find({
-#         'user_id': user_id,
-#         'ingredients': {
-#             '$all': ingredients.split(",")
-#         }
-#     })
-
-#     return_list = []
-
-#     newList = list(orders)
-#     newList = [json_util.dumps(doc) for doc in newList]
-#     return jsonify(newList), 200
 
 @app.route('/user/<user_id>/searchIngredients/<ingredients>', methods=['GET'])
 def get_user_orders_with_ingredients(user_id, ingredients):
