@@ -171,7 +171,7 @@ export function ConfirmOrder() {
 			fourthName
 		);
 		if(fifthName !== null) {
-			ingredients.concat(fifthName);
+			ingredients = ingredients.concat(fifthName);
 		}
 		const data = {
 			user_id: user?.uid,
@@ -215,25 +215,21 @@ export function ConfirmOrder() {
 							{name}
 						</div>
 					))}
-					----
 					{secondName.map((name, index) => (
 						<div key={index} className="finalOrderText">
 							{name}
 						</div>
 					))}
-					----
 					{thirdName.map((name, index) => (
 						<div key={index} className="finalOrderText">
 							{name}
 						</div>
 					))}
-					----
 					{fourthName.map((name, index) => (
 						<div key={index} className="finalOrderText">
 							{name}
 						</div>
 					))}
-					----
 					{(type === "sandwich" ||
 						(type === "sandwich" && fromPage === "confirmOrder")) &&
 						fifthName.map((name, index) => (

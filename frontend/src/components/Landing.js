@@ -219,14 +219,15 @@ export function Landing() {
 							);
 						}
 					})}
-					<div
+					{orderHistory.length !== 0 && 
+						<div
 						className="historyLink"
 						onClick={() => {
 							window.location.href = "/orderHistory";
 						}}
 					>
 						View Full History
-					</div>
+					</div>}
 				</div>
 			</div>
 		</div>
