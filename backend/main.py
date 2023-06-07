@@ -277,17 +277,13 @@ def get_user_type_count(user_id):
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
 
-@app.route('/user/<user_id>/searchIngredients', methods=['GET'])
-def get_user_orders_with_ingredients(user_id):
-
-    data = request.get_json()
-    if not data or 'ingredients' not in data:
-        return jsonify({'error': 'Missing required fields'}), 400
+@app.route('/user/<user_id>/searchIngredients/<ingredients>', methods=['GET'])
+def get_user_orders_with_ingredients(user_id, ingredients):
 
     orders = mongo.db.orders.find({
         'user_id': user_id,
         'ingredients': {
-            '$all': data.get('ingredients')
+            '$all': ingredients.split(",")
         }
     })
 
