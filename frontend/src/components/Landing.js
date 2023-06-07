@@ -147,7 +147,7 @@ export function Landing() {
 					Order
 				</button>
 				<button className="mainOrderButton" onClick={() => signOut(auth)}>
-					Sign out button (Temporary)
+					Sign out
 				</button>
 			</div>
 			<div className="landingContent">
