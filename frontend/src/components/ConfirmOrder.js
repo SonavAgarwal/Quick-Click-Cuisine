@@ -155,10 +155,6 @@ export function ConfirmOrder() {
 	const handleEditOrder = () => {
 		const destination = "/" + type;
 		navigate(destination, { state: { finalOrder, fromPage: "confirmOrder" } });
-		//window.location.href = destination;
-		//const destination = `/sandwich/${finalOrder}`;
-		//const state = { finalOrder };
-		//navigate('/sandwich', { state });
 	};
 
 	async function sendPostRequest() {
@@ -172,7 +168,8 @@ export function ConfirmOrder() {
 			firstName,
 			secondName,
 			thirdName,
-			fourthName
+			fourthName,
+			fifthName
 		);
 		const data = {
 			user_id: user?.uid,

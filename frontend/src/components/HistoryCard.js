@@ -3,14 +3,9 @@ import './HistoryCard.scss';
 import pizzaFull from '../static/pizza.png';
 import sandwichFull from '../static/sandwich.png';
 import saladFull from '../static/salad.png';
-import starIcon from '../static/starIcon.svg';
-import writeIcon from '../static/writeIcon.svg';
-import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const HistoryCard = (props) => {
-    const navigate = useNavigate();
-    const location = useLocation();
     const [isFavorite, setFavorite] = useState();
     const [buttonStyle, setButtonStyle] = useState("yellow");
     const [buttonContent, setButtonContent] = useState("Favorite");
@@ -49,7 +44,6 @@ export const HistoryCard = (props) => {
     }
 
     const [orderTitle, setOrderTitle] = useState("");
-    const [isEditing, setIsEditing] = useState(false);
 
     let desc = type + " with ";
     for (let i = 0; i < ingredients.length - 1; i++){
@@ -57,14 +51,6 @@ export const HistoryCard = (props) => {
     }
 
     desc += "and " + ingredients[ingredients.length - 1];
-
-    const handleTitleClick = () => {
-        setIsEditing(true);
-     };
-    
-    const handleTitleBlur = () => {
-        setIsEditing(false);
-    };
 
     const handleNameChange = (event) => {
         setOrderTitle(event.target.value);
@@ -78,14 +64,10 @@ export const HistoryCard = (props) => {
         }
      };
 
-     const redirectToInputField = (event) => {
-        event.preventDefault();
-        const inputField = document.getElementById("inputField");
-        inputField.scrollIntoView({ behavior: 'smooth' });
-        inputField.focus();
-      };
-
       async function addFavorite () {
+        setFavorite(false);
+        setButtonStyle("green");
+        setButtonContent("Favorited");
         if (isFavorite !== true){
             if (orderTitle === ""){
                 const data = {
@@ -109,8 +91,6 @@ export const HistoryCard = (props) => {
                     console.log("order favorited successfully!");
                 }
             }
-            setFavorite(false);
-            setButtonStyle("green")
         }
       }
 
@@ -120,7 +100,7 @@ export const HistoryCard = (props) => {
                 <img src = {image}></img>
                 <div className = "textContainer">
                     <div className = "orderContainer">
-                        <input className = "orderTitle" id = "inputField" placeholder={type} value = {orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
+                        <input className = "orderTitle" id = "inputField" placeholder={type} value = {orderTitle} maxLength={10} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
                     </div>
                     <div className = "orderDesc">{desc}</div>
                 </div>
