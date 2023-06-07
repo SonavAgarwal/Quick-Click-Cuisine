@@ -109,7 +109,7 @@ export function ConfirmOrder() {
 
 		fourthId = finalOrder.ingredients.ingredients.dressing;
 		fourthData = dressingsSaladData;
-		thirdOptionalText = "No Dressing";
+		fourthOptionalText = "No Dressing";
 	}
 
 	const firstItem = firstId.flatMap((id) =>
@@ -170,7 +170,9 @@ export function ConfirmOrder() {
 			thirdName,
 			fourthName
 		);
-		if(fifthName !== null) {
+		if(fifthName !== undefined) {
+			console.log("brodie");
+			console.log("fifthName", fifthName);
 			ingredients = ingredients.concat(fifthName);
 		}
 		const data = {
