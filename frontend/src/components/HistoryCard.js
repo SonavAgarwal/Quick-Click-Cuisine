@@ -13,6 +13,7 @@ export const HistoryCard = (props) => {
     const location = useLocation();
 
     let type = props.type;
+
     let pastIngredients = props.ingredients;
     let pastSide = props.side;
     let pastBeverage = props.beverage;
@@ -21,7 +22,7 @@ export const HistoryCard = (props) => {
 
     const [ingredients, setIngredients] = useState(pastIngredients);
     const [newType, setNewType] = useState(type);
-    const [orderTitle, setOrderTitle] = useState(type);
+    const [orderTitle, setOrderTitle] = useState(newType);
     const [isEditing, setIsEditing] = useState(false);
     const [image, setImage] = useState();
 
@@ -31,8 +32,7 @@ export const HistoryCard = (props) => {
 
     useEffect(() => {
         setNewType(type)
-        console.log(orderTitle);
-    }, [type, newType]);
+    }, [type]);
 
     useEffect(() => {
         if(newType === "Sandwich") {
@@ -101,7 +101,7 @@ export const HistoryCard = (props) => {
                 <img src = {image}></img>
                 <div className = "textContainer">
                     <div className = "orderContainer">
-                        <input className = "orderTitle" id = "inputField" defaultValue={orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
+                        <input className = "orderTitle" id = "inputField" defaultValue={newType} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
                     </div>
                     <div className = "date">{timestamp}</div>
                     <div className = "orderDesc">{desc}</div>

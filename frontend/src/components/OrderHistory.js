@@ -93,11 +93,11 @@ export function OrderHistory() {
                         const parsed = JSON.parse(order);
                         const type = parsed.type;
                         const ingredients = parsed.ingredients;
-                        //console.log(ingredients);
                         const beverage = parsed.beverage;
                         const side = parsed.side;
                         const oid = parsed.order_id;
                         const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
+                        console.log("typeUpper: ", typeUpper, "\n");
                         return (
                             <div>
                                 <HistoryCard
