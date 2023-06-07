@@ -48,26 +48,30 @@ export function Landing() {
 			});
 	}
 
-	useEffect(() => {
-		if (!user) return;
+	function fetchWaitTime() {
 		fetch("http://127.0.0.1:5000/waitTime")
 			.then((res) => res.json())
 			.then((data) => {
 				setEstimatedTime(data?.wait_time);
-			});
+		});
+	}
+
+	useEffect(() => {
+		if (!user) return;
+
 
 		fetchPendingOrders();
+		fetchWaitTime();
 
 		let intervalID = setInterval(() => {
 			fetchPendingOrders();
 			fetchOrderHistory();
 			fetchFavorites();
+			fetchWaitTime();
 		}, 1000);
 
 		return () => clearInterval(intervalID);
 	}, [user]);
-
-	const navigate = useNavigate();
 
 	return (
 		<div className="landingPage">
