@@ -110,6 +110,21 @@ def get_in_progress_orders():
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
     
 
+@app.route('/waitTime', methods=['GET'])
+def get_wait_time():
+    try:
+        print("SDLFKJSDLKJFSDKLJSFKLDJLKFD")
+        status_0_orders = mongo.db.orders.find({'status': 0})
+        print("SDLFKJSDLKJFSDKLJSFKLDJLKFD")
+        status_1_orders = mongo.db.orders.find({'status': 1})
+        print("SDLFKJSDLKJFSDKLJSFKLDJLKFD")
+        size = len(list(status_0_orders)) + len(list(status_1_orders))
+        wait_time = size * 2
+        return jsonify({'wait_time': wait_time}), 200
+    except Exception as e:
+        return jsonify({'error': 'Database error', 'message': str(e)}), 500
+    
+
 @app.route('/orders/user/<user_id>', methods=['GET'])
 def get_user_orders(user_id):
     try:

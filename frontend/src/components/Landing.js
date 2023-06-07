@@ -23,7 +23,7 @@ export function Landing() {
 			.then((res) => res.json())
 			.then((data) => {
 				setPendingOrders(data);
-		});
+			});
 	}
 
 	// function fetchPendingOrders() {
@@ -114,10 +114,11 @@ export function Landing() {
 
 	useEffect(() => {
 		if (!user) return;
-		fetch("http://127.0.0.1:5000/orders/inprogress")
+		fetch("http://127.0.0.1:5000/waitTime")
 			.then((res) => res.json())
 			.then((data) => {
-				setEstimatedTime(data?.length * 5);
+				console.log(data);
+				setEstimatedTime(data?.wait_time);
 			});
 
 		fetchPendingOrders();
@@ -196,8 +197,7 @@ export function Landing() {
 				</div>
 				<div className="orderHistory">
 					<div className="sectionTitle">Order History</div>
-					{
-					orderHistory.slice(-3)?.map((order, index) => {
+					{orderHistory.slice(-3)?.map((order, index) => {
 						const parsed = JSON.parse(order);
 						const type = parsed.type;
 						const ingredients = parsed.ingredients;
@@ -205,7 +205,7 @@ export function Landing() {
 						const side = parsed.side;
 						const oid = parsed.order_id;
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
-						if (index < 4){
+						if (index < 4) {
 							return (
 								<div>
 									<HistoryCard

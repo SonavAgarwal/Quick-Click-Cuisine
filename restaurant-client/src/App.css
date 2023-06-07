@@ -1,6 +1,6 @@
 .app-container {
-	display: flex;
-	justify-content: center;
+	/* display: flex;
+	justify-content: center; */
 	width: 100vw;
 }
 
@@ -26,4 +26,11 @@
 	.section {
 		width: 34rem;
 	}
+}
+
+/* stats page */
+
+.stats-page {
+	width: 100vw;
+	height: calc(100vh - 5rem);
 }
