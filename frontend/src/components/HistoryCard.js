@@ -123,17 +123,27 @@ export const HistoryCard = (props) => {
 
       async function addFavorite () {
         if (isFavorite !== true){
-            const data = {
-                "order_id": orderId,
-                "order_nickname": orderTitle
-            }
-    
-            const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
-            if (response.status === 200){
-                console.log("order favorited successfully!");
+            if (orderTitle === ""){
+                const data = {
+                    "order_id": orderId,
+                    "order_nickname": type
+                }
+        
+                const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
+                if (response.status === 200){
+                    console.log("order favorited successfully!");
+                }
             }
             else{
-                console.log("shit")
+                const data = {
+                    "order_id": orderId,
+                    "order_nickname": orderTitle
+                }
+        
+                const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
+                if (response.status === 200){
+                    console.log("order favorited successfully!");
+                }
             }
         }
       }
