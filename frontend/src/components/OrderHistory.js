@@ -57,6 +57,12 @@ export function OrderHistory() {
         }
      };
 
+     useEffect(() => {
+        if (!user) return;
+        fetchOrders();
+    }, [user]);
+
+
 	return (
 		<div className="orderHistory">
 			<div className="header">
