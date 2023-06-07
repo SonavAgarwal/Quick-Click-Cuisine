@@ -20,8 +20,6 @@ export const HistoryCard = (props) => {
         fetch("http://127.0.0.1:5000/order/" + orderId + "/isFavorite")
         .then((res) => res.json())
         .then((data) => {
-            // console.log("favorite request went through");
-            // console.log("data is " + data);
             setFavorite(data);
             console.log("favorite is now " + isFavorite);
         })
@@ -50,42 +48,8 @@ export const HistoryCard = (props) => {
         image = pizzaFull;
     }
 
-    // let pastIngredients = props.ingredients;
-    // console.log("past", pastIngredients);
-    // let pastSide = props.side;
-    // let pastBeverage = props.beverage;
-    // let timestamp = props.timestamp;
-    // let orderId = props.oid;
-
-    // const [ingredients, setIngredients] = useState(props.ingredients);
-    // const [newType, setNewType] = useState(type);
     const [orderTitle, setOrderTitle] = useState("");
     const [isEditing, setIsEditing] = useState(false);
-    // const [image, setImage] = useState();
-
-    // useEffect(() =>{
-    //     setIngredients(pastIngredients);
-    // }, [pastIngredients]);
-
-    // useEffect(() => {
-    //     setNewType(type)
-    // }, [type]);
-
-    // useEffect(() => {
-    //     setOrderTitle(type)
-    // }, [type]);
-
-    // useEffect(() => {
-    //     if(newType === "Sandwich") {
-    //         setImage(sandwichFull);
-    //     }
-    //     if(newType === "Pizza") {
-    //         setImage(pizzaFull);
-    //     }
-    //     if(newType === "Salad") {
-    //         setImage(saladFull);
-    //     }
-    // }, [newType]);
 
     let desc = type + " with ";
     for (let i = 0; i < ingredients.length - 1; i++){
@@ -145,6 +109,8 @@ export const HistoryCard = (props) => {
                     console.log("order favorited successfully!");
                 }
             }
+            setFavorite(false);
+            setButtonStyle("green")
         }
       }
 
@@ -156,7 +122,6 @@ export const HistoryCard = (props) => {
                     <div className = "orderContainer">
                         <input className = "orderTitle" id = "inputField" placeholder={type} value = {orderTitle} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
                     </div>
-                    {/* <div className = "date">{timestamp}</div> */}
                     <div className = "orderDesc">{desc}</div>
                 </div>
             </div>
