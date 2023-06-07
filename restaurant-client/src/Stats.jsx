@@ -19,12 +19,9 @@ const defaultDogData = {
 };
 
 export const Stats = () => {
-	// fetch this http://127.0.0.1:5000/orders/type_count
-
 	const [donutData, setDonutData] = useState(defaultDogData);
 
-	useEffect(() => {
-		console.log("fetching stats");
+	function fetchData() {
 		fetch("http://127.0.0.1:5000/orders/type_count")
 			.then((res) => res.json())
 			.then((data) => {
@@ -51,14 +48,17 @@ export const Stats = () => {
 				};
 
 				setDonutData(dogData);
-				console.log("dogData");
-				console.log(dogData);
 			});
+	}
+
+	useEffect(() => {
+		console.log("fetching stats");
+		fetchData();
 	}, []);
 
 	const chartOptions = {
 		responsive: true,
-	};	
+	};
 
 	return (
 		<div className="stats-page">
