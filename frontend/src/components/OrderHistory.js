@@ -44,9 +44,9 @@ export function OrderHistory() {
 
         const temp = orderHistory.filter((order) => {
             const parsed = JSON.parse(order);
-            const ingredients = parsed.ingredients.map((ingredient) => ingredient.toLowerCase());
+            const ingredients = parsed.ingredients?.map((ingredient) => ingredient.toLowerCase());
             const type = parsed.type.toLowerCase();
-            return ingredients.some((ingredient) => ingredient.includes(lowercaseQuery)) ||
+            return ingredients?.some((ingredient) => ingredient.includes(lowercaseQuery)) ||
                    type === lowercaseQuery;
         });
       
