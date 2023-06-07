@@ -19,7 +19,7 @@ export function OrderHistory() {
 
     useEffect(() => {
         fetchOrders();
-    }, [])
+    }, [searchQuery])
     
 
     const fetchOrders = () => {
@@ -89,7 +89,6 @@ export function OrderHistory() {
                         const side = parsed.side;
                         const oid = parsed.order_id;
                         const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
-                        console.log("typeUpper: ", typeUpper, "\n");
                         return (
                             <div>
                                 <HistoryCard

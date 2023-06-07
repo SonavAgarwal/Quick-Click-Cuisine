@@ -15,6 +15,7 @@ export const HistoryCard = (props) => {
     let type = props.type;
 
     let pastIngredients = props.ingredients;
+    console.log("past", pastIngredients);
     let pastSide = props.side;
     let pastBeverage = props.beverage;
     let timestamp = props.timestamp;
@@ -32,6 +33,10 @@ export const HistoryCard = (props) => {
 
     useEffect(() => {
         setNewType(type)
+    }, [type]);
+
+    useEffect(() => {
+        setOrderTitle(type)
     }, [type]);
 
     useEffect(() => {
@@ -101,7 +106,7 @@ export const HistoryCard = (props) => {
                 <img src = {image}></img>
                 <div className = "textContainer">
                     <div className = "orderContainer">
-                        <input className = "orderTitle" id = "inputField" defaultValue={newType} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
+                        <input className = "orderTitle" id = "inputField" defaultValue={type} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
                     </div>
                     <div className = "date">{timestamp}</div>
                     <div className = "orderDesc">{desc}</div>
