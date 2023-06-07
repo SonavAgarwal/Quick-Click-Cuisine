@@ -56,12 +56,16 @@ export const Stats = () => {
 			});
 	}, []);
 
+	const chartOptions = {
+		responsive: true,
+	};	
+
 	return (
 		<div className="stats-page">
 			<h1>STATISTICS!!!</h1>
-			<Doughnut data={donutData} />
-			<Bar data={donutData} />
-			<Line data={donutData} />
+			<div style={{ maxWidth: "700px", margin: "0 auto" }}>
+				<Doughnut data={donutData} options={chartOptions} />
+			</div>
 		</div>
 	);
 };

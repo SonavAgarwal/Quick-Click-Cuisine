@@ -120,7 +120,10 @@ def get_wait_time():
         status_1_orders = mongo.db.orders.find({'status': 1})
         print("SDLFKJSDLKJFSDKLJSFKLDJLKFD")
         size = len(list(status_0_orders)) + len(list(status_1_orders))
-        wait_time = math.ceil(size * 1.37)
+        if(size <= 3):
+            wait_time = 4
+        else:
+            wait_time = math.ceil(size * 1.39)
         return jsonify({'wait_time': wait_time}), 200
     except Exception as e:
         return jsonify({'error': 'Database error', 'message': str(e)}), 500
