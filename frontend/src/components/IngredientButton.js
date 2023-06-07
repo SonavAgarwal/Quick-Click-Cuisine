@@ -128,7 +128,6 @@ const ButtonGroup = ({
 
 	const handleButtonClick = (buttonId) => {
 		if (maximum !== 1) {
-			console.log(selectedButtons);
 			if ( selectedButtons.length === maximum && selectedButtons.includes(buttonId)) {
 				decrementQuantity(buttonId - 1, ingredientQuantity[buttonId - 1]);
 				setSelectedButtons(selectedButtons.filter((id) => id !== buttonId));

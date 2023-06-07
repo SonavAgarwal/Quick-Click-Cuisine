@@ -32,7 +32,6 @@ export function ConfirmOrder() {
 	const fromPage = location.state.fromPage;
 	const type = location.state.type;
 	const finalOrder = location.state.finalOrder || [];
-	console.log(finalOrder);
 
 	const [user] = useAuthState(auth);
 	const navigate = useNavigate();
@@ -171,8 +170,6 @@ export function ConfirmOrder() {
 			fourthName
 		);
 		if(fifthName !== undefined) {
-			console.log("brodie");
-			console.log("fifthName", fifthName);
 			ingredients = ingredients.concat(fifthName);
 		}
 		const data = {
@@ -187,12 +184,8 @@ export function ConfirmOrder() {
 		const response = await axios.post("http://127.0.0.1:5000/order", data);
 
 		if (response.status === 201) {
-			console.log("Order placed successfully!");
-			console.log(response.data);
 			navigate("/");
 		} else {
-			console.log("Error placing order!");
-			console.log(response.data);
 			alert("Error placing order!");
 		}
 	}
@@ -211,7 +204,6 @@ export function ConfirmOrder() {
 					Make sure that your order is correct.
 				</div>
 				<div className="ingredientType">
-					{/* <div className = "finalOrderText">{firstName} {firstOptionalText}</div> */}
 					{firstName.map((name, index) => (
 						<div key={index} className="finalOrderText">
 							{name}
