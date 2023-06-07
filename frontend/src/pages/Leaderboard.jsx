@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Leaderboard.module.css";
+import { auth } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Leaderboard = () => {
 	const [selectedOption, setSelectedOption] = useState("pizzas");
+
+	const [user] = useAuthState(auth);
+
+	useEffect(() => {
+		// /user/<user_id>/type_count
+		if (!user) return;
+
+		fetch("http://127.0.0.1:5000/user/" + user.uid + "/type_count")
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+			});
+	}, [user]);
 
 	return (
 		<div className={styles.page}>

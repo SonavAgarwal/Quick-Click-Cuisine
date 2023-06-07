@@ -8,6 +8,7 @@ import { auth } from "../firebase";
 import { NameText } from "./NameText";
 import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 export function Landing() {
 	const [estimatedTime, setEstimatedTime] = useState("Loading");
@@ -130,6 +131,8 @@ export function Landing() {
 		return () => clearInterval(intervalID);
 	}, [user]);
 
+	const navigate = useNavigate();
+
 	return (
 		<div className="landingPage">
 			<div className="header">
@@ -148,6 +151,12 @@ export function Landing() {
 				</button>
 				<button className="mainOrderButton" onClick={() => signOut(auth)}>
 					Sign out
+				</button>
+				<button
+					className="mainOrderButton"
+					onClick={() => navigate("/leaderboard")}
+				>
+					Leaderboard
 				</button>
 			</div>
 			<div className="landingContent">

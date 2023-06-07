@@ -1,24 +1,29 @@
 .app-container {
-    display: flex;
-    justify-content: center;
-  }
-  
+	display: flex;
+	justify-content: center;
+	width: 100vw;
+}
+
 .sections-container {
-    display: flex;
-    gap: 20px;
+	padding: 1rem;
+	box-sizing: border-box;
+	display: flex;
+	width: 100vw;
+	gap: 20px;
 }
 
 .section {
-    width: 37rem;
+	/* width: 37rem; */
+	flex: 1;
 }
 
 .noneMessage {
-    font-size: 1.2rem;
-    font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.2rem;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 @media (max-width: 1730px) {
-    .section {
-        width: 34rem;
-    }
+	.section {
+		width: 34rem;
+	}
 }
