@@ -11,45 +11,81 @@ import axios from "axios";
 export const HistoryCard = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [isFavorite, setFavorite] = useState();
+    const [buttonStyle, setButtonStyle] = useState("yellow");
+    const [buttonContent, setButtonContent] = useState("Favorite");
 
-    let type = props.type;
-
-    let pastIngredients = props.ingredients;
-    console.log("past", pastIngredients);
-    let pastSide = props.side;
-    let pastBeverage = props.beverage;
-    let timestamp = props.timestamp;
-    let orderId = props.oid;
-
-    const [ingredients, setIngredients] = useState(pastIngredients);
-    const [newType, setNewType] = useState(type);
-    const [orderTitle, setOrderTitle] = useState(newType);
-    const [isEditing, setIsEditing] = useState(false);
-    const [image, setImage] = useState();
+    const fetchFavorite = () => {
+        console.log("fetchFavorite is called");
+        fetch("http://127.0.0.1:5000/order/" + orderId + "/isFavorite")
+        .then((res) => res.json())
+        .then((data) => {
+            // console.log("favorite request went through");
+            // console.log("data is " + data);
+            setFavorite(data);
+            console.log("favorite is now " + isFavorite);
+        })
+    }
 
     useEffect(() =>{
-        setIngredients(pastIngredients);
-    }, [pastIngredients]);
-
-    useEffect(() => {
-        setNewType(type)
-    }, [type]);
-
-    useEffect(() => {
-        setOrderTitle(type)
-    }, [type]);
-
-    useEffect(() => {
-        if(newType === "Sandwich") {
-            setImage(sandwichFull);
+        fetchFavorite();
+        if (isFavorite === true){
+            setButtonStyle("green");
+            setButtonContent("Favorited");
         }
-        if(newType === "Pizza") {
-            setImage(pizzaFull);
-        }
-        if(newType === "Salad") {
-            setImage(saladFull);
-        }
-    }, [newType]);
+    });
+
+    let type = props.type;
+    let ingredients = props.ingredients; 
+    let orderId = props.oid;
+    let image;
+
+    if (type === "Sandwich"){
+        image = sandwichFull;
+    }
+    if (type === "Salad"){
+        image = saladFull;
+    }
+    if (type === "Pizza"){
+        image = pizzaFull;
+    }
+
+    // let pastIngredients = props.ingredients;
+    // console.log("past", pastIngredients);
+    // let pastSide = props.side;
+    // let pastBeverage = props.beverage;
+    // let timestamp = props.timestamp;
+    // let orderId = props.oid;
+
+    // const [ingredients, setIngredients] = useState(props.ingredients);
+    // const [newType, setNewType] = useState(type);
+    const [orderTitle, setOrderTitle] = useState(type);
+    const [isEditing, setIsEditing] = useState(false);
+    // const [image, setImage] = useState();
+
+    // useEffect(() =>{
+    //     setIngredients(pastIngredients);
+    // }, [pastIngredients]);
+
+    // useEffect(() => {
+    //     setNewType(type)
+    // }, [type]);
+
+    // useEffect(() => {
+    //     setOrderTitle(type)
+    // }, [type]);
+
+    // useEffect(() => {
+    //     if(newType === "Sandwich") {
+    //         setImage(sandwichFull);
+    //     }
+    //     if(newType === "Pizza") {
+    //         setImage(pizzaFull);
+    //     }
+    //     if(newType === "Salad") {
+    //         setImage(saladFull);
+    //     }
+    // }, [newType]);
 
     let desc = type + " with ";
     for (let i = 0; i < ingredients.length - 1; i++){
@@ -86,17 +122,19 @@ export const HistoryCard = (props) => {
       };
 
       async function addFavorite () {
-        const data = {
-            "order_id": orderId,
-            "order_nickname": orderTitle
-        }
-
-        const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
-        if (response.status === 200){
-            console.log("order favorited successfully!");
-        }
-        else{
-            console.log("shit")
+        if (isFavorite !== true){
+            const data = {
+                "order_id": orderId,
+                "order_nickname": orderTitle
+            }
+    
+            const response = await axios.post("http://127.0.0.1:5000/order/favorite", data);
+            if (response.status === 200){
+                console.log("order favorited successfully!");
+            }
+            else{
+                console.log("shit")
+            }
         }
       }
 
@@ -106,15 +144,15 @@ export const HistoryCard = (props) => {
                 <img src = {image}></img>
                 <div className = "textContainer">
                     <div className = "orderContainer">
-                        <input className = "orderTitle" id = "inputField" defaultValue={type} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}></input>
+                        <div className = "orderTitle" id = "inputField" contentEditable ={true} maxLength={10} onClick={handleTitleClick} onBlur={handleTitleBlur} onChange={handleNameChange} onKeyDown = {handleKeyDown}>{type}</div>
                     </div>
-                    <div className = "date">{timestamp}</div>
+                    {/* <div className = "date">{timestamp}</div> */}
                     <div className = "orderDesc">{desc}</div>
                 </div>
             </div>
             <div className = "historyFooter">
                 <div className = "spacer"></div>
-                <button className = "reorder" onClick = {addFavorite}>Favorite</button>
+                <button className = {`reorder ${buttonStyle}`} onClick = {addFavorite}>{buttonContent}</button>
             </div>
 
         </div>
