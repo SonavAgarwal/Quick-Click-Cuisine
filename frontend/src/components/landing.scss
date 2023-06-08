@@ -130,12 +130,12 @@
 				}
 			}
 
-			>.historyLink{
+			> .historyLink {
 				margin-top: 1rem;
 				margin-left: 1rem;
 				font-weight: 700;
 
-				&:hover{
+				&:hover {
 					color: var(--limeGreen);
 					cursor: pointer;
 				}
@@ -143,4 +143,10 @@
 		}
 	}
 	//}
+}
+
+.instantOrder,
+.pendingOrders,
+.orderHistory {
+	min-width: 20rem;
 }
