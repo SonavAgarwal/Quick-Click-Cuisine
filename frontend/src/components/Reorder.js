@@ -12,10 +12,6 @@ export function Reorder() {
 	const side = location.state.side;
 	const beverage = location.state.beverage;
 	const orderType = location.state.orderType;
-	console.log(reorderIngredients);
-	console.log(side);
-	console.log(beverage);
-	console.log(orderType);
 
 	const [user] = useAuthState(auth);
 	const navigate = useNavigate();
@@ -38,12 +34,8 @@ export function Reorder() {
 		const response = await axios.post("http://127.0.0.1:5000/order", data);
 
 		if (response.status === 201) {
-			console.log("Order placed successfully!");
-			console.log(response.data);
 			navigate("/");
 		} else {
-			console.log("Error placing order!");
-			console.log(response.data);
 			alert("Error placing order!");
 		}
 	}

@@ -26,25 +26,6 @@ export function Landing() {
 			});
 	}
 
-	// function fetchPendingOrders() {
-	// 	const user_id = user?.uid;
-	// 	fetch("http://127.0.0.1:5000/orders/user/" + user_id)
-	// 		.then((res) => {
-	// 			if (!res.ok) {
-	// 				//fetchPendingOrders();
-	// 				//throw new Error("Network response was not ok");
-	// 			}
-	// 			return res.json();
-	// 		})
-	// 		.then((data) => {
-	// 			setPendingOrders(data);
-	// 		})
-	// 		.catch((error) => {
-	// 			//fetchPendingOrders();
-	// 			console.error("Error fetching pending orders:", error);
-	// 		});
-	// }
-
 	function fetchOrderHistory() {
 		const user_id = user?.uid;
 		fetch("http://127.0.0.1:5000/orders/past/user/" + user_id)
@@ -53,25 +34,6 @@ export function Landing() {
 				setOrderHistory(data);
 			});
 	}
-
-	// function fetchOrderHistory() {
-	// 	const user_id = user?.uid;
-	// 	fetch("http://127.0.0.1:5000/orders/past/user/" + user_id)
-	// 		.then((res) => {
-	// 			if (!res.ok) {
-	// 				//fetchOrderHistory();
-	// 				//throw new Error("Network response was not ok");
-	// 			}
-	// 			return res.json();
-	// 		})
-	// 		.then((data) => {
-	// 			setOrderHistory(data);
-	// 		})
-	// 		.catch((error) => {
-	// 			//fetchOrderHistory();
-	// 			console.error("Error fetching order history:", error);
-	// 		});
-	// }
 
 	function fetchFavorites() {
 		const user_id = user?.uid;
@@ -83,56 +45,33 @@ export function Landing() {
 				} else {
 					setFavorites([]);
 				}
-
-				// console.log("favorites ", data);
 			});
 	}
 
-	// function fetchFavorites() {
-	// const user_id = user?.uid;
-	// fetch("http://127.0.0.1:5000/user/" + user_id + "/favorites")
-	// 	.then((res) => {
-	// 		if (!res.ok) {
-	// 			//fetchFavorites();
-	// 			//throw new Error("Network response was not ok");
-	// 		}
-	// 		return res.json();
-	// 	})
-	// 	.then((data) => {
-	// 		if (Array.isArray(data)) {
-	// 			setFavorites(data);
-	// 		} else {
-	// 			setFavorites([]);
-	// 		}
-	// 		// console.log("favorites ", data);
-	// 	})
-	// 	.catch((error) => {
-	// 		//fetchFavorites();
-	// 		console.error("Error fetching favorites:", error);
-	// 	});
-	// }
-
-	useEffect(() => {
-		if (!user) return;
+	function fetchWaitTime() {
 		fetch("http://127.0.0.1:5000/waitTime")
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
 				setEstimatedTime(data?.wait_time);
-			});
+		});
+	}
+
+	useEffect(() => {
+		if (!user) return;
+
 
 		fetchPendingOrders();
+		fetchWaitTime();
 
 		let intervalID = setInterval(() => {
 			fetchPendingOrders();
 			fetchOrderHistory();
 			fetchFavorites();
+			fetchWaitTime();
 		}, 1000);
 
 		return () => clearInterval(intervalID);
 	}, [user]);
-
-	const navigate = useNavigate();
 
 	return (
 		<div className="landingPage">
@@ -152,12 +91,6 @@ export function Landing() {
 				</button>
 				<button className="mainOrderButton" onClick={() => signOut(auth)}>
 					Sign out
-				</button>
-				<button
-					className="mainOrderButton"
-					onClick={() => navigate("/leaderboard")}
-				>
-					Leaderboard
 				</button>
 			</div>
 			<div className="landingContent">
@@ -180,7 +113,6 @@ export function Landing() {
 						const type = parsed.type;
 						const ingredients = parsed.ingredients;
 						const status = parsed.status;
-						// console.log(status);
 						const typeUpper = type.charAt(0).toUpperCase() + type.slice(1);
 						if (status !== 3) {
 							return (

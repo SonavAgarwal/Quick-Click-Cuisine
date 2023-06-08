@@ -16,12 +16,10 @@ export const HistoryCard = (props) => {
 	const [buttonContent, setButtonContent] = useState("Favorite");
 
 	const fetchFavorite = () => {
-		// console.log("fetchFavorite is called");
 		fetch("http://127.0.0.1:5000/order/" + orderId + "/isFavorite")
 			.then((res) => res.json())
 			.then((data) => {
 				setFavorite(data);
-				// console.log("favorite is now " + isFavorite);
 			});
 	};
 
@@ -68,7 +66,6 @@ export const HistoryCard = (props) => {
 
 	const handleNameChange = (event) => {
 		setOrderTitle(event.target.value);
-		console.log(orderTitle);
 	};
 
 	const handleKeyDown = (event) => {
@@ -97,9 +94,6 @@ export const HistoryCard = (props) => {
 					"http://127.0.0.1:5000/order/favorite",
 					data
 				);
-				if (response.status === 200) {
-					console.log("order favorited successfully!");
-				}
 			} else {
 				const data = {
 					order_id: orderId,
@@ -110,9 +104,6 @@ export const HistoryCard = (props) => {
 					"http://127.0.0.1:5000/order/favorite",
 					data
 				);
-				if (response.status === 200) {
-					console.log("order favorited successfully!");
-				}
 			}
 			setFavorite(false);
 			setButtonStyle("green");

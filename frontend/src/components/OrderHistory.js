@@ -45,8 +45,6 @@ export function OrderHistory() {
     };
 
     const handleSearch = () => {
-        // const temp = searchQuery + " i am just added here for fun";
-        // setSearchQuery(temp);
         fetchOrders();
     };
 

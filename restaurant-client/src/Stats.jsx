@@ -58,11 +58,27 @@ export const Stats = () => {
 
 	const chartOptions = {
 		responsive: true,
+		plugins: {
+			legend: {
+				labels: {
+					font: {
+						family: "Arial, Helvetica, sans-serif",
+						size: 14,
+					},
+				},
+			},
+			tooltip: {
+				bodyFont: {
+					family: "Arial, Helvetica, sans-serif",
+					size: 14,
+				},
+			},
+		},
 	};
 
 	return (
 		<div className="stats-page">
-			<h1>STATISTICS!!!</h1>
+			<h1 style={{ fontFamily: "Arial, Helvetica, sans-serif", fontSize: "28px" }}>Statistics!</h1>
 			<div style={{ maxWidth: "700px", margin: "0 auto" }}>
 				<Doughnut data={donutData} options={chartOptions} />
 			</div>
