@@ -76,7 +76,7 @@ export function OrderHistory() {
 					</button>
 				</div>
                 <div className="searchBar">
-                    <input type="text" placeholder="Search for an ingredient..." value={searchQuery} onChange = {handleSearchChange} onKeyDown={handleKeyDown}/>
+                    <input type="text" placeholder="Search by ingredient or order type..." value={searchQuery} onChange = {handleSearchChange} onKeyDown={handleKeyDown}/>
                     <button onClick={fetchOrders}>
                         <img className = "searchIcon" src = {magnifyingGlass}></img>
                     </button>
