@@ -306,7 +306,14 @@ def get_user_orders_with_ingredients(user_id, ingredients):
         'user_id': user_id,
         'status': 3,
         'ingredients': {
-            #'$all': ingredients.split(",")
+            '$regex': pattern
+        }
+    })
+
+    orders = mongo.db.orders.find({
+        'user_id': user_id,
+        'status': 3,
+        'type': {
             '$regex': pattern
         }
     })
