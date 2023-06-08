@@ -29,7 +29,12 @@ function App() {
 
 	return (
 		<div className="app-container">
+			<button className="stats-button" onClick={() => setShowStats(!showStats)}>
+				{showStats ? "Back" : "Statistics"}
+			</button>
 			{showStats && <Stats />}
+
+
 
 			{!showStats && (
 				<div className="sections-container">
@@ -47,10 +52,6 @@ function App() {
 					/>
 				</div>
 			)}
-
-			<button className="stats-button" onClick={() => setShowStats(!showStats)}>
-				Toggle Stats
-			</button>
 		</div>
 	);
 }

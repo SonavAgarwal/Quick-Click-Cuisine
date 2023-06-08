@@ -15,6 +15,7 @@
 .section {
 	/* width: 37rem; */
 	flex: 1;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .noneMessage {
@@ -51,26 +52,15 @@
 }
 
 .stats-button {
-	background-color: #57de54;
+	background-color: #fff;
 	border: none;
-	color: white;
-	padding: 15px 32px;
+	color: black;
 	text-align: center;
-	text-decoration: none;
 	display: block;
-	margin: 4px 2px;
 	cursor: pointer;
-	border-radius: 12px;
-	width: 100%;
+	font-size: 1.5rem;
 	font-weight: bold;
 	max-width: 30rem;
-	/* center */
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 2rem;
-
-	/* fix to bototm */
-	position: fixed;
-	bottom: 0;
-	margin-left: 2rem;
+	margin-top: 1%;
+	margin-left: 0.5%;
 }
