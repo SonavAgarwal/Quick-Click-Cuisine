@@ -75,7 +75,7 @@ This command starts the React development server, typically running on `http://l
 
 Remember, any modifications to the code will automatically refresh the page with the new changes due to React's hot-reloading feature.
 
-#Backend:
+# Backend
 
 To start the Quick-Click-Cuisine backend, follow these steps:
 
