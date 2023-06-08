@@ -132,7 +132,7 @@ export const HistoryCard = (props) => {
 				</div>
 			</div>
 			<div className="historyFooter">
-				<div className="spacer"></div>
+				{/* <div className="spacer"></div> */}
 				<button className={`reorder ${buttonStyle}`} onClick={addFavorite}>
 					{buttonContent}
 				</button>

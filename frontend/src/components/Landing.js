@@ -53,12 +53,11 @@ export function Landing() {
 			.then((res) => res.json())
 			.then((data) => {
 				setEstimatedTime(data?.wait_time);
-		});
+			});
 	}
 
 	useEffect(() => {
 		if (!user) return;
-
 
 		fetchPendingOrders();
 		fetchWaitTime();
@@ -76,21 +75,26 @@ export function Landing() {
 	return (
 		<div className="landingPage">
 			<div className="header">
-				<div className="mainTitle">
-					Welcome, <NameText />
+				<div className="headerLeft">
+					<div className="mainTitle">
+						Welcome, <NameText />
+					</div>
+					<div className="mainSubtitle">
+						The estimated wait time at the Study is{" "}
+						<span id="subtitleBold">{estimatedTime} minutes.</span>
+					</div>
 				</div>
-				<div className="mainSubtitle">
-					The estimated wait time at the Study is{" "}
-					<span id="subtitleBold">{estimatedTime} minutes.</span>
-				</div>
+				<button
+					className="mainOrderButton signOutButton"
+					onClick={() => signOut(auth)}
+				>
+					Sign out
+				</button>
 				<button
 					className="mainOrderButton"
 					onClick={() => (window.location.href = "/order")}
 				>
 					Order
-				</button>
-				<button className="mainOrderButton" onClick={() => signOut(auth)}>
-					Sign out
 				</button>
 			</div>
 			<div className="landingContent">
@@ -151,15 +155,16 @@ export function Landing() {
 							);
 						}
 					})}
-					{orderHistory.length !== 0 && 
+					{orderHistory.length !== 0 && (
 						<div
-						className="historyLink"
-						onClick={() => {
-							window.location.href = "/orderHistory";
-						}}
-					>
-						View Full History
-					</div>}
+							className="historyLink"
+							onClick={() => {
+								window.location.href = "/orderHistory";
+							}}
+						>
+							View Full History
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

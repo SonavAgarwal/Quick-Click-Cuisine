@@ -1,152 +1,178 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 @mixin section {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: left;
-    // margin-left: 8%;
-    // margin-right: 8%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: left;
+	// margin-left: 8%;
+	// margin-right: 8%;
 
-    @media only screen and (min-aspect-ratio: 1) {
-        margin-left: 4rem;
-        margin-right: none;
-        flex-start: top;
-        margin-top: 3rem;
-        justify-content: flex-start;
-    }
+	@media only screen and (min-aspect-ratio: 1) {
+		margin-left: 4rem;
+		margin-right: none;
+		flex-start: top;
+		margin-top: 3rem;
+		justify-content: flex-start;
+	}
 
-    > .sectionTitle {
-        font-size: 1rem;
-        line-height: 1.1875rem;
-        text-decoration: underline;
-    }
+	> .sectionTitle {
+		font-size: 1rem;
+		line-height: 1.1875rem;
+		text-decoration: underline;
+	}
 }
 
 .orderHistory {
-    //@media only screen and (max-width: 50rem){
-    --limeGreen: #57de54;
-    font-family: "Inter";
+	//@media only screen and (max-width: 50rem){
+	--limeGreen: #57de54;
+	font-family: "Inter";
 
-    > .header {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
+	> .header {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
 
-        > .mainTitle {
-            margin: 0;
-            padding: 0;
-            font-weight: 700;
-            font-size: 2rem;
-            line-height: 2.4375rem;
-            margin-top: 2.125rem;
-            margin-bottom: 0.8125rem;
-            text-align: center;
-        }
-        > .mainSubtitle {
-            font-weight: 400;
-            font-size: 1rem;
-            line-height: 1.1875rem;
-            padding-left: 20%;
-            padding-right: 20%;
-            text-align: center;
+		> .mainTitle {
+			margin: 0;
+			padding: 0;
+			font-weight: 700;
+			font-size: 2rem;
+			line-height: 2.4375rem;
+			margin-top: 2.125rem;
+			margin-bottom: 0.8125rem;
+			text-align: center;
+		}
+		> .mainSubtitle {
+			font-weight: 400;
+			font-size: 1rem;
+			line-height: 1.1875rem;
+			padding-left: 20%;
+			padding-right: 20%;
+			text-align: center;
 
-            > #subtitleBold {
-                font-weight: 700;
-            }
-        }
+			> #subtitleBold {
+				font-weight: 700;
+			}
+		}
 
-        > .buttons {
-            margin-top: 1.25rem;
-            display: flex;
-            justify-content: center;
+		> .buttons {
+			margin-top: 1.25rem;
+			display: flex;
+			justify-content: center;
 
-            > .button {
-                margin: 10px;
-                background: var(--limeGreen);
-                color: white;
-                border: none;
-                width: 15%;
-                height: 3.3125rem;
-                text-align: center;
-                font-size: 1.5rem;
-                font-weight: 700;
-                border-radius: 1rem;
+			> .button {
+				margin: 10px;
+				background: var(--limeGreen);
+				color: white;
+				border: none;
+				width: 15%;
+				height: 3.3125rem;
+				text-align: center;
+				font-size: 1.5rem;
+				font-weight: 700;
+				border-radius: 1rem;
 
-                &:hover {
-                    filter: brightness(0.9);
-                    cursor: pointer;
-                }
-            }
-        }
+				&:hover {
+					filter: brightness(0.9);
+					cursor: pointer;
+				}
+			}
+		}
 
-        > .searchBar {
-            margin-top: 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-      
-            > input[type="text"] {
-              padding: 0.5rem;
-              font-size: 1rem;
-              border: 1px solid gray;
-              border-radius: 0.5rem;
-              margin-right: 0.5rem;
-              width: 20%;
-            }
-      
-            > button {
-              //background-color: var(--limeGreen);
-              //color: white;
-              background: transparent;
-              border: none;
-              padding: 0.5rem 1rem;
-              font-size: 1rem;
-              font-weight: 700;
-              border-radius: 0.5rem;
-              cursor: pointer;
+		> .searchBar {
+			margin-top: 1.5rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-              > .searchIcon {
-                width: 21px;
-                height: 21px;
-              }
-            }
-          }
+			> input[type="text"] {
+				padding: 0.5rem;
+				font-size: 1rem;
+				border: 1px solid gray;
+				border-radius: 0.5rem;
+				margin-right: 0.5rem;
+				width: 20%;
+			}
 
-    }
+			> button {
+				//background-color: var(--limeGreen);
+				//color: white;
+				background: transparent;
+				border: none;
+				padding: 0.5rem 1rem;
+				font-size: 1rem;
+				font-weight: 700;
+				border-radius: 0.5rem;
+				cursor: pointer;
 
-    > .landingContent {
-        display: flex;
-        //flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        //justify-content: center;
+				> .searchIcon {
+					width: 21px;
+					height: 21px;
+				}
+			}
+		}
+	}
 
-        @media only screen and (min-aspect-ratio: 1) {
-            flex-direction: row;
-            margin-bottom: 1rem;
-        }
+	> .landingContent {
+		display: flex;
+		//flex-direction: column;
+		flex-wrap: wrap;
+		justify-content: center;
+		//justify-content: center;
 
-        > .orderHistory {
-            @include section;
-            @media only screen and (max-aspect-ratio: 1) {
-                margin-top: 1.875rem;
-            }
+		@media only screen and (min-aspect-ratio: 1) {
+			flex-direction: row;
+			margin-bottom: 1rem;
+		}
 
-            .content {
-                img {
-                    width: 5rem;
-                    height: 5rem;
-                    object-fit: cover;
-                    border-radius: 0.75rem;
-                }
-            }
+		> .orderHistory {
+			@include section;
+			@media only screen and (max-aspect-ratio: 1) {
+				margin-top: 1.875rem;
+			}
 
-            > .cardContainer {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: flex-start;
-            }
-        }
-    }
+			.content {
+				img {
+					width: 5rem;
+					height: 5rem;
+					object-fit: cover;
+					border-radius: 0.75rem;
+				}
+			}
+
+			> .cardContainer {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				grid-gap: 2rem;
+				justify-content: center;
+				padding: 1rem;
+				margin-left: auto;
+				margin-right: auto;
+
+				box-sizing: border-box;
+				padding-bottom: 2rem;
+			}
+		}
+	}
+}
+
+@media (max-aspect-ratio: 1/1) {
+	.cardContainer {
+		grid-template-columns: repeat(1, 1fr) !important;
+	}
+
+	.mainTitle,
+	.mainSubtitle {
+		padding-left: 1rem !important;
+		padding-right: 1rem !important;
+		box-sizing: border-box !important;
+	}
+	.button {
+		min-width: 80vw;
+	}
+
+	.searchBar > input {
+		min-width: 60vw;
+	}
 }

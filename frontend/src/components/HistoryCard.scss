@@ -1,123 +1,124 @@
-.historyCard{
+.historyCard {
+	margin-top: 0.75rem;
+	// margin-right: 5rem;
+	height: 10rem;
+	// width: 20.625rem;
+	background: #f8f8f8;
+	border-radius: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	// padding-top: 0.5rem;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	padding-bottom: 1rem;
+	height: auto;
 
-    margin-top: 0.75rem;
-    margin-right: 5rem;
-    height: 10rem;
-    width: 20.625rem;
-    background: #F8F8F8;
-    border-radius: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    padding-top: 0.5rem;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding-bottom: 0.3rem;
+	> .content {
+		display: flex;
+		flex-direction: row;
+		margin-top: 1rem;
+		margin-left: 1rem;
 
-    >.content{
-        display: flex;
-        flex-direction: row;
-        margin-top: 0.7rem;
-        margin-left: 0.7rem;
+		> .textContainer {
+			margin-left: 1rem;
+			display: flex;
+			flex-direction: column;
 
-        >.textContainer{
-            margin-left: 1rem;
-            display: flex;
-            flex-direction: column;
+			> .orderContainer {
+				display: flex;
+				align-items: center;
+				// gap: 1.5rem;
 
-            >.orderContainer {
-                display: flex;
-                align-items: center;
-                // gap: 1.5rem;
+				> .orderTitle {
+					font-weight: 700;
+					font-size: 1.25rem;
+					line-height: 1.5rem;
+					overflow-x: auto;
+					white-space: nowrap;
+					max-width: 7.2rem;
+					overflow: hidden;
+					border: none;
+					background: #f8f8f8;
+					margin-right: 0rem;
 
-                >.orderTitle {
-                    font-weight: 700;
-                    font-size: 1.25rem;
-                    line-height: 1.5rem;
-                    overflow-x: auto;
-                    white-space: nowrap;
-                    max-width: 7.2rem;
-                    overflow: hidden;
-                    border: none;
-                    background: #F8F8F8;
-                    margin-right: 0rem;
+					&:hover {
+						cursor: pointer;
+					}
+				}
 
-                    &:hover{
-                        cursor: pointer;
-                    }
-                }
+				> .orderTitle:focus {
+					outline: none;
+				}
 
-                >.orderTitle:focus {
-                    outline: none;
-                }
+				> .writeIcon {
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
 
-                >.writeIcon {
-                    &:hover {
-                        cursor: pointer;
-                    }
-                }
-            }
+			> .orderTitle {
+				font-weight: 700;
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+			}
 
-            >.orderTitle{
-                font-weight: 700;
-                font-size: 1.25rem;
-                line-height: 1.5rem;
-            }
+			> .date {
+				font-weight: 700;
+				font-size: 1rem;
+			}
 
-            >.date{
-                font-weight: 700;
-                font-size: 1rem;
-            }
+			> .orderDesc {
+				margin-top: 3px;
+				width: 11.3125rem;
+				height: 3.75rem;
+				overflow-y: auto;
+			}
+		}
+	}
 
-            >.orderDesc{
-                margin-top: 3px;
-                width: 11.3125rem;
-                height: 3.75rem;
-                overflow-y: auto;
+	> .historyFooter {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		justify-content: flex-end;
+		> .starIcon {
+			margin-left: 0.75rem;
+			margin-top: 0.4rem;
+		}
 
-            }
-        }
-    }
+		> .spacer {
+			width: 4rem;
+		}
 
-    >.historyFooter{
-        display: flex;
-        flex-direction: row;
+		> .reorder {
+			margin-top: 1rem;
+			width: 7.25rem;
+			margin-right: 1rem;
+			height: 2rem;
+			border-radius: 0.75rem;
+			border: none;
+			font-family: "Inter";
+			font-size: 1rem;
+			font-weight: 700;
+			color: white;
+			// background: #45C166;
+			background: #dec854;
+			// margin-left: 7rem;
 
-        >.starIcon{
-            margin-left: 0.75rem;
-            margin-top: 0.4rem;
-        }
+			&:hover {
+				filter: brightness(0.8);
+				cursor: pointer;
+			}
+		}
 
-        >.spacer{
-            width: 4rem;
-        }
+		> .green {
+			background: #57de54;
 
-        >.reorder{
-            margin-top: 1rem;
-            width: 7.25rem;
-            height: 2rem;
-            border-radius: 0.75rem;
-            border: none;
-            font-family: 'Inter';
-            font-size: 1rem;
-            font-weight: 700;
-            color: white;
-            // background: #45C166;
-            background: #dec854;
-            margin-left: 7rem;
-
-            &:hover{
-                filter: brightness(0.8);
-                cursor: pointer;
-            }
-        }
-
-        >.green{
-            background: #57de54;
-
-            &:hover{
-                cursor: default;
-                filter: brightness(1);
-            }
-        }
-
-    }
+			&:hover {
+				cursor: default;
+				filter: brightness(1);
+			}
+		}
+	}
 }

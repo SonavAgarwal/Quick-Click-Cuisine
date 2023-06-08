@@ -36,11 +36,21 @@
 
 		> .ingredientType {
 			margin-top: 1.25rem;
-			padding-left: 10%;
+			// padding-left: 10%;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 80rem;
+
+			> div {
+				> button {
+					min-width: 8rem;
+				}
+			}
 
 			> .ingredientTypeText {
 				font-weight: bold;
 				text-decoration: underline;
+				padding-left: 2rem;
 			}
 
 			> .finalOrderText {
@@ -110,6 +120,7 @@
 				font-size: 1.5rem;
 				font-weight: 700;
 				border-radius: 1rem;
+				min-width: 10rem;
 
 				&:hover {
 					filter: brightness(0.9);

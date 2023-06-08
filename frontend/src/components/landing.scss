@@ -20,6 +20,7 @@
 		font-size: 1rem;
 		line-height: 1.1875rem;
 		text-decoration: underline;
+		margin-top: 1rem;
 	}
 }
 
@@ -31,56 +32,69 @@
 	> .header {
 		display: flex;
 		justify-content: center;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
+		gap: 1rem;
+		box-sizing: border-box;
+		padding: 2rem;
+		padding-left: 7rem;
+		padding-right: 7rem;
+		flex-wrap: wrap;
+	}
 
-		> .mainTitle {
-			//@media only screen and (max-width: 50rem){
-			margin: 0;
-			padding: 0;
+	.mainTitle {
+		//@media only screen and (max-width: 50rem){
+		margin: 0;
+		padding: 0;
+		font-weight: 700;
+		font-size: 2rem;
+		line-height: 2.4375rem;
+		// margin-top: 2.125rem;
+		margin-bottom: 0.8125rem;
+		text-align: left;
+		//}
+	}
+	.mainSubtitle {
+		font-weight: 400;
+		font-size: 1rem;
+		line-height: 1.1875rem;
+		// padding-left: 20%;
+		// padding-right: 20%;
+		// text-align: left;
+
+		> #subtitleBold {
 			font-weight: 700;
-			font-size: 2rem;
-			line-height: 2.4375rem;
-			margin-top: 2.125rem;
-			margin-bottom: 0.8125rem;
-			//}
-		}
-		> .mainSubtitle {
-			font-weight: 400;
-			font-size: 1rem;
-			line-height: 1.1875rem;
-			padding-left: 20%;
-			padding-right: 20%;
-			text-align: center;
-
-			> #subtitleBold {
-				font-weight: 700;
-			}
-		}
-
-		> .mainOrderButton {
-			margin-top: 3.25rem;
-			background: var(--limeGreen);
-			color: white;
-			border: none;
-			width: 41.8%;
-			height: 3.3125rem;
-			text-align: center;
-			font-size: 1.5rem;
-			font-weight: 700;
-			border-radius: 1rem;
-
-			&:hover {
-				filter: brightness(0.9);
-				cursor: pointer;
-			}
 		}
 	}
 
-	> .landingContent {
+	.mainOrderButton {
+		// margin-top: 3.25rem;
+		background: var(--limeGreen);
+		color: white;
+		border: none;
+		// width: 41.8%;
+		width: 10rem;
+		height: 3.3125rem;
+		text-align: center;
+		font-size: 1.5rem;
+		font-weight: 700;
+		border-radius: 1rem;
+
+		&:hover {
+			filter: brightness(0.9);
+			cursor: pointer;
+		}
+	}
+
+	.landingContent {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-between;
+
+		width: 100%;
+		padding-left: 7rem;
+		padding-right: 7rem;
+		box-sizing: border-box;
 
 		@media only screen and (min-aspect-ratio: 1) {
 			flex-direction: row;
@@ -149,4 +163,61 @@
 .pendingOrders,
 .orderHistory {
 	min-width: 20rem;
+	margin: 0 !important;
+}
+
+.headerLeft {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	min-width: 20rem;
+}
+
+.signOutButton {
+	background-color: lightgray !important;
+}
+
+@media (max-aspect-ratio: 1/1) {
+	.landingContent {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		width: 100%;
+		flex-direction: column;
+		justify-content: center;
+		padding: 1rem !important;
+		box-sizing: border-box;
+		padding-top: 0 !important;
+	}
+
+	.instantOrder,
+	.pendingOrders,
+	.orderHistory {
+		display: flex !important;
+		flex-direction: column !important;
+		justify-content: center !important;
+	}
+
+	.pendingOrders > div {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	// .pendingOrders > .sectionTitle {
+	// 	justify-self: flex-start;
+	// 	align-self: flex-start;
+	// }
+
+	.sectionTitle {
+		text-align: center;
+	}
+
+	.mainOrderButton {
+		width: calc(100vw - 4rem) !important;
+		min-width: calc(100vw - 4rem) !important;
+		float: left !important;
+	}
 }
