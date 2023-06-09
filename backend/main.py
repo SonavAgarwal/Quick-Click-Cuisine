@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 import bson
 from bson import json_util
-import requests
 from datetime import datetime
 from helpers import generate_id, generate_estimate, generate_order_number
 from flask_cors import CORS
