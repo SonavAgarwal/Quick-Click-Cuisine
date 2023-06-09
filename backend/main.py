@@ -317,8 +317,9 @@ def get_user_orders_with_ingredients(user_id, ingredients):
         }
     })
 
-    newList = list(set(list(ingredientOrders) + list(typeOrders)))
+    newList = list(ingredientOrders) + list(typeOrders)
     newList = [json_util.dumps(doc) for doc in newList]
+    newList = list(set(newList))
     return jsonify(newList), 200
 
 if __name__ == '__main__':
