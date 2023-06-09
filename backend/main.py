@@ -301,7 +301,7 @@ def get_user_orders_with_ingredients(user_id, ingredients):
 
     pattern = re.compile(ingredients, re.IGNORECASE)
 
-    orders = mongo.db.orders.find({
+    ingredientOrders = mongo.db.orders.find({
         'user_id': user_id,
         'status': 3,
         'ingredients': {
@@ -309,7 +309,7 @@ def get_user_orders_with_ingredients(user_id, ingredients):
         }
     })
 
-    orders = mongo.db.orders.find({
+    typeOrders = mongo.db.orders.find({
         'user_id': user_id,
         'status': 3,
         'type': {
@@ -317,9 +317,7 @@ def get_user_orders_with_ingredients(user_id, ingredients):
         }
     })
 
-    return_list = []
-
-    newList = list(orders)
+    newList = list(set(list(ingredientOrders) + list(typeOrders)))
     newList = [json_util.dumps(doc) for doc in newList]
     return jsonify(newList), 200
 
